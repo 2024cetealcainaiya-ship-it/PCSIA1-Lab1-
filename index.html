@@ -2,45 +2,47 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SWCRS - Smart Waste Collection Report System</title>
+    <title>
+        SWCRS - Smart Waste Collection Report System
+    </title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    
-
     <main class="hero">
 
-        <!-- Dark background overlay -->
         <div class="overlay"></div>
 
 
-        <!-- Main Content -->
         <section class="content">
 
-            <!-- System Title -->
+
+
             <h1>
-                SMART WASTE COLLECTION
-                REPORT SYSTEM (SWCRS)
+                SMART WASTE COLLECTION REPORT SYSTEM (SWCRS)
             </h1>
 
 
-            <!-- Office Name -->
             <h2>
                 Barangay Environment Management Office (BEMO)
             </h2>
 
 
-            <!-- Welcome Card -->
-            <div class="welcome-box">
+
+
+            <div
+                id="welcomeBox"
+                class="welcome-box"
+            >
 
                 <h3>
                     Welcome to SWCRS!
@@ -48,16 +50,784 @@
 
 
                 <p>
-                    Efficiency in waste management begins with intelligence. A Smart Waste Collection Report System transforms data into action, ensuring cleaner district, optimized routes, and sustainable futures.
+
+                    Efficiency in waste management begins with intelligence. A Smart Waste Collection 
+                    Report System transforms data into action, ensuring cleaner district, optimized 
+                    roots and sustainable future.
+
                 </p>
 
 
-                <!-- Get Started Button -->
-                <button id="getStartedBtn">
-                    Get Started
-                </button>
+                <div class="button-container">
+
+                    <button
+                        id="RegisterBtn"
+                        type="button"
+                    >
+                        Register
+                    </button>
+
+
+                    <button
+                        id="LoginBtn"
+                        type="button"
+                    >
+                        Login
+                    </button>
+
+                </div>
 
             </div>
+
+
+
+
+            <form
+                id="registerForm"
+                class="form-box hidden"
+            >
+
+                <h3>
+                    User Registration
+                </h3>
+
+
+                <p class="form-description">
+
+                    Create an account to access the
+                    SWCRS system.
+
+                </p>
+
+
+                <div class="form-group">
+
+                    <label for="firstName">
+                        First Name
+                    </label>
+
+                    <input
+                        id="firstName"
+                        type="text"
+                        placeholder="Enter first name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="middleName">
+                        Middle Name
+                    </label>
+
+                    <input
+                        id="middleName"
+                        type="text"
+                        placeholder="Enter middle name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="lastName">
+                        Last Name
+                    </label>
+
+                    <input
+                        id="lastName"
+                        type="text"
+                        placeholder="Enter last name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="registerEmail">
+                        Email
+                    </label>
+
+                    <input
+                        id="registerEmail"
+                        type="email"
+                        placeholder="Enter email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="registerPassword">
+                        Password
+                    </label>
+
+                    <input
+                        id="registerPassword"
+                        type="password"
+                        placeholder="Create password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="full-button"
+                >
+                    Create Account
+                </button>
+
+
+                <button
+                    id="BackFromRegisterBtn"
+                    type="button"
+                    class="secondary-button"
+                >
+                    Back
+                </button>
+
+            </form>
+
+
+
+            <form
+                id="loginForm"
+                class="form-box hidden"
+            >
+
+                <h3>
+                    User Login
+                </h3>
+
+
+                <p class="form-description">
+
+                    Please enter your account information
+                    to access SWCRS.
+
+                </p>
+
+
+                <div class="form-group">
+
+                    <label for="loginEmail">
+                        Email
+                    </label>
+
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="full-button"
+                >
+                    Login
+                </button>
+
+
+                <button
+                    id="BackFromLoginBtn"
+                    type="button"
+                    class="secondary-button"
+                >
+                    Back
+                </button>
+
+
+                <p
+                    id="loginMessage"
+                    class="message"
+                ></p>
+
+            </form>
+
+
+
+
+            <section
+                id="userMenu"
+                class="menu-section hidden"
+            >
+
+                <div class="menu-card">
+
+                    <h3>
+                        Welcome to SWCRS!
+                    </h3>
+
+
+                    <p id="userWelcome">
+
+                        You are now logged in.
+
+                    </p>
+
+
+                    <p class="menu-description">
+
+                        Please select the information
+                        you want to view.
+
+                    </p>
+
+
+                    <div class="menu-buttons">
+
+
+                        <button
+                            id="ScheduleBtn"
+                            type="button"
+                        >
+
+                            Collection Schedule
+
+                        </button>
+
+
+
+                        <button
+                            id="ReportsBtn"
+                            type="button"
+                        >
+
+                            Waste Collection Reports
+
+                        </button>
+
+
+
+                        <button
+                            id="CrewBtn"
+                            type="button"
+                        >
+
+                            Collection Crew
+
+                        </button>
+
+
+
+                        <button
+                            id="LogoutBtn"
+                            type="button"
+                            class="logout-button"
+                        >
+
+                            Logout
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <section
+                id="scheduleSection"
+                class="data-section hidden"
+            >
+
+                <div class="section-title">
+
+                    <h3>
+                        Collection Schedule
+                    </h3>
+
+                    <p>
+                        View the scheduled waste collection
+                        activities by area.
+                    </p>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-wrapper">
+
+                        <table class="styled-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Schedule ID
+                                    </th>
+
+                                    <th>
+                                        Area / Purok
+                                    </th>
+
+                                    <th>
+                                        Collection Date
+                                    </th>
+
+                                    <th>
+                                        Collection Time
+                                    </th>
+
+                                    <th>
+                                        Waste Type
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>CS001</td>
+
+                                    <td>Purok 1</td>
+
+                                    <td>August 25, 2026</td>
+
+                                    <td>7:00 AM</td>
+
+                                    <td>Plastic</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>CS002</td>
+
+                                    <td>Purok 2</td>
+
+                                    <td>August 26, 2026</td>
+
+                                    <td>7:30 AM</td>
+
+                                    <td>Organic</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>CS003</td>
+
+                                    <td>Purok 3</td>
+
+                                    <td>August 27, 2026</td>
+
+                                    <td>8:00 AM</td>
+
+                                    <td>Paper</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>CS004</td>
+
+                                    <td>Purok 4</td>
+
+                                    <td>August 28, 2026</td>
+
+                                    <td>7:00 AM</td>
+
+                                    <td>Mixed Waste</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>CS005</td>
+
+                                    <td>Purok 5</td>
+
+                                    <td>August 29, 2026</td>
+
+                                    <td>8:30 AM</td>
+
+                                    <td>Glass</td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="back-menu-button"
+                    data-back-menu
+                    type="button"
+                >
+                    Back to Menu
+                </button>
+
+            </section>
+
+
+
+            <section
+                id="reportsSection"
+                class="data-section hidden"
+            >
+
+                <div class="section-title">
+
+                    <h3>
+                        Waste Collection Reports
+                    </h3>
+
+                    <p>
+                        View submitted waste collection
+                        reports and their current status.
+                    </p>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-wrapper">
+
+                        <table class="styled-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Report ID
+                                    </th>
+
+                                    <th>
+                                        Location
+                                    </th>
+
+                                    <th>
+                                        Waste Type
+                                    </th>
+
+                                    <th>
+                                        Date Collected
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>WR001</td>
+
+                                    <td>Purok 1</td>
+
+                                    <td>Plastic</td>
+
+                                    <td>August 20, 2026</td>
+
+                                    <td>
+                                        <span class="status collected">
+                                            Collected
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>WR002</td>
+
+                                    <td>Purok 2</td>
+
+                                    <td>Organic</td>
+
+                                    <td>August 21, 2026</td>
+
+                                    <td>
+                                        <span class="status collected">
+                                            Collected
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>WR003</td>
+
+                                    <td>Purok 3</td>
+
+                                    <td>Paper</td>
+
+                                    <td>August 21, 2026</td>
+
+                                    <td>
+                                        <span class="status collected">
+                                            Collected
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>WR004</td>
+
+                                    <td>Purok 4</td>
+
+                                    <td>Mixed Waste</td>
+
+                                    <td>August 22, 2026</td>
+
+                                    <td>
+                                        <span class="status pending">
+                                            Pending
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>WR005</td>
+
+                                    <td>Purok 5</td>
+
+                                    <td>Glass</td>
+
+                                    <td>August 22, 2026</td>
+
+                                    <td>
+                                        <span class="status collected">
+                                            Collected
+                                        </span>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="back-menu-button"
+                    data-back-menu
+                    type="button"
+                >
+                    Back to Menu
+                </button>
+
+            </section>
+
+
+
+            <section
+                id="crewSection"
+                class="data-section hidden"
+            >
+
+                <div class="section-title">
+
+                    <h3>
+                        Collection Crew
+                    </h3>
+
+                    <p>
+                        View the assigned collection crew
+                        and their current status.
+                    </p>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-wrapper">
+
+                        <table class="styled-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Crew ID
+                                    </th>
+
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Assigned Route
+                                    </th>
+
+                                    <th>
+                                        Contact
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>C001</td>
+
+                                    <td>Juan Dela Cruz</td>
+
+                                    <td>Route A</td>
+
+                                    <td>09123456789</td>
+
+                                    <td>Active</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>C002</td>
+
+                                    <td>Maria Santos</td>
+
+                                    <td>Route B</td>
+
+                                    <td>09234567890</td>
+
+                                    <td>Active</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>C003</td>
+
+                                    <td>Pedro Reyes</td>
+
+                                    <td>Route C</td>
+
+                                    <td>09345678901</td>
+
+                                    <td>On Duty</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>C004</td>
+
+                                    <td>Ana Garcia</td>
+
+                                    <td>Route D</td>
+
+                                    <td>09456789012</td>
+
+                                    <td>Active</td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>C005</td>
+
+                                    <td>Mark Lopez</td>
+
+                                    <td>Route E</td>
+
+                                    <td>09567890123</td>
+
+                                    <td>Off Duty</td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="back-menu-button"
+                    data-back-menu
+                    type="button"
+                >
+                    Back to Menu
+                </button>
+
+            </section>
 
 
         </section>
@@ -65,8 +835,7 @@
     </main>
 
 
-    <!-- JavaScript -->
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 

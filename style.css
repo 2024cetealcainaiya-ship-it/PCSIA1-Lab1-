@@ -1,18 +1,27 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
 
 
 html {
+
     width: 100%;
+
     min-height: 100%;
+
 }
 
+
 body {
+
     width: 100%;
+
     min-height: 100vh;
 
     font-family:
@@ -24,8 +33,8 @@ body {
     overflow-x: hidden;
 
     background: #07130e;
-}
 
+}
 
 
 .hero {
@@ -33,44 +42,41 @@ body {
     position: relative;
 
     width: 100%;
+
     min-height: 100vh;
 
-    display: flex;
+    padding:
+        60px 20px;
 
-    align-items: center;
-    justify-content: center;
-
-    padding: 60px 20px;
-
-    background-image: url("1000011153.jpg.jpg");
+    background-image:
+        url("1000011153.jpg");
 
     background-size: cover;
 
-    background-position: center center;
+    background-position:
+        center center;
 
     background-repeat: no-repeat;
-}
 
+}
 
 
 .overlay {
 
     position: absolute;
 
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
 
     z-index: 1;
 
     background:
         linear-gradient(
             135deg,
-            rgba(0, 40, 28, 0.82),
-            rgba(0, 0, 0, 0.60),
-            rgba(0, 25, 17, 0.78)
+            rgba(0, 40, 28, 0.86),
+            rgba(0, 0, 0, 0.68),
+            rgba(0, 25, 17, 0.82)
         );
+
 }
 
 
@@ -83,7 +89,7 @@ body {
 
     width: 100%;
 
-    max-width: 1050px;
+    max-width: 1150px;
 
     margin: 0 auto;
 
@@ -101,13 +107,15 @@ h1 {
 
     max-width: 1000px;
 
-    margin: 0 auto 22px auto;
+    margin:
+        0 auto 22px;
 
-    font-size: clamp(
-        30px,
-        5vw,
-        58px
-    );
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            58px
+        );
 
     line-height: 1.12;
 
@@ -116,10 +124,10 @@ h1 {
     letter-spacing: 0.5px;
 
     text-shadow:
-        0 4px 15px rgba(0, 0, 0, 0.8);
+        0 4px 15px
+        rgba(0, 0, 0, 0.8);
 
 }
-
 
 
 h1::after {
@@ -132,7 +140,8 @@ h1::after {
 
     height: 5px;
 
-    margin: 20px auto 0;
+    margin:
+        20px auto 0;
 
     border-radius: 50px;
 
@@ -141,20 +150,21 @@ h1::after {
 }
 
 
-
 h2 {
 
     width: 100%;
 
     max-width: 850px;
 
-    margin: 0 auto 35px auto;
+    margin:
+        0 auto 35px;
 
-    font-size: clamp(
-        15px,
-        2vw,
-        23px
-    );
+    font-size:
+        clamp(
+            15px,
+            2vw,
+            23px
+        );
 
     line-height: 1.5;
 
@@ -163,9 +173,11 @@ h2 {
     color: #edfff6;
 
     text-shadow:
-        0 2px 7px rgba(0, 0, 0, 0.8);
+        0 2px 7px
+        rgba(0, 0, 0, 0.8);
 
 }
+
 
 
 
@@ -177,20 +189,23 @@ h2 {
 
     margin: 0 auto;
 
-    padding: 40px 45px;
-
-    border-radius: 20px;
+    padding:
+        40px 45px;
 
     border:
         1px solid
         rgba(255, 255, 255, 0.20);
 
+    border-radius: 20px;
+
     background:
         rgba(0, 0, 0, 0.43);
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter:
+        blur(10px);
 
     box-shadow:
         0 20px 60px
@@ -199,16 +214,17 @@ h2 {
 }
 
 
-
 h3 {
 
-    margin: 0 0 18px 0;
+    margin:
+        0 0 18px;
 
-    font-size: clamp(
-        25px,
-        3vw,
-        37px
-    );
+    font-size:
+        clamp(
+            25px,
+            3vw,
+            37px
+        );
 
     line-height: 1.2;
 
@@ -219,24 +235,31 @@ h3 {
 }
 
 
-
 .welcome-box p {
 
-    width: 100%;
-
-    max-width: 700px;
+    max-width: 800px;
 
     margin: 0 auto;
 
-    font-size: clamp(
-        15px,
-        1.5vw,
-        19px
-    );
+    font-size: 17px;
 
-    line-height: 1.75;
+    line-height: 1.7;
 
     color: #f2fff9;
+
+}
+
+
+
+.button-container {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
 
 }
 
@@ -246,9 +269,11 @@ button {
 
     display: inline-block;
 
-    margin: 30px auto 0 auto;
+    margin:
+        30px 8px 0;
 
-    padding: 15px 40px;
+    padding:
+        14px 32px;
 
     border: none;
 
@@ -265,7 +290,7 @@ button {
 
     font-family: inherit;
 
-    font-size: 17px;
+    font-size: 16px;
 
     font-weight: 700;
 
@@ -281,11 +306,10 @@ button {
 }
 
 
-
 button:hover {
 
     transform:
-        translateY(-4px);
+        translateY(-3px);
 
     background:
         linear-gradient(
@@ -301,7 +325,6 @@ button:hover {
 }
 
 
-
 button:active {
 
     transform:
@@ -311,33 +334,461 @@ button:active {
 
 
 
-.developers {
+.hidden {
 
-    margin: 40px auto 0 auto;
-
-    font-size: 14px;
-
-    line-height: 1.7;
-
-    color:
-        rgba(255, 255, 255, 0.85);
-
-    text-shadow:
-        0 2px 6px rgba(0, 0, 0, 0.8);
+    display: none !important;
 
 }
 
-.developers p {
 
-    margin-bottom: 3px;
+
+.form-box {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    padding:
+        35px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.20);
+
+    border-radius: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.45);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    text-align: left;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.40);
 
 }
 
-.developers strong {
+
+.form-box h3 {
+
+    text-align: center;
+
+}
+
+
+.form-description {
+
+    margin-bottom: 25px;
+
+    text-align: center;
+
+    color: #dff9eb;
+
+    line-height: 1.5;
+
+}
+
+
+.form-group {
+
+    margin-bottom: 17px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+
+    color: #edfff6;
+
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    padding:
+        13px 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-size: 15px;
+
+}
+
+
+.form-group input:focus {
+
+    box-shadow:
+        0 0 0 3px
+        rgba(53, 216, 137, 0.35);
+
+}
+
+
+.full-button {
+
+    width: 100%;
+
+    margin:
+        12px 0 0;
+
+}
+
+
+.secondary-button {
+
+    width: 100%;
+
+    margin:
+        12px 0 0;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    box-shadow: none;
+
+}
+
+
+.secondary-button:hover {
+
+    background:
+        rgba(255, 255, 255, 0.22);
+
+}
+
+
+
+.message {
+
+    min-height: 24px;
+
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-weight: 600;
+
+}
+
+
+
+
+.menu-section {
+
+    width: 100%;
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+}
+
+
+.menu-card {
+
+    padding:
+        40px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.20);
+
+    border-radius: 20px;
+
+    background:
+        rgba(0, 0, 0, 0.43);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.40);
+
+}
+
+
+.menu-card h3 {
+
+    margin-bottom: 8px;
+
+}
+
+
+#userWelcome {
+
+    color: #35d889;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+}
+
+
+.menu-description {
+
+    margin-top: 10px;
+
+    color: #eafaf1;
+
+}
+
+
+.menu-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+
+}
+
+
+.menu-buttons button {
+
+    width: 100%;
+
+    margin: 0;
+
+}
+
+
+.menu-buttons .logout-button {
+
+    background:
+        linear-gradient(
+            135deg,
+            #c94141,
+            #a72d2d
+        );
+
+    box-shadow:
+        0 8px 25px
+        rgba(200, 60, 60, 0.25);
+
+}
+
+
+
+.data-section {
+
+    width: 100%;
+
+    margin: 0 auto;
+
+    text-align: left;
+
+}
+
+
+.section-title {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.section-title h3 {
+
+    margin-bottom: 8px;
+
+}
+
+
+.section-title p {
+
+    color: #f2fff9;
+
+    font-size: 16px;
+
+}
+
+
+
+.table-card {
+
+    margin-top: 20px;
+
+    padding: 22px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(0, 0, 0, 0.43);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    backdrop-filter:
+        blur(7px);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
+}
+
+
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 10px;
+
+}
+
+
+
+
+.styled-table {
+
+    width: 100%;
+
+    min-width: 720px;
+
+    border-collapse: collapse;
+
+    background: white;
+
+    color: #17231d;
+
+    font-size: 15px;
+
+}
+
+
+.styled-table th,
+.styled-table td {
+
+    padding:
+        13px 15px;
+
+    border:
+        1px solid
+        #cbd8d0;
+
+    text-align: left;
+
+}
+
+
+.styled-table th {
+
+    background:
+        #1eaf65;
 
     color: white;
 
-    font-weight: 600;
+    font-weight: 700;
+
+}
+
+
+.styled-table tbody tr:nth-child(even) {
+
+    background:
+        #eef8f2;
+
+}
+
+
+.styled-table tbody tr:hover {
+
+    background:
+        #d9f3e4;
+
+    cursor: pointer;
+
+}
+
+
+.styled-table tbody tr.highlight {
+
+    background:
+        #b8ebcf;
+
+    outline:
+        2px solid
+        #35d889;
+
+}
+
+
+
+.status {
+
+    display: inline-block;
+
+    padding:
+        5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.status.collected {
+
+    background: #d5f5e2;
+
+    color: #157a43;
+
+}
+
+
+.status.pending {
+
+    background: #fff1c9;
+
+    color: #8a6300;
+
+}
+
+
+
+.back-menu-button {
+
+    display: block;
+
+    margin:
+        25px auto 0;
 
 }
 
@@ -353,13 +804,6 @@ button:active {
     }
 
 
-    .content {
-
-        max-width: 650px;
-
-    }
-
-
     h1 {
 
         font-size: 38px;
@@ -371,19 +815,35 @@ button:active {
 
         font-size: 17px;
 
-        margin-bottom: 28px;
+    }
+
+
+    .welcome-box,
+    .form-box,
+    .menu-card {
+
+        padding:
+            25px 20px;
 
     }
 
 
-    .welcome-box {
+    .menu-buttons {
 
-        padding:
-            32px 25px;
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .table-card {
+
+        padding: 15px;
 
     }
 
 }
+
 
 
 @media screen and (max-width: 480px) {
@@ -405,21 +865,6 @@ button:active {
 
         font-size: 28px;
 
-        line-height: 1.15;
-
-        margin-bottom: 18px;
-
-    }
-
-
-    h1::after {
-
-        width: 60px;
-
-        height: 4px;
-
-        margin-top: 15px;
-
     }
 
 
@@ -427,28 +872,17 @@ button:active {
 
         font-size: 14px;
 
-        line-height: 1.5;
-
-        margin-bottom: 23px;
-
     }
 
 
-    .welcome-box {
-
-        padding:
-            28px 18px;
+    .welcome-box,
+    .form-box,
+    .menu-card {
 
         border-radius: 16px;
 
-    }
-
-
-    h3 {
-
-        font-size: 25px;
-
-        margin-bottom: 15px;
+        padding:
+            22px 15px;
 
     }
 
@@ -457,27 +891,30 @@ button:active {
 
         font-size: 14px;
 
-        line-height: 1.65;
+    }
+
+
+    .button-container {
+
+        flex-direction: column;
+
+        align-items: center;
 
     }
 
 
-    button {
+    .button-container button {
 
         width: 100%;
 
-        max-width: 240px;
-
-        margin-top: 25px;
+        max-width: 260px;
 
     }
 
 
-    .developers {
+    .table-card {
 
-        margin-top: 28px;
-
-        font-size: 12px;
+        padding: 12px;
 
     }
 
