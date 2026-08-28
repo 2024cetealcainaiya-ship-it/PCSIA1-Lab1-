@@ -1,544 +1,720 @@
-const welcomeBox =
-    document.getElementById("welcomeBox");
+const loginSection =
+    document.getElementById("loginSection");
 
-const registerBtn =
-    document.getElementById("RegisterBtn");
+const registerSection =
+    document.getElementById("registerSection");
 
-const loginBtn =
-    document.getElementById("LoginBtn");
+const residentArea =
+    document.getElementById("residentArea");
 
+const adminArea =
+    document.getElementById("adminArea");
 
+const showRegister =
+    document.getElementById("showRegister");
 
+const showLogin =
+    document.getElementById("showLogin");
 
-const registerForm =
-    document.getElementById("registerForm");
+const logoutResident =
+    document.getElementById("logoutResident");
 
-const backFromRegisterBtn =
-    document.getElementById(
-        "BackFromRegisterBtn"
-    );
-
-
-
-const loginForm =
-    document.getElementById("loginForm");
-
-const backFromLoginBtn =
-    document.getElementById(
-        "BackFromLoginBtn"
-    );
-
-const loginMessage =
-    document.getElementById(
-        "loginMessage"
-    );
+const logoutAdmin =
+    document.getElementById("logoutAdmin");
 
 
+let statsChartInstance = null;
 
-const userMenu =
-    document.getElementById("userMenu");
-
-const userWelcome =
-    document.getElementById(
-        "userWelcome"
-    );
-
-const logoutBtn =
-    document.getElementById("LogoutBtn");
-
-
-
-const scheduleBtn =
-    document.getElementById(
-        "ScheduleBtn"
-    );
-
-const reportsBtn =
-    document.getElementById(
-        "ReportsBtn"
-    );
-
-const crewBtn =
-    document.getElementById(
-        "CrewBtn"
-    );
-
-
-
-const scheduleSection =
-    document.getElementById(
-        "scheduleSection"
-    );
-
-const reportsSection =
-    document.getElementById(
-        "reportsSection"
-    );
-
-const crewSection =
-    document.getElementById(
-        "crewSection"
-    );
-
-
-
-
-registerBtn.addEventListener(
+showRegister.addEventListener(
     "click",
-    () => {
+    function () {
 
-
-        welcomeBox.classList.add(
-            "hidden"
+        loginSection.classList.remove(
+            "active"
         );
 
-
-
-        registerForm.classList.remove(
-            "hidden"
+        registerSection.classList.add(
+            "active"
         );
 
     }
 );
 
 
-
-
-backFromRegisterBtn.addEventListener(
+showLogin.addEventListener(
     "click",
-    () => {
+    function () {
 
-
-        registerForm.classList.add(
-            "hidden"
+        registerSection.classList.remove(
+            "active"
         );
 
-
-
-        welcomeBox.classList.remove(
-            "hidden"
+        loginSection.classList.add(
+            "active"
         );
 
     }
 );
 
+document
+    .getElementById("loginForm")
+    .addEventListener(
+        "submit",
+        function (e) {
+
+            e.preventDefault();
 
 
-registerForm.addEventListener(
-    "submit",
-    (event) => {
+            // Get role
 
-        event.preventDefault();
+            const role =
+                document.getElementById(
+                    "loginRole"
+                ).value;
 
-        const firstName =
+
+            // Get username
+
+            const username =
+                document.getElementById(
+                    "loginUser"
+                ).value;
+
+
+            // Display username
+
             document.getElementById(
-                "firstName"
-            ).value.trim();
-
-        const email =
-            document.getElementById(
-                "registerEmail"
-            ).value.trim();
-
-        const password =
-            document.getElementById(
-                "registerPassword"
-            ).value;
+                "residentDisplay"
+            ).textContent =
+                username;
 
 
+            // Hide login
 
-        if (
-            firstName === "" ||
-            email === "" ||
-            password === ""
-        ) {
+            loginSection.classList.remove(
+                "active"
+            );
+
+
+            if (role === "resident") {
+
+                residentArea.classList.add(
+                    "active"
+                );
+
+
+                residentArea.classList.remove(
+                    "interface-open"
+                );
+
+
+                hideAllInterfaces();
+
+
+                updateNotificationCount();
+
+            }
+
+
+            else {
+
+                adminArea.classList.add(
+                    "active"
+                );
+
+
+                renderChart();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById("registerForm")
+    .addEventListener(
+        "submit",
+        function (e) {
+
+            e.preventDefault();
+
 
             alert(
-                "Please complete all required fields."
+                "Registration successful! Please login."
             );
 
-            return;
+
+            registerSection.classList.remove(
+                "active"
+            );
+
+
+            loginSection.classList.add(
+                "active"
+            );
 
         }
+    );
+
+function openInterface(interfaceId) {
 
 
+    // Find selected interface
 
-        localStorage.setItem(
-            "swcrsEmail",
-            email
-        );
-
-        localStorage.setItem(
-            "swcrsPassword",
-            password
-        );
-
-        localStorage.setItem(
-            "swcrsFirstName",
-            firstName
-        );
-
-
-
-        alert(
-            "Registration successful! You can now login."
-        );
-
-
-
-        registerForm.classList.add(
-            "hidden"
-        );
-
-
-
-        loginForm.classList.remove(
-            "hidden"
-        );
-
-
-
+    const selectedInterface =
         document.getElementById(
-            "loginEmail"
-        ).value = email;
+            interfaceId
+        );
+
+
+    // Check if interface exists
+
+    if (!selectedInterface) {
+
+        console.error(
+            "Interface not found:",
+            interfaceId
+        );
+
+        return;
 
     }
-);
 
 
+    // Hide all interfaces
 
-loginBtn.addEventListener(
-    "click",
-    () => {
-
-        welcomeBox.classList.add(
-            "hidden"
-        );
+    hideAllInterfaces();
 
 
+    // Display selected interface
 
-        loginForm.classList.remove(
-            "hidden"
-        );
-
-
-
-        loginMessage.textContent = "";
-
-    }
-);
+    selectedInterface.classList.add(
+        "active"
+    );
 
 
+    // Hide dashboard menu
 
-backFromLoginBtn.addEventListener(
-    "click",
-    () => {
-
-
-        loginForm.classList.add(
-            "hidden"
-        );
+    residentArea.classList.add(
+        "interface-open"
+    );
 
 
-        welcomeBox.classList.remove(
-            "hidden"
-        );
+    // If notifications are opened
 
+    if (
+        interfaceId ===
+        "viewNotifications"
+    ) {
 
-
-        loginMessage.textContent = "";
+        updateNotificationCount();
 
     }
-);
 
 
+    // Scroll to top
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
 
 
-loginForm.addEventListener(
-    "submit",
-    (event) => {
+function hideAllInterfaces() {
 
 
-        event.preventDefault();
+    const interfaces =
+        document.querySelectorAll(
+            ".view-panel"
+        );
 
 
+    interfaces.forEach(
+        function (panel) {
 
-        const email =
-            document.getElementById(
-                "loginEmail"
-            ).value.trim();
-
-        const password =
-            document.getElementById(
-                "loginPassword"
-            ).value;
-
-
-        const savedEmail =
-            localStorage.getItem(
-                "swcrsEmail"
+            panel.classList.remove(
+                "active"
             );
-
-        const savedPassword =
-            localStorage.getItem(
-                "swcrsPassword"
-            );
-
-        const savedFirstName =
-            localStorage.getItem(
-                "swcrsFirstName"
-            );
-
-
-
-        if (
-            savedEmail === null ||
-            savedPassword === null
-        ) {
-
-            loginMessage.textContent =
-                "No account found. Please register first.";
-
-            loginMessage.style.color =
-                "#ffb3b3";
-
-            return;
 
         }
+    );
+
+}
+
+function returnToDashboard() {
 
 
-        if (
-            email === savedEmail &&
-            password === savedPassword
-        ) {
+    // Hide interfaces
+
+    hideAllInterfaces();
 
 
-            loginMessage.textContent =
-                "Login successful!";
+    // Show dashboard
 
-            loginMessage.style.color =
-                "#6ff0a7";
+    residentArea.classList.remove(
+        "interface-open"
+    );
 
 
+    // Update notifications
 
-            setTimeout(
-                () => {
+    updateNotificationCount();
 
-                    showUserMenu(
-                        savedFirstName
-                    );
 
-                },
-                500
+    // Scroll to top
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+document
+    .getElementById("newReportForm")
+    .addEventListener(
+        "submit",
+        function (e) {
+
+            e.preventDefault();
+
+
+            // Get location
+
+            const location =
+                document.getElementById(
+                    "repLocation"
+                ).value;
+
+
+            // Get description
+
+            const description =
+                document.getElementById(
+                    "repDescription"
+                ).value;
+
+
+            // Validate
+
+            if (
+                location.trim() === "" ||
+                description.trim() === ""
+            ) {
+
+                alert(
+                    "Please complete all required fields."
+                );
+
+                return;
+
+            }
+
+
+            // Success message
+
+            alert(
+                "Waste report submitted successfully!"
             );
+
+
+            // Clear form
+
+            document
+                .getElementById(
+                    "newReportForm"
+                )
+                .reset();
+
+
+            // Return dashboard
+
+            returnToDashboard();
+
+        }
+    );
+
+logoutResident.addEventListener(
+    "click",
+    function () {
+
+
+        // Hide resident area
+
+        residentArea.classList.remove(
+            "active"
+        );
+
+
+        // Remove interface mode
+
+        residentArea.classList.remove(
+            "interface-open"
+        );
+
+
+        // Hide interfaces
+
+        hideAllInterfaces();
+
+
+        // Clear login form
+
+        document
+            .getElementById("loginForm")
+            .reset();
+
+
+        // Show login
+
+        loginSection.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+logoutAdmin.addEventListener(
+    "click",
+    function () {
+
+
+        // Hide admin
+
+        adminArea.classList.remove(
+            "active"
+        );
+
+
+        // Clear login
+
+        document
+            .getElementById("loginForm")
+            .reset();
+
+
+        // Show login
+
+        loginSection.classList.add(
+            "active"
+        );
+
+    }
+);
+
+function updateNotificationCount() {
+
+
+    // Find unread notifications
+
+    const unreadNotifications =
+        document.querySelectorAll(
+            ".notification-item.unread"
+        );
+
+
+    // Count them
+
+    const count =
+        unreadNotifications.length;
+
+
+    // Notification badge
+
+    const badge =
+        document.getElementById(
+            "notificationCount"
+        );
+
+
+    // Notification number inside interface
+
+    const number =
+        document.getElementById(
+            "notificationNumber"
+        );
+
+
+    // Update dashboard badge
+
+    if (badge) {
+
+        badge.textContent =
+            count;
+
+
+        if (count === 0) {
+
+            badge.style.display =
+                "none";
 
         }
 
         else {
 
-
-            loginMessage.textContent =
-                "Incorrect email or password.";
-
-            loginMessage.style.color =
-                "#ffb3b3";
+            badge.style.display =
+                "inline-flex";
 
         }
+
+    }
+
+
+    // Update notification page number
+
+    if (number) {
+
+        number.textContent =
+            count;
+
+    }
+
+}
+
+
+function markNotificationAsRead(
+    notification
+) {
+
+
+    // Remove unread class
+
+    notification.classList.remove(
+        "unread"
+    );
+
+
+    // Add read class
+
+    notification.classList.add(
+        "read"
+    );
+
+
+    // Update counter
+
+    updateNotificationCount();
+
+}
+
+document.addEventListener(
+    "click",
+    function (e) {
+
+
+        // Check if clicked element
+        // belongs to notification
+
+        const notification =
+            e.target.closest(
+                ".notification-item"
+            );
+
+
+        // Nothing clicked
+
+        if (!notification) {
+
+            return;
+
+        }
+
+
+        // Mark notification as read
+
+        markNotificationAsRead(
+            notification
+        );
 
     }
 );
 
 
-
-function showUserMenu(firstName) {
-
-
-    loginForm.classList.add(
-        "hidden"
+const markAllRead =
+    document.getElementById(
+        "markAllRead"
     );
 
 
+if (markAllRead) {
 
-    userMenu.classList.remove(
-        "hidden"
+    markAllRead.addEventListener(
+        "click",
+        function (e) {
+
+
+            // Prevent parent notification click
+
+            e.stopPropagation();
+
+
+            // Find unread notifications
+
+            const notifications =
+                document.querySelectorAll(
+                    ".notification-item.unread"
+                );
+
+
+            // Mark each as read
+
+            notifications.forEach(
+                function (notification) {
+
+                    notification.classList.remove(
+                        "unread"
+                    );
+
+                    notification.classList.add(
+                        "read"
+                    );
+
+                }
+            );
+
+
+            // Update counter
+
+            updateNotificationCount();
+
+
+            // Message
+
+            alert(
+                "All notifications have been marked as read."
+            );
+
+        }
     );
-
-
-
-    userWelcome.textContent =
-        "Welcome, " +
-        firstName +
-        "! You are now logged in.";
 
 }
 
 
 
-scheduleBtn.addEventListener(
-    "click",
-    () => {
+function renderChart() {
 
 
-        userMenu.classList.add(
-            "hidden"
-        );
+    // Get canvas
 
-
-
-        scheduleSection.classList.remove(
-            "hidden"
-        );
-
-    }
-);
-
-
-
-
-reportsBtn.addEventListener(
-    "click",
-    () => {
-
-
-        userMenu.classList.add(
-            "hidden"
-        );
-
-
-
-        reportsSection.classList.remove(
-            "hidden"
-        );
-
-    }
-);
-
-
-
-
-crewBtn.addEventListener(
-    "click",
-    () => {
-
-
-        userMenu.classList.add(
-            "hidden"
-        );
-
-
-
-        crewSection.classList.remove(
-            "hidden"
-        );
-
-    }
-);
-
-
-const backMenuButtons =
-    document.querySelectorAll(
-        "[data-back-menu]"
-    );
-
-
-backMenuButtons.forEach(
-    (button) => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-
-                scheduleSection.classList.add(
-                    "hidden"
-                );
-
-                reportsSection.classList.add(
-                    "hidden"
-                );
-
-                crewSection.classList.add(
-                    "hidden"
-                );
-
-
-
-                userMenu.classList.remove(
-                    "hidden"
-                );
-
-            }
-        );
-
-    }
-);
-
-
-
-logoutBtn.addEventListener(
-    "click",
-    () => {
-
-
-        userMenu.classList.add(
-            "hidden"
-        );
-
-
-
-        scheduleSection.classList.add(
-            "hidden"
-        );
-
-        reportsSection.classList.add(
-            "hidden"
-        );
-
-        crewSection.classList.add(
-            "hidden"
-        );
-
-
-
+    const canvas =
         document.getElementById(
-            "loginPassword"
-        ).value = "";
-
-
-
-        welcomeBox.classList.remove(
-            "hidden"
+            "statsChart"
         );
 
 
-        alert(
-            "You have been logged out."
-        );
+    // Check canvas
+
+    if (!canvas) {
+
+        return;
 
     }
-);
 
 
+    // Get context
 
-const tableRows =
-    document.querySelectorAll(
-        ".styled-table tbody tr"
-    );
+    const ctx =
+        canvas.getContext("2d");
 
 
-tableRows.forEach(
-    (row) => {
+    // Destroy previous chart
 
-        row.addEventListener(
-            "click",
-            () => {
+    if (statsChartInstance) {
 
-                row.classList.toggle(
-                    "highlight"
-                );
+        statsChartInstance.destroy();
+
+    }
+
+
+    // Create chart
+
+    statsChartInstance =
+        new Chart(
+            ctx,
+            {
+
+                type: "bar",
+
+
+                data: {
+
+                    labels: [
+                        "Daily",
+                        "Weekly",
+                        "Monthly"
+                    ],
+
+
+                    datasets: [
+
+                        {
+
+                            label:
+                                "Collection Volume (kg)",
+
+
+                            data: [
+                                120,
+                                850,
+                                3400
+                            ],
+
+
+                            backgroundColor: [
+                                "#66bb6a",
+                                "#43a047",
+                                "#2e7d32"
+                            ]
+
+                        }
+
+                    ]
+
+                },
+
+
+                options: {
+
+                    responsive: true,
+
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+
+                            title: {
+
+                                display: true,
+
+
+                                text:
+                                    "Collection Volume (kg)"
+
+                            }
+
+                        }
+
+                    }
+
+                }
 
             }
         );
 
-    }
-);
+}
+
+updateNotificationCount();

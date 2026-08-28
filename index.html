@@ -5,110 +5,204 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>
-        SWCRS - Smart Waste Collection Report System
+        Smart Waste Collection Report System
     </title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
 
 <body>
+    <header>
 
-    <main class="hero">
+        <h1>
+            Smart Waste Collection Report System (SWCRS)
+        </h1>
 
-        <div class="overlay"></div>
+        <div class="header-divider"></div>
 
+        <p class="header-subtitle">
+            Barangay Environment Management Office (BEMO)
+        </p>
 
-        <section class="content">
+    </header>
 
-
-
-            <h1>
-                SMART WASTE COLLECTION REPORT SYSTEM (SWCRS)
-            </h1>
-
-
-            <h2>
-                Barangay Environment Management Office (BEMO)
-            </h2>
+    <main class="main-wrapper">
 
 
+        <section
+            id="loginSection"
+            class="auth auth-card active"
+        >
 
+            <div class="form-header">
 
-            <div
-                id="welcomeBox"
-                class="welcome-box"
-            >
-
-                <h3>
-                    Welcome to SWCRS!
-                </h3>
-
+                <h2>
+                    Account Login
+                </h2>
 
                 <p>
-
-                    Efficiency in waste management begins with intelligence. A Smart Waste Collection 
-                    Report System transforms data into action, ensuring cleaner district, optimized 
-                    roots and sustainable future.
-
+                    Sign in to your account.
                 </p>
-
-
-                <div class="button-container">
-
-                    <button
-                        id="RegisterBtn"
-                        type="button"
-                    >
-                        Register
-                    </button>
-
-
-                    <button
-                        id="LoginBtn"
-                        type="button"
-                    >
-                        Login
-                    </button>
-
-                </div>
 
             </div>
 
 
-
-
-            <form
-                id="registerForm"
-                class="form-box hidden"
-            >
-
-                <h3>
-                    User Registration
-                </h3>
-
-
-                <p class="form-description">
-
-                    Create an account to access the
-                    SWCRS system.
-
-                </p>
+            <form id="loginForm">
 
 
                 <div class="form-group">
 
-                    <label for="firstName">
+                    <label for="loginRole">
+                        Role
+                    </label>
+
+                    <select id="loginRole">
+
+                        <option value="resident">
+                            Resident
+                        </option>
+
+                        <option value="admin">
+                            Admin/Officer
+                        </option>
+
+                        <option value="crew">
+                            Crew
+                        </option>
+
+                        <option value="facilitator">
+                            City Facilitator
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginUser">
+                        Username or Email
+                    </label>
+
+                    <input
+                        type="text"
+                        id="loginUser"
+                        placeholder="Enter username or email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginPass">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="loginPass"
+                        placeholder="Enter password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Sign In
+                </button>
+
+
+                <button
+                    type="button"
+                    id="showRegister"
+                    class="btn-secondary"
+                >
+                    Create Account
+                </button>
+
+
+            </form>
+
+        </section>
+
+
+        <section
+            id="registerSection"
+            class="auth auth-card"
+        >
+
+            <div class="form-header">
+
+                <h2>
+                    Account Registration
+                </h2>
+
+                <p>
+                    Create your account.
+                </p>
+
+            </div>
+
+
+            <form id="registerForm">
+
+
+                <div class="form-group">
+
+                    <label for="regRole">
+                        Register As
+                    </label>
+
+                    <select id="regRole">
+
+                        <option value="resident">
+                            Resident
+                        </option>
+
+                        <option value="admin">
+                            Admin / Officer
+                        </option>
+
+                        <option value="crew">
+                            Crew
+                        </option>
+
+                        <option value="facilitator">
+                            City Facilitator
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="regFirstName">
                         First Name
                     </label>
 
                     <input
-                        id="firstName"
                         type="text"
+                        id="regFirstName"
                         placeholder="Enter first name"
                         required
                     >
@@ -118,13 +212,13 @@
 
                 <div class="form-group">
 
-                    <label for="middleName">
+                    <label for="regMiddleName">
                         Middle Name
                     </label>
 
                     <input
-                        id="middleName"
                         type="text"
+                        id="regMiddleName"
                         placeholder="Enter middle name"
                     >
 
@@ -133,13 +227,13 @@
 
                 <div class="form-group">
 
-                    <label for="lastName">
+                    <label for="regLastName">
                         Last Name
                     </label>
 
                     <input
-                        id="lastName"
                         type="text"
+                        id="regLastName"
                         placeholder="Enter last name"
                         required
                     >
@@ -149,13 +243,13 @@
 
                 <div class="form-group">
 
-                    <label for="registerEmail">
+                    <label for="regEmail">
                         Email
                     </label>
 
                     <input
-                        id="registerEmail"
                         type="email"
+                        id="regEmail"
                         placeholder="Enter email"
                         required
                     >
@@ -165,13 +259,13 @@
 
                 <div class="form-group">
 
-                    <label for="registerPassword">
+                    <label for="regPass">
                         Password
                     </label>
 
                     <input
-                        id="registerPassword"
                         type="password"
+                        id="regPass"
                         placeholder="Create password"
                         required
                     >
@@ -181,207 +275,185 @@
 
                 <button
                     type="submit"
-                    class="full-button"
+                    class="btn-primary"
                 >
                     Create Account
                 </button>
 
 
                 <button
-                    id="BackFromRegisterBtn"
                     type="button"
-                    class="secondary-button"
+                    id="showLogin"
+                    class="btn-secondary"
                 >
-                    Back
+                    ← Back to Login
                 </button>
+
 
             </form>
 
+        </section>
 
+        <section
+            id="residentArea"
+            class="area dashboard-card-container resident-dashboard"
+        >
 
-            <form
-                id="loginForm"
-                class="form-box hidden"
+            <div
+                id="dashboardHeader"
+                class="form-header"
             >
 
-                <h3>
-                    User Login
-                </h3>
+                <h2>
 
+                    Welcome,
+                    <span id="residentDisplay">
+                        Resident
+                    </span>!
 
-                <p class="form-description">
+                </h2>
 
-                    Please enter your account information
-                    to access SWCRS.
-
+                <p>
+                    Please select an option below.
                 </p>
 
-
-                <div class="form-group">
-
-                    <label for="loginEmail">
-                        Email
-                    </label>
-
-                    <input
-                        id="loginEmail"
-                        type="email"
-                        placeholder="Enter your email"
-                        required
-                    >
-
-                </div>
+            </div>
 
 
-                <div class="form-group">
+            <div
+                id="dashboardMenu"
+                class="menu-grid"
+            >
 
-                    <label for="loginPassword">
-                        Password
-                    </label>
 
-                    <input
-                        id="loginPassword"
-                        type="password"
-                        placeholder="Enter your password"
-                        required
-                    >
-
-                </div>
-
+                <!-- COLLECTION SCHEDULE -->
 
                 <button
-                    type="submit"
-                    class="full-button"
-                >
-                    Login
-                </button>
-
-
-                <button
-                    id="BackFromLoginBtn"
                     type="button"
-                    class="secondary-button"
+                    class="menu-btn btn-menu-green"
+                    onclick="openInterface('viewSchedule')"
                 >
-                    Back
+
+                    Collection Schedule
+
                 </button>
 
 
-                <p
-                    id="loginMessage"
-                    class="message"
-                ></p>
 
-            </form>
+                <!-- MY REPORTS -->
+
+                <button
+                    type="button"
+                    class="menu-btn btn-menu-green"
+                    onclick="openInterface('viewReports')"
+                >
+
+                    My Waste Reports
+
+                </button>
 
 
 
+                <!-- SUBMIT REPORT -->
 
-            <section
-                id="userMenu"
-                class="menu-section hidden"
+                <button
+                    type="button"
+                    class="menu-btn btn-menu-blue"
+                    onclick="openInterface('viewSubmit')"
+                >
+
+                    + Submit New Report
+
+                </button>
+
+
+
+                <!-- CREW INFORMATION -->
+
+                <button
+                    type="button"
+                    class="menu-btn btn-menu-green"
+                    onclick="openInterface('viewCrew')"
+                >
+
+                    Collection Crew Info
+
+                </button>
+
+
+
+                <!-- NOTIFICATIONS -->
+
+                <button
+                    type="button"
+                    class="menu-btn btn-menu-orange notification-menu-btn"
+                    onclick="openInterface('viewNotifications')"
+                >
+
+                    🔔 Notifications
+
+                    <span
+                        id="notificationCount"
+                        class="notification-count"
+                    >
+                        3
+                    </span>
+
+                </button>
+
+
+
+                <!-- LOGOUT -->
+
+                <button
+                    type="button"
+                    class="menu-btn btn-menu-red"
+                    id="logoutResident"
+                >
+
+                    Logout
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="viewSchedule"
+                class="view-panel"
             >
 
-                <div class="menu-card">
 
-                    <h3>
-                        Welcome to SWCRS!
-                    </h3>
+                <div class="interface-header">
 
+                    <span class="interface-number">
+                        INTERFACE 01
+                    </span>
 
-                    <p id="userWelcome">
-
-                        You are now logged in.
-
-                    </p>
-
-
-                    <p class="menu-description">
-
-                        Please select the information
-                        you want to view.
-
-                    </p>
-
-
-                    <div class="menu-buttons">
-
-
-                        <button
-                            id="ScheduleBtn"
-                            type="button"
-                        >
-
-                            Collection Schedule
-
-                        </button>
-
-
-
-                        <button
-                            id="ReportsBtn"
-                            type="button"
-                        >
-
-                            Waste Collection Reports
-
-                        </button>
-
-
-
-                        <button
-                            id="CrewBtn"
-                            type="button"
-                        >
-
-                            Collection Crew
-
-                        </button>
-
-
-
-                        <button
-                            id="LogoutBtn"
-                            type="button"
-                            class="logout-button"
-                        >
-
-                            Logout
-
-                        </button>
-
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-
-            <section
-                id="scheduleSection"
-                class="data-section hidden"
-            >
-
-                <div class="section-title">
-
-                    <h3>
-                        Collection Schedule
-                    </h3>
+                    <h2>
+                        Barangay Waste Collection Schedule
+                    </h2>
 
                     <p>
-                        View the scheduled waste collection
-                        activities by area.
+                        View the current waste collection
+                        schedules in your barangay.
                     </p>
 
                 </div>
+
 
 
                 <div class="table-card">
 
+                    <div class="table-title">
+                        Collection Schedule
+                    </div>
+
+
                     <div class="table-wrapper">
 
-                        <table class="styled-table">
+                        <table>
 
                             <thead>
 
@@ -392,19 +464,19 @@
                                     </th>
 
                                     <th>
-                                        Area / Purok
+                                        Barangay Purok
                                     </th>
 
                                     <th>
-                                        Collection Date
+                                        Waste Category
                                     </th>
 
                                     <th>
-                                        Collection Time
+                                        Pickup Date & Time
                                     </th>
 
                                     <th>
-                                        Waste Type
+                                        Status
                                     </th>
 
                                 </tr>
@@ -414,79 +486,165 @@
 
                             <tbody>
 
+
                                 <tr>
 
-                                    <td>CS001</td>
+                                    <td>
+                                        SCH-2026-01
+                                    </td>
 
-                                    <td>Purok 1</td>
+                                    <td>
+                                        Fatima - Purok 18
+                                    </td>
 
-                                    <td>August 25, 2026</td>
+                                    <td>
+                                        Biodegradable (Organic)
+                                    </td>
 
-                                    <td>7:00 AM</td>
+                                    <td>
+                                        Aug 26, 2026 | 08:00 AM
+                                    </td>
 
-                                    <td>Plastic</td>
+                                    <td>
+
+                                        <span
+                                            class="badge badge-warning"
+                                        >
+                                            In Progress
+                                        </span>
+
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>CS002</td>
+                                    <td>
+                                        SCH-2026-02
+                                    </td>
 
-                                    <td>Purok 2</td>
+                                    <td>
+                                        Fatima - Purok 7
+                                    </td>
 
-                                    <td>August 26, 2026</td>
+                                    <td>
+                                        Non-Biodegradable (Dry)
+                                    </td>
 
-                                    <td>7:30 AM</td>
+                                    <td>
+                                        Aug 27, 2026 | 09:30 AM
+                                    </td>
 
-                                    <td>Organic</td>
+                                    <td>
+
+                                        <span
+                                            class="badge badge-info"
+                                        >
+                                            Scheduled
+                                        </span>
+
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>CS003</td>
+                                    <td>
+                                        SCH-2026-03
+                                    </td>
 
-                                    <td>Purok 3</td>
+                                    <td>
+                                        Fatima - Purok 5
+                                    </td>
 
-                                    <td>August 27, 2026</td>
+                                    <td>
+                                        Recyclables (Plastics/Glass)
+                                    </td>
 
-                                    <td>8:00 AM</td>
+                                    <td>
+                                        Aug 28, 2026 | 07:00 AM
+                                    </td>
 
-                                    <td>Paper</td>
+                                    <td>
+
+                                        <span
+                                            class="badge badge-info"
+                                        >
+                                            Scheduled
+                                        </span>
+
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>CS004</td>
+                                    <td>
+                                        SCH-2026-04
+                                    </td>
 
-                                    <td>Purok 4</td>
+                                    <td>
+                                        Fatima - Purok 2
+                                    </td>
 
-                                    <td>August 28, 2026</td>
+                                    <td>
+                                        Hazardous / E-Waste
+                                    </td>
 
-                                    <td>7:00 AM</td>
+                                    <td>
+                                        Aug 29, 2026 | 01:00 PM
+                                    </td>
 
-                                    <td>Mixed Waste</td>
+                                    <td>
+
+                                        <span
+                                            class="badge badge-info"
+                                        >
+                                            Scheduled
+                                        </span>
+
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>CS005</td>
+                                    <td>
+                                        SCH-2026-05
+                                    </td>
 
-                                    <td>Purok 5</td>
+                                    <td>
+                                        Fatima - Purok 8
+                                    </td>
 
-                                    <td>August 29, 2026</td>
+                                    <td>
+                                        Bulk Household Waste
+                                    </td>
 
-                                    <td>8:30 AM</td>
+                                    <td>
+                                        Aug 25, 2026 | 10:00 AM
+                                    </td>
 
-                                    <td>Glass</td>
+                                    <td>
+
+                                        <span
+                                            class="badge badge-success"
+                                        >
+                                            Completed
+                                        </span>
+
+                                    </td>
 
                                 </tr>
+
 
                             </tbody>
 
@@ -497,42 +655,52 @@
                 </div>
 
 
+
                 <button
-                    class="back-menu-button"
-                    data-back-menu
                     type="button"
+                    class="btn-back"
+                    onclick="returnToDashboard()"
                 >
-                    Back to Menu
+
+                    ← Back to Dashboard
+
                 </button>
 
-            </section>
+
+            </div>
 
 
-
-            <section
-                id="reportsSection"
-                class="data-section hidden"
+            <div
+                id="viewReports"
+                class="view-panel"
             >
 
-                <div class="section-title">
 
-                    <h3>
-                        Waste Collection Reports
-                    </h3>
+                <div class="interface-header">
+
+                    <h2>
+                        Waste Reports
+                    </h2>
 
                     <p>
-                        View submitted waste collection
-                        reports and their current status.
+                        View the waste incidents that
+                        you have reported.
                     </p>
 
                 </div>
 
 
+
                 <div class="table-card">
+
+                    <div class="table-title">
+                        Submitted Incident Reports
+                    </div>
+
 
                     <div class="table-wrapper">
 
-                        <table class="styled-table">
+                        <table>
 
                             <thead>
 
@@ -543,19 +711,19 @@
                                     </th>
 
                                     <th>
-                                        Location
+                                        Location / Landmark
                                     </th>
 
                                     <th>
-                                        Waste Type
+                                        Issue Category
                                     </th>
 
                                     <th>
-                                        Date Collected
+                                        Date Filed
                                     </th>
 
                                     <th>
-                                        Status
+                                        Action Status
                                     </th>
 
                                 </tr>
@@ -565,99 +733,165 @@
 
                             <tbody>
 
+
                                 <tr>
 
-                                    <td>WR001</td>
-
-                                    <td>Purok 1</td>
-
-                                    <td>Plastic</td>
-
-                                    <td>August 20, 2026</td>
+                                    <td>
+                                        REP-801
+                                    </td>
 
                                     <td>
-                                        <span class="status collected">
-                                            Collected
+                                        Near Plaza Gym
+                                    </td>
+
+                                    <td>
+                                        Overflowing Communal Bin
+                                    </td>
+
+                                    <td>
+                                        Aug 25, 2026
+                                    </td>
+
+                                    <td>
+
+                                        <span
+                                            class="badge badge-success"
+                                        >
+                                            Resolved
                                         </span>
+
                                     </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>WR002</td>
-
-                                    <td>Purok 2</td>
-
-                                    <td>Organic</td>
-
-                                    <td>August 21, 2026</td>
+                                    <td>
+                                        REP-802
+                                    </td>
 
                                     <td>
-                                        <span class="status collected">
-                                            Collected
+                                        Near Waste District
+                                    </td>
+
+                                    <td>
+                                        Uncollected Commercial Trash
+                                    </td>
+
+                                    <td>
+                                        Aug 26, 2026
+                                    </td>
+
+                                    <td>
+
+                                        <span
+                                            class="badge badge-warning"
+                                        >
+                                            Under Review
                                         </span>
+
                                     </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>WR003</td>
-
-                                    <td>Purok 3</td>
-
-                                    <td>Paper</td>
-
-                                    <td>August 21, 2026</td>
+                                    <td>
+                                        REP-803
+                                    </td>
 
                                     <td>
-                                        <span class="status collected">
-                                            Collected
+                                        Basketball Court
+                                    </td>
+
+                                    <td>
+                                        Illegal Dumping Incident
+                                    </td>
+
+                                    <td>
+                                        Aug 26, 2026
+                                    </td>
+
+                                    <td>
+
+                                        <span
+                                            class="badge badge-danger"
+                                        >
+                                            High Priority
                                         </span>
+
                                     </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>WR004</td>
-
-                                    <td>Purok 4</td>
-
-                                    <td>Mixed Waste</td>
-
-                                    <td>August 22, 2026</td>
+                                    <td>
+                                        REP-804
+                                    </td>
 
                                     <td>
-                                        <span class="status pending">
-                                            Pending
+                                        Block 12 Lot 5, Subd. A
+                                    </td>
+
+                                    <td>
+                                        Missed Household Pickup
+                                    </td>
+
+                                    <td>
+                                        Aug 24, 2026
+                                    </td>
+
+                                    <td>
+
+                                        <span
+                                            class="badge badge-success"
+                                        >
+                                            Resolved
                                         </span>
+
                                     </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>WR005</td>
-
-                                    <td>Purok 5</td>
-
-                                    <td>Glass</td>
-
-                                    <td>August 22, 2026</td>
+                                    <td>
+                                        REP-805
+                                    </td>
 
                                     <td>
-                                        <span class="status collected">
-                                            Collected
+                                        Public Park Entrance
+                                    </td>
+
+                                    <td>
+                                        Damaged Recycling Bin
+                                    </td>
+
+                                    <td>
+                                        Aug 23, 2026
+                                    </td>
+
+                                    <td>
+
+                                        <span
+                                            class="badge badge-info"
+                                        >
+                                            Scheduled Fix
                                         </span>
+
                                     </td>
 
                                 </tr>
+
 
                             </tbody>
 
@@ -668,42 +902,170 @@
                 </div>
 
 
+
                 <button
-                    class="back-menu-button"
-                    data-back-menu
                     type="button"
+                    class="btn-back"
+                    onclick="returnToDashboard()"
                 >
-                    Back to Menu
+
+                    ← Back to Dashboard
+
                 </button>
 
-            </section>
+
+            </div>
 
 
-
-            <section
-                id="crewSection"
-                class="data-section hidden"
+            <div
+                id="viewSubmit"
+                class="view-panel"
             >
 
-                <div class="section-title">
 
-                    <h3>
-                        Collection Crew
-                    </h3>
+                <div class="interface-header">
+
+                    <h2>
+                        Submit New Waste Report
+                    </h2>
 
                     <p>
-                        View the assigned collection crew
-                        and their current status.
+                        Report an uncollected waste problem
+                        or waste-related incident.
                     </p>
 
                 </div>
 
 
+
+                <form id="newReportForm">
+
+
+                    <div class="form-group">
+
+                        <label for="repLocation">
+                            Incident Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="repLocation"
+                            placeholder="Enter street, purok, or landmark"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="repType">
+                            Issue Category
+                        </label>
+
+                        <select id="repType">
+
+                            <option>
+                                Overflowing Communal Bin
+                            </option>
+
+                            <option>
+                                Uncollected Garbage
+                            </option>
+
+                            <option>
+                                Illegal Dumping Site
+                            </option>
+
+                            <option>
+                                Damaged Public Bin
+                            </option>
+
+                            <option>
+                                Missed Household Pickup
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="repDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="repDescription"
+                            placeholder="Describe the waste problem..."
+                            rows="5"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+                        Submit Report
+                    </button>
+
+
+                </form>
+
+
+
+                <button
+                    type="button"
+                    class="btn-back"
+                    onclick="returnToDashboard()"
+                >
+
+                    ← Back to Dashboard
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="viewCrew"
+                class="view-panel"
+            >
+
+
+                <div class="interface-header">
+
+                    <h2>
+                        Collection Crew Information
+                    </h2>
+
+                    <p>
+                        View the assigned collection teams
+                        and their service areas.
+                    </p>
+
+                </div>
+
+
+
                 <div class="table-card">
+
+                    <div class="table-title">
+                        Assigned Collection Crew
+                    </div>
+
 
                     <div class="table-wrapper">
 
-                        <table class="styled-table">
+                        <table>
 
                             <thead>
 
@@ -714,19 +1076,19 @@
                                     </th>
 
                                     <th>
-                                        Name
+                                        Team Leader
                                     </th>
 
                                     <th>
-                                        Assigned Route
+                                        Vehicle Unit
                                     </th>
 
                                     <th>
-                                        Contact
+                                        Assigned Zone
                                     </th>
 
                                     <th>
-                                        Status
+                                        Contact Number
                                     </th>
 
                                 </tr>
@@ -736,79 +1098,135 @@
 
                             <tbody>
 
+
                                 <tr>
 
-                                    <td>C001</td>
+                                    <td>
+                                        CREW-101
+                                    </td>
 
-                                    <td>Juan Dela Cruz</td>
+                                    <td>
+                                        Officer Kirby Donguines
+                                    </td>
 
-                                    <td>Route A</td>
+                                    <td>
+                                        Compactor Truck Alpha
+                                    </td>
 
-                                    <td>09123456789</td>
+                                    <td>
+                                        Fatima - Purok 18
+                                    </td>
 
-                                    <td>Active</td>
+                                    <td>
+                                        +63 917 555 0192
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>C002</td>
+                                    <td>
+                                        CREW-102
+                                    </td>
 
-                                    <td>Maria Santos</td>
+                                    <td>
+                                        Driver P. Palantes
+                                    </td>
 
-                                    <td>Route B</td>
+                                    <td>
+                                        Compactor Truck Bravo
+                                    </td>
 
-                                    <td>09234567890</td>
+                                    <td>
+                                        Fatima - Purok 5
+                                    </td>
 
-                                    <td>Active</td>
+                                    <td>
+                                        +63 918 555 0143
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>C003</td>
+                                    <td>
+                                        CREW-103
+                                    </td>
 
-                                    <td>Pedro Reyes</td>
+                                    <td>
+                                        Driver J. Aquino
+                                    </td>
 
-                                    <td>Route C</td>
+                                    <td>
+                                        Mini Hauler Truck 01
+                                    </td>
 
-                                    <td>09345678901</td>
+                                    <td>
+                                        Fatima - Purok 7
+                                    </td>
 
-                                    <td>On Duty</td>
+                                    <td>
+                                        +63 919 555 0188
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>C004</td>
+                                    <td>
+                                        CREW-104
+                                    </td>
 
-                                    <td>Ana Garcia</td>
+                                    <td>
+                                        Officer S. Mendoza
+                                    </td>
 
-                                    <td>Route D</td>
+                                    <td>
+                                        Heavy Dump Truck 04
+                                    </td>
 
-                                    <td>09456789012</td>
+                                    <td>
+                                        Fatima - Purok 8
+                                    </td>
 
-                                    <td>Active</td>
+                                    <td>
+                                        +63 920 555 0177
+                                    </td>
 
                                 </tr>
 
 
+
                                 <tr>
 
-                                    <td>C005</td>
+                                    <td>
+                                        CREW-105
+                                    </td>
 
-                                    <td>Mark Lopez</td>
+                                    <td>
+                                        Driver L. Fernandez
+                                    </td>
 
-                                    <td>Route E</td>
+                                    <td>
+                                        Mini Hauler Truck 02
+                                    </td>
 
-                                    <td>09567890123</td>
+                                    <td>
+                                        Fatima - Purok 2
+                                    </td>
 
-                                    <td>Off Duty</td>
+                                    <td>
+                                        +63 921 555 0121
+                                    </td>
 
                                 </tr>
+
 
                             </tbody>
 
@@ -819,23 +1237,364 @@
                 </div>
 
 
+
                 <button
-                    class="back-menu-button"
-                    data-back-menu
                     type="button"
+                    class="btn-back"
+                    onclick="returnToDashboard()"
                 >
-                    Back to Menu
+
+                    ← Back to Dashboard
+
                 </button>
 
-            </section>
+
+            </div>
+
+            <div
+                id="viewNotifications"
+                class="view-panel"
+            >
+
+
+                <div class="interface-header">
+
+                    <h2>
+                        🔔 Notifications
+                    </h2>
+
+                    <p>
+                        Stay updated with your collection
+                        schedules, waste reports, and
+                        system announcements.
+                    </p>
+
+                </div>
+
+
+
+                <div class="notification-summary">
+
+
+                    <div class="notification-summary-box">
+
+                        <span
+                            id="notificationNumber"
+                            class="notification-number"
+                        >
+                            3
+                        </span>
+
+                        <span>
+                            Unread Notifications
+                        </span>
+
+                    </div>
+
+
+
+                    <button
+                        type="button"
+                        id="markAllRead"
+                        class="mark-read-btn"
+                    >
+
+                        Mark All as Read
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- NOTIFICATION LIST -->
+
+                <div
+                    id="notificationList"
+                    class="notification-list"
+                >
+
+
+                    <!-- NOTIFICATION 1 -->
+
+                    <div
+                        class="notification-item unread"
+                        data-notification="1"
+                    >
+
+                        <div
+                            class="notification-icon schedule-icon"
+                        >
+                            📅
+                        </div>
+
+
+                        <div class="notification-content">
+
+                            <h3>
+                                Collection Schedule Reminder
+                            </h3>
+
+                            <p>
+                                Your recyclable waste collection
+                                is scheduled for August 28, 2026
+                                at 7:00 AM.
+                            </p>
+
+                            <span class="notification-time">
+                                2 hours ago
+                            </span>
+
+                        </div>
+
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+
+
+                    <!-- NOTIFICATION 2 -->
+
+                    <div
+                        class="notification-item unread"
+                        data-notification="2"
+                    >
+
+                        <div
+                            class="notification-icon report-icon"
+                        >
+                            📝
+                        </div>
+
+
+                        <div class="notification-content">
+
+                            <h3>
+                                Waste Report Update
+                            </h3>
+
+                            <p>
+                                Your waste report REP-802 is
+                                currently under review by the
+                                Barangay Environment Management
+                                Office.
+                            </p>
+
+                            <span class="notification-time">
+                                Yesterday
+                            </span>
+
+                        </div>
+
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+
+
+                    <!-- NOTIFICATION 3 -->
+
+                    <div
+                        class="notification-item unread"
+                        data-notification="3"
+                    >
+
+                        <div
+                            class="notification-icon warning-icon"
+                        >
+                            ⚠️
+                        </div>
+
+
+                        <div class="notification-content">
+
+                            <h3>
+                                Collection Advisory
+                            </h3>
+
+                            <p>
+                                Please place your waste outside
+                                before 7:00 AM on your scheduled
+                                collection day.
+                            </p>
+
+                            <span class="notification-time">
+                                Aug 26, 2026
+                            </span>
+
+                        </div>
+
+
+                        <span class="unread-dot"></span>
+
+                    </div>
+
+
+
+                    <!-- NOTIFICATION 4 -->
+
+                    <div
+                        class="notification-item"
+                        data-notification="4"
+                    >
+
+                        <div
+                            class="notification-icon success-icon"
+                        >
+                            ✓
+                        </div>
+
+
+                        <div class="notification-content">
+
+                            <h3>
+                                Waste Report Resolved
+                            </h3>
+
+                            <p>
+                                Your previous waste report
+                                REP-801 has been successfully
+                                resolved.
+                            </p>
+
+                            <span class="notification-time">
+                                Aug 25, 2026
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- NOTIFICATION 5 -->
+
+                    <div
+                        class="notification-item"
+                        data-notification="5"
+                    >
+
+                        <div
+                            class="notification-icon info-icon"
+                        >
+                            ℹ️
+                        </div>
+
+
+                        <div class="notification-content">
+
+                            <h3>
+                                System Announcement
+                            </h3>
+
+                            <p>
+                                Thank you for helping keep our
+                                barangay clean and environmentally
+                                friendly.
+                            </p>
+
+                            <span class="notification-time">
+                                Aug 24, 2026
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- BACK BUTTON -->
+
+                <button
+                    type="button"
+                    class="btn-back"
+                    onclick="returnToDashboard()"
+                >
+
+                    ← Back to Dashboard
+
+                </button>
+
+
+            </div>
 
 
         </section>
 
+
+        <section
+            id="adminArea"
+            class="area dashboard-card-container"
+        >
+
+
+            <div class="form-header">
+
+                <h2>
+                    Welcome, Admin!
+                </h2>
+
+                <p>
+                    BEMO Management Dashboard
+                </p>
+
+            </div>
+
+
+
+            <div class="admin-chart-container">
+
+                <h3>
+                    Collection Statistics
+                </h3>
+
+                <canvas id="statsChart"></canvas>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                id="logoutAdmin"
+                class="btn-secondary"
+            >
+
+                Logout
+
+            </button>
+
+
+        </section>
+
+
     </main>
 
 
+
+    <footer>
+
+        <p>
+            © 2026 Smart Waste System | Designed by Aiya Ryl
+        </p>
+
+    </footer>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
+
+
     <script src="script.js"></script>
+
 
 </body>
 
