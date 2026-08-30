@@ -11,7 +11,7 @@
     >
 
     <title>
-        Smart Waste Collection Report System
+        Smart Waste Collection and Reporting System
     </title>
 
     <link
@@ -19,1582 +19,3319 @@
         href="style.css"
     >
 
+    <!-- Chart.js -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+
 </head>
 
 
 <body>
-    <header>
 
-        <h1>
-            Smart Waste Collection Report System (SWCRS)
-        </h1>
 
-        <div class="header-divider"></div>
+<header>
 
-        <p class="header-subtitle">
-            Barangay Environment Management Office (BEMO)
+    <h1>
+        Smart Waste Collection and Reporting System
+    </h1>
+
+    <p>
+        Clean Community • Smart Monitoring • Better Waste Management
+    </p>
+
+</header>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section
+    id="loginSection"
+    class="auth active"
+>
+
+    <div class="card">
+
+        <h2>
+            Login
+        </h2>
+
+        <form id="loginForm">
+
+            <label for="loginUser">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="loginUser"
+                placeholder="Enter username"
+                required
+            >
+
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter password"
+                minlength="4"
+                required
+            >
+
+
+            <label for="loginRole">
+                Login As
+            </label>
+
+            <select
+                id="loginRole"
+                required
+            >
+
+                <option value="">
+                    Select Role
+                </option>
+
+                <option value="resident">
+                    Resident
+                </option>
+
+                <option value="crew">
+                    Collection Crew
+                </option>
+
+                <option value="facilitator">
+                    City Facilitator
+                </option>
+
+                <option value="admin">
+                    Admin / Officer
+                </option>
+
+            </select>
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p>
+            Don't have an account?
+
+            <a
+                href="#"
+                id="showRegister"
+            >
+                Register here
+            </a>
+
         </p>
 
-    </header>
+    </div>
 
-    <main class="main-wrapper">
+</section>
 
 
-        <section
-            id="loginSection"
-            class="auth auth-card active"
-        >
 
-            <div class="form-header">
+<!-- =====================================================
+     REGISTER
+===================================================== -->
 
-                <h2>
-                    Account Login
-                </h2>
+<section
+    id="registerSection"
+    class="auth"
+    required
+>
 
-                <p>
-                    Sign in to your account.
-                </p>
+    <div class="card">
 
-            </div>
+        <h2>
+            Create Resident Account
+        </h2>
 
 
-            <form id="loginForm">
+        <form id="registerForm">
 
+            <label for="regFirstName">
+                First Name
+            </label>
 
-                <div class="form-group">
-
-                    <label for="loginRole">
-                        Role
-                    </label>
-
-                    <select id="loginRole">
-
-                        <option value="resident">
-                            Resident
-                        </option>
-
-                        <option value="admin">
-                            Admin/Officer
-                        </option>
-
-                        <option value="crew">
-                            Crew
-                        </option>
-
-                        <option value="facilitator">
-                            City Facilitator
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="loginUser">
-                        Username or Email
-                    </label>
-
-                    <input
-                        type="text"
-                        id="loginUser"
-                        placeholder="Enter username or email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="loginPass">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="loginPass"
-                        placeholder="Enter password"
-                        required
-                    >
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn-primary"
-                >
-                    Sign In
-                </button>
-
-
-                <button
-                    type="button"
-                    id="showRegister"
-                    class="btn-secondary"
-                >
-                    Create Account
-                </button>
-
-
-            </form>
-
-        </section>
-
-
-        <section
-            id="registerSection"
-            class="auth auth-card"
-        >
-
-            <div class="form-header">
-
-                <h2>
-                    Account Registration
-                </h2>
-
-                <p>
-                    Create your account.
-                </p>
-
-            </div>
-
-
-            <form id="registerForm">
-
-
-                <div class="form-group">
-
-                    <label for="regRole">
-                        Register As
-                    </label>
-
-                    <select id="regRole">
-
-                        <option value="resident">
-                            Resident
-                        </option>
-
-                        <option value="admin">
-                            Admin / Officer
-                        </option>
-
-                        <option value="crew">
-                            Crew
-                        </option>
-
-                        <option value="facilitator">
-                            City Facilitator
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="regFirstName">
-                        First Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="regFirstName"
-                        placeholder="Enter first name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="regMiddleName">
-                        Middle Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="regMiddleName"
-                        placeholder="Enter middle name"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="regLastName">
-                        Last Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="regLastName"
-                        placeholder="Enter last name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="regEmail">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="regEmail"
-                        placeholder="Enter email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="regPass">
-                        Password
-                    </label>
-
-                    <input
-                        type="password"
-                        id="regPass"
-                        placeholder="Create password"
-                        required
-                    >
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn-primary"
-                >
-                    Create Account
-                </button>
-
-
-                <button
-                    type="button"
-                    id="showLogin"
-                    class="btn-secondary"
-                >
-                    ← Back to Login
-                </button>
-
-
-            </form>
-
-        </section>
-
-        <section
-            id="residentArea"
-            class="area dashboard-card-container resident-dashboard"
-        >
-
-            <div
-                id="dashboardHeader"
-                class="form-header"
+            <input
+                type="text"
+                id="regFirstName"
+                placeholder="Enter First Name"
+                required
             >
 
-                <h2>
 
+            <label for="regMiddleName">
+                Middle Name
+            </label>
+
+            <input
+                type="text"
+                id="regMiddleName"
+                placeholder="Enter Middle Name"
+            >
+
+
+            <label for="regLastName">
+                Last Name
+            </label>
+
+            <input
+                type="text"
+                id="regLastName"
+                placeholder="Enter Last Name"
+                required
+            >
+
+
+            <label for="regEmail">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="regEmail"
+                placeholder="example@email.com"
+                required
+            >
+
+
+            <label for="regUsername">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="regUsername"
+                placeholder="Create username"
+                required
+            >
+
+
+            <label for="regPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="regPassword"
+                minlength="6"
+                placeholder="Minimum 6 characters"
+                required
+            >
+
+
+            <label for="regCountry">
+                Country
+            </label>
+
+            <input
+                type="text"
+                id="regCountry"
+                value="Philippines"
+                required
+            >
+
+
+            <label for="regRegion">
+                Region
+            </label>
+
+            <input
+                type="text"
+                id="regRegion"
+                placeholder="Enter Region"
+                required
+            >
+
+
+            <label for="regCity">
+                City / Municipality
+            </label>
+
+            <input
+                type="text"
+                id="regCity"
+                placeholder="Enter City / Municipality"
+                required
+            >
+
+
+            <label for="regBarangay">
+                Barangay
+            </label>
+
+            <input
+                type="text"
+                id="regBarangay"
+                placeholder="Enter Barangay"
+                required
+            >
+
+
+            <label for="regPurokZone">
+                Purok / Zone
+            </label>
+
+            <input
+                type="text"
+                id="regPurokZone"
+                placeholder="Enter Purok or Zone"
+                required
+            >
+
+
+            <label for="regBlock">
+                Block
+            </label>
+
+            <input
+                type="text"
+                id="regBlock"
+                placeholder="Optional"
+            >
+
+
+            <label for="regStreetPhaseLot">
+                Street / Phase / Lot
+            </label>
+
+            <input
+                type="text"
+                id="regStreetPhaseLot"
+                placeholder="Optional"
+            >
+
+            <label for="loginRole">
+                Register As
+            </label>
+
+            <select
+                id="loginRole"
+                required
+            >
+
+                <option value="">
+                    Select Role
+                </option>
+
+                <option value="resident">
+                    Resident
+                </option>
+
+                <option value="crew">
+                    Collection Crew
+                </option>
+
+                <option value="facilitator">
+                    City Facilitator
+                </option>
+
+                <option value="admin">
+                    Admin / Officer
+                </option>
+
+            </select>
+
+
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+
+
+        <p>
+
+            Already have an account?
+
+            <a
+                href="#"
+                id="showLogin"
+            >
+                Back to Login
+            </a>
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RESIDENT AREA
+===================================================== -->
+
+<section
+    id="residentArea"
+    class="area"
+>
+
+
+    <!-- RESIDENT DASHBOARD -->
+
+    <div id="residentDashboard">
+
+        <div class="dashboard-heading">
+
+            <div>
+
+                <h2>
+                    Resident Dashboard
+                </h2>
+
+                <p>
                     Welcome,
-                    <span id="residentDisplay">
+
+                    <strong id="residentDisplay">
                         Resident
-                    </span>!
+                    </strong>
 
-                </h2>
-
-                <p>
-                    Please select an option below.
                 </p>
 
             </div>
 
 
-            <div
-                id="dashboardMenu"
-                class="menu-grid"
+            <button
+                type="button"
+                class="logout"
+                id="logoutResident"
             >
+                Logout
+            </button>
+
+        </div>
 
 
-                <!-- COLLECTION SCHEDULE -->
-
-                <button
-                    type="button"
-                    class="menu-btn btn-menu-green"
-                    onclick="openInterface('viewSchedule')"
-                >
-
-                    Collection Schedule
-
-                </button>
-
-
-
-                <!-- MY REPORTS -->
-
-                <button
-                    type="button"
-                    class="menu-btn btn-menu-green"
-                    onclick="openInterface('viewReports')"
-                >
-
-                    My Waste Reports
-
-                </button>
-
-
-
-                <!-- SUBMIT REPORT -->
-
-                <button
-                    type="button"
-                    class="menu-btn btn-menu-blue"
-                    onclick="openInterface('viewSubmit')"
-                >
-
-                    + Submit New Report
-
-                </button>
-
-
-
-                <!-- CREW INFORMATION -->
-
-                <button
-                    type="button"
-                    class="menu-btn btn-menu-green"
-                    onclick="openInterface('viewCrew')"
-                >
-
-                    Collection Crew Info
-
-                </button>
-
-
-
-                <!-- NOTIFICATIONS -->
-
-                <button
-                    type="button"
-                    class="menu-btn btn-menu-orange notification-menu-btn"
-                    onclick="openInterface('viewNotifications')"
-                >
-
-                    🔔 Notifications
-
-                    <span
-                        id="notificationCount"
-                        class="notification-count"
-                    >
-                        3
-                    </span>
-
-                </button>
-
-
-
-                <!-- LOGOUT -->
-
-                <button
-                    type="button"
-                    class="menu-btn btn-menu-red"
-                    id="logoutResident"
-                >
-
-                    Logout
-
-                </button>
-
-
-            </div>
+        <div class="grid">
 
 
             <div
-                id="viewSchedule"
-                class="view-panel"
+                class="feature-card"
+                onclick="openInterface('reportInterface')"
             >
 
-
-                <div class="interface-header">
-
-                    <span class="interface-number">
-                        INTERFACE 01
-                    </span>
-
-                    <h2>
-                        Barangay Waste Collection Schedule
-                    </h2>
-
-                    <p>
-                        View the current waste collection
-                        schedules in your barangay.
-                    </p>
-
+                <div class="feature-icon">
+                    📝
                 </div>
-
-
-
-                <div class="table-card">
-
-                    <div class="table-title">
-                        Collection Schedule
-                    </div>
-
-
-                    <div class="table-wrapper">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-
-                                    <th>
-                                        Schedule ID
-                                    </th>
-
-                                    <th>
-                                        Barangay Purok
-                                    </th>
-
-                                    <th>
-                                        Waste Category
-                                    </th>
-
-                                    <th>
-                                        Pickup Date & Time
-                                    </th>
-
-                                    <th>
-                                        Status
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-                            <tbody>
-
-
-                                <tr>
-
-                                    <td>
-                                        SCH-2026-01
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 18
-                                    </td>
-
-                                    <td>
-                                        Biodegradable (Organic)
-                                    </td>
-
-                                    <td>
-                                        Aug 26, 2026 | 08:00 AM
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-warning"
-                                        >
-                                            In Progress
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        SCH-2026-02
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 7
-                                    </td>
-
-                                    <td>
-                                        Non-Biodegradable (Dry)
-                                    </td>
-
-                                    <td>
-                                        Aug 27, 2026 | 09:30 AM
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-info"
-                                        >
-                                            Scheduled
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        SCH-2026-03
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 5
-                                    </td>
-
-                                    <td>
-                                        Recyclables (Plastics/Glass)
-                                    </td>
-
-                                    <td>
-                                        Aug 28, 2026 | 07:00 AM
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-info"
-                                        >
-                                            Scheduled
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        SCH-2026-04
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 2
-                                    </td>
-
-                                    <td>
-                                        Hazardous / E-Waste
-                                    </td>
-
-                                    <td>
-                                        Aug 29, 2026 | 01:00 PM
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-info"
-                                        >
-                                            Scheduled
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        SCH-2026-05
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 8
-                                    </td>
-
-                                    <td>
-                                        Bulk Household Waste
-                                    </td>
-
-                                    <td>
-                                        Aug 25, 2026 | 10:00 AM
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-success"
-                                        >
-                                            Completed
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-
-
-                <button
-                    type="button"
-                    class="btn-back"
-                    onclick="returnToDashboard()"
-                >
-
-                    ← Back to Dashboard
-
-                </button>
-
-
-            </div>
-
-
-            <div
-                id="viewReports"
-                class="view-panel"
-            >
-
-
-                <div class="interface-header">
-
-                    <h2>
-                        Waste Reports
-                    </h2>
-
-                    <p>
-                        View the waste incidents that
-                        you have reported.
-                    </p>
-
-                </div>
-
-
-
-                <div class="table-card">
-
-                    <div class="table-title">
-                        Submitted Incident Reports
-                    </div>
-
-
-                    <div class="table-wrapper">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-
-                                    <th>
-                                        Report ID
-                                    </th>
-
-                                    <th>
-                                        Location / Landmark
-                                    </th>
-
-                                    <th>
-                                        Issue Category
-                                    </th>
-
-                                    <th>
-                                        Date Filed
-                                    </th>
-
-                                    <th>
-                                        Action Status
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-                            <tbody>
-
-
-                                <tr>
-
-                                    <td>
-                                        REP-801
-                                    </td>
-
-                                    <td>
-                                        Near Plaza Gym
-                                    </td>
-
-                                    <td>
-                                        Overflowing Communal Bin
-                                    </td>
-
-                                    <td>
-                                        Aug 25, 2026
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-success"
-                                        >
-                                            Resolved
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        REP-802
-                                    </td>
-
-                                    <td>
-                                        Near Waste District
-                                    </td>
-
-                                    <td>
-                                        Uncollected Commercial Trash
-                                    </td>
-
-                                    <td>
-                                        Aug 26, 2026
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-warning"
-                                        >
-                                            Under Review
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        REP-803
-                                    </td>
-
-                                    <td>
-                                        Basketball Court
-                                    </td>
-
-                                    <td>
-                                        Illegal Dumping Incident
-                                    </td>
-
-                                    <td>
-                                        Aug 26, 2026
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-danger"
-                                        >
-                                            High Priority
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        REP-804
-                                    </td>
-
-                                    <td>
-                                        Block 12 Lot 5, Subd. A
-                                    </td>
-
-                                    <td>
-                                        Missed Household Pickup
-                                    </td>
-
-                                    <td>
-                                        Aug 24, 2026
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-success"
-                                        >
-                                            Resolved
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        REP-805
-                                    </td>
-
-                                    <td>
-                                        Public Park Entrance
-                                    </td>
-
-                                    <td>
-                                        Damaged Recycling Bin
-                                    </td>
-
-                                    <td>
-                                        Aug 23, 2026
-                                    </td>
-
-                                    <td>
-
-                                        <span
-                                            class="badge badge-info"
-                                        >
-                                            Scheduled Fix
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-
-
-                <button
-                    type="button"
-                    class="btn-back"
-                    onclick="returnToDashboard()"
-                >
-
-                    ← Back to Dashboard
-
-                </button>
-
-
-            </div>
-
-
-            <div
-                id="viewSubmit"
-                class="view-panel"
-            >
-
-
-                <div class="interface-header">
-
-                    <h2>
-                        Submit New Waste Report
-                    </h2>
-
-                    <p>
-                        Report an uncollected waste problem
-                        or waste-related incident.
-                    </p>
-
-                </div>
-
-
-
-                <form id="newReportForm">
-
-
-                    <div class="form-group">
-
-                        <label for="repLocation">
-                            Incident Location
-                        </label>
-
-                        <input
-                            type="text"
-                            id="repLocation"
-                            placeholder="Enter street, purok, or landmark"
-                            required
-                        >
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="repType">
-                            Issue Category
-                        </label>
-
-                        <select id="repType">
-
-                            <option>
-                                Overflowing Communal Bin
-                            </option>
-
-                            <option>
-                                Uncollected Garbage
-                            </option>
-
-                            <option>
-                                Illegal Dumping Site
-                            </option>
-
-                            <option>
-                                Damaged Public Bin
-                            </option>
-
-                            <option>
-                                Missed Household Pickup
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="repDescription">
-                            Description
-                        </label>
-
-                        <textarea
-                            id="repDescription"
-                            placeholder="Describe the waste problem..."
-                            rows="5"
-                            required
-                        ></textarea>
-
-                    </div>
-
-
-
-                    <button
-                        type="submit"
-                        class="btn-primary"
-                    >
-                        Submit Report
-                    </button>
-
-
-                </form>
-
-
-
-                <button
-                    type="button"
-                    class="btn-back"
-                    onclick="returnToDashboard()"
-                >
-
-                    ← Back to Dashboard
-
-                </button>
-
-
-            </div>
-
-
-            <div
-                id="viewCrew"
-                class="view-panel"
-            >
-
-
-                <div class="interface-header">
-
-                    <h2>
-                        Collection Crew Information
-                    </h2>
-
-                    <p>
-                        View the assigned collection teams
-                        and their service areas.
-                    </p>
-
-                </div>
-
-
-
-                <div class="table-card">
-
-                    <div class="table-title">
-                        Assigned Collection Crew
-                    </div>
-
-
-                    <div class="table-wrapper">
-
-                        <table>
-
-                            <thead>
-
-                                <tr>
-
-                                    <th>
-                                        Crew ID
-                                    </th>
-
-                                    <th>
-                                        Team Leader
-                                    </th>
-
-                                    <th>
-                                        Vehicle Unit
-                                    </th>
-
-                                    <th>
-                                        Assigned Zone
-                                    </th>
-
-                                    <th>
-                                        Contact Number
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-                            <tbody>
-
-
-                                <tr>
-
-                                    <td>
-                                        CREW-101
-                                    </td>
-
-                                    <td>
-                                        Officer Kirby Donguines
-                                    </td>
-
-                                    <td>
-                                        Compactor Truck Alpha
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 18
-                                    </td>
-
-                                    <td>
-                                        +63 917 555 0192
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        CREW-102
-                                    </td>
-
-                                    <td>
-                                        Driver P. Palantes
-                                    </td>
-
-                                    <td>
-                                        Compactor Truck Bravo
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 5
-                                    </td>
-
-                                    <td>
-                                        +63 918 555 0143
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        CREW-103
-                                    </td>
-
-                                    <td>
-                                        Driver J. Aquino
-                                    </td>
-
-                                    <td>
-                                        Mini Hauler Truck 01
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 7
-                                    </td>
-
-                                    <td>
-                                        +63 919 555 0188
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        CREW-104
-                                    </td>
-
-                                    <td>
-                                        Officer S. Mendoza
-                                    </td>
-
-                                    <td>
-                                        Heavy Dump Truck 04
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 8
-                                    </td>
-
-                                    <td>
-                                        +63 920 555 0177
-                                    </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                    <td>
-                                        CREW-105
-                                    </td>
-
-                                    <td>
-                                        Driver L. Fernandez
-                                    </td>
-
-                                    <td>
-                                        Mini Hauler Truck 02
-                                    </td>
-
-                                    <td>
-                                        Fatima - Purok 2
-                                    </td>
-
-                                    <td>
-                                        +63 921 555 0121
-                                    </td>
-
-                                </tr>
-
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-
-
-                <button
-                    type="button"
-                    class="btn-back"
-                    onclick="returnToDashboard()"
-                >
-
-                    ← Back to Dashboard
-
-                </button>
-
-
-            </div>
-
-            <div
-                id="viewNotifications"
-                class="view-panel"
-            >
-
-
-                <div class="interface-header">
-
-                    <h2>
-                        🔔 Notifications
-                    </h2>
-
-                    <p>
-                        Stay updated with your collection
-                        schedules, waste reports, and
-                        system announcements.
-                    </p>
-
-                </div>
-
-
-
-                <div class="notification-summary">
-
-
-                    <div class="notification-summary-box">
-
-                        <span
-                            id="notificationNumber"
-                            class="notification-number"
-                        >
-                            3
-                        </span>
-
-                        <span>
-                            Unread Notifications
-                        </span>
-
-                    </div>
-
-
-
-                    <button
-                        type="button"
-                        id="markAllRead"
-                        class="mark-read-btn"
-                    >
-
-                        Mark All as Read
-
-                    </button>
-
-
-                </div>
-
-
-
-                <!-- NOTIFICATION LIST -->
-
-                <div
-                    id="notificationList"
-                    class="notification-list"
-                >
-
-
-                    <!-- NOTIFICATION 1 -->
-
-                    <div
-                        class="notification-item unread"
-                        data-notification="1"
-                    >
-
-                        <div
-                            class="notification-icon schedule-icon"
-                        >
-                            📅
-                        </div>
-
-
-                        <div class="notification-content">
-
-                            <h3>
-                                Collection Schedule Reminder
-                            </h3>
-
-                            <p>
-                                Your recyclable waste collection
-                                is scheduled for August 28, 2026
-                                at 7:00 AM.
-                            </p>
-
-                            <span class="notification-time">
-                                2 hours ago
-                            </span>
-
-                        </div>
-
-
-                        <span class="unread-dot"></span>
-
-                    </div>
-
-
-
-                    <!-- NOTIFICATION 2 -->
-
-                    <div
-                        class="notification-item unread"
-                        data-notification="2"
-                    >
-
-                        <div
-                            class="notification-icon report-icon"
-                        >
-                            📝
-                        </div>
-
-
-                        <div class="notification-content">
-
-                            <h3>
-                                Waste Report Update
-                            </h3>
-
-                            <p>
-                                Your waste report REP-802 is
-                                currently under review by the
-                                Barangay Environment Management
-                                Office.
-                            </p>
-
-                            <span class="notification-time">
-                                Yesterday
-                            </span>
-
-                        </div>
-
-
-                        <span class="unread-dot"></span>
-
-                    </div>
-
-
-
-                    <!-- NOTIFICATION 3 -->
-
-                    <div
-                        class="notification-item unread"
-                        data-notification="3"
-                    >
-
-                        <div
-                            class="notification-icon warning-icon"
-                        >
-                            ⚠️
-                        </div>
-
-
-                        <div class="notification-content">
-
-                            <h3>
-                                Collection Advisory
-                            </h3>
-
-                            <p>
-                                Please place your waste outside
-                                before 7:00 AM on your scheduled
-                                collection day.
-                            </p>
-
-                            <span class="notification-time">
-                                Aug 26, 2026
-                            </span>
-
-                        </div>
-
-
-                        <span class="unread-dot"></span>
-
-                    </div>
-
-
-
-                    <!-- NOTIFICATION 4 -->
-
-                    <div
-                        class="notification-item"
-                        data-notification="4"
-                    >
-
-                        <div
-                            class="notification-icon success-icon"
-                        >
-                            ✓
-                        </div>
-
-
-                        <div class="notification-content">
-
-                            <h3>
-                                Waste Report Resolved
-                            </h3>
-
-                            <p>
-                                Your previous waste report
-                                REP-801 has been successfully
-                                resolved.
-                            </p>
-
-                            <span class="notification-time">
-                                Aug 25, 2026
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-
-
-                    <!-- NOTIFICATION 5 -->
-
-                    <div
-                        class="notification-item"
-                        data-notification="5"
-                    >
-
-                        <div
-                            class="notification-icon info-icon"
-                        >
-                            ℹ️
-                        </div>
-
-
-                        <div class="notification-content">
-
-                            <h3>
-                                System Announcement
-                            </h3>
-
-                            <p>
-                                Thank you for helping keep our
-                                barangay clean and environmentally
-                                friendly.
-                            </p>
-
-                            <span class="notification-time">
-                                Aug 24, 2026
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- BACK BUTTON -->
-
-                <button
-                    type="button"
-                    class="btn-back"
-                    onclick="returnToDashboard()"
-                >
-
-                    ← Back to Dashboard
-
-                </button>
-
-
-            </div>
-
-
-        </section>
-
-
-        <section
-            id="adminArea"
-            class="area dashboard-card-container"
-        >
-
-
-            <div class="form-header">
-
-                <h2>
-                    Welcome, Admin!
-                </h2>
-
-                <p>
-                    BEMO Management Dashboard
-                </p>
-
-            </div>
-
-
-
-            <div class="admin-chart-container">
 
                 <h3>
-                    Collection Statistics
+                    Waste Reports
                 </h3>
+
+                <p>
+                    Submit and view waste reports.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openInterface('binInterface')"
+            >
+
+                <div class="feature-icon">
+                    🗑️
+                </div>
+
+                <h3>
+                    Waste Bin Monitoring
+                </h3>
+
+                <p>
+                    Monitor community waste bins.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openInterface('notificationInterface')"
+            >
+
+                <div class="feature-icon">
+                    🔔
+                </div>
+
+                <h3>
+                    Notifications
+                </h3>
+
+                <p>
+                    View collection notifications.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openInterface('profileInterface')"
+            >
+
+                <div class="feature-icon">
+                    👤
+                </div>
+
+                <h3>
+                    My Profile
+                </h3>
+
+                <p>
+                    Manage resident information.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RESIDENT REPORT -->
+
+    <div
+        id="reportInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToDashboard()"
+        >
+            ← Back to Resident Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Waste Reports
+            </h2>
+
+            <p>
+                Submit and monitor waste-related reports.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Submit New Waste Report
+            </h3>
+
+
+            <form id="newReportForm">
+
+                <label for="repLocation">
+                    Waste Location
+                </label>
+
+                <input
+                    type="text"
+                    id="repLocation"
+                    placeholder="Enter location"
+                    required
+                >
+
+
+                <label for="repType">
+                    Waste Category
+                </label>
+
+                <select
+                    id="repType"
+                    required
+                >
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option>
+                        General Waste
+                    </option>
+
+                    <option>
+                        Plastic
+                    </option>
+
+                    <option>
+                        Paper
+                    </option>
+
+                    <option>
+                        Organic
+                    </option>
+
+                    <option>
+                        Metal
+                    </option>
+
+                </select>
+
+
+                <label for="repPriority">
+                    Priority
+                </label>
+
+                <select
+                    id="repPriority"
+                    required
+                >
+
+                    <option value="">
+                        Select priority
+                    </option>
+
+                    <option>
+                        Low
+                    </option>
+
+                    <option>
+                        Medium
+                    </option>
+
+                    <option>
+                        High
+                    </option>
+
+                </select>
+
+
+                <label for="repDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="repDescription"
+                    rows="4"
+                    placeholder="Describe the waste problem"
+                    required
+                ></textarea>
+
+
+                <button type="submit">
+                    Submit Report
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                My Reports
+            </h3>
+
+
+            <div class="table-container">
+
+                <table id="reportsTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Report ID
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="residentReportsBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RESIDENT BIN -->
+
+    <div
+        id="binInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToDashboard()"
+        >
+            ← Back to Resident Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Waste Bin Monitoring
+            </h2>
+
+            <p>
+                Monitor the fill level and collection status.
+            </p>
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <div class="bin-card">
+
+                <div class="bin-top">
+
+                    <strong>
+                        BIN-001
+                    </strong>
+
+                    <span class="status full">
+                        Full
+                    </span>
+
+                </div>
+
+                <h3>
+                    Main Street
+                </h3>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width:90%"
+                    ></div>
+
+                </div>
+
+                <p>
+                    Fill Level:
+                    <strong>
+                        90%
+                    </strong>
+                </p>
+
+                <p>
+                    Collection:
+                    <strong>
+                        Required
+                    </strong>
+                </p>
+
+            </div>
+
+
+
+            <div class="bin-card">
+
+                <div class="bin-top">
+
+                    <strong>
+                        BIN-002
+                    </strong>
+
+                    <span class="status medium">
+                        Medium
+                    </span>
+
+                </div>
+
+                <h3>
+                    Barangay Hall
+                </h3>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width:55%"
+                    ></div>
+
+                </div>
+
+                <p>
+                    Fill Level:
+                    <strong>
+                        55%
+                    </strong>
+                </p>
+
+                <p>
+                    Collection:
+                    <strong>
+                        Scheduled
+                    </strong>
+                </p>
+
+            </div>
+
+
+
+            <div class="bin-card">
+
+                <div class="bin-top">
+
+                    <strong>
+                        BIN-003
+                    </strong>
+
+                    <span class="status low">
+                        Low
+                    </span>
+
+                </div>
+
+                <h3>
+                    Community Park
+                </h3>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        style="width:25%"
+                    ></div>
+
+                </div>
+
+                <p>
+                    Fill Level:
+                    <strong>
+                        25%
+                    </strong>
+                </p>
+
+                <p>
+                    Collection:
+                    <strong>
+                        Not Required
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Waste Bin Status
+            </h3>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Bin ID</th>
+                            <th>Location</th>
+                            <th>Fill Level</th>
+                            <th>Condition</th>
+                            <th>Collection Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>BIN-001</td>
+                            <td>Main Street</td>
+                            <td>90%</td>
+                            <td>Full</td>
+                            <td>Required</td>
+                        </tr>
+
+                        <tr>
+                            <td>BIN-002</td>
+                            <td>Barangay Hall</td>
+                            <td>55%</td>
+                            <td>Medium</td>
+                            <td>Scheduled</td>
+                        </tr>
+
+                        <tr>
+                            <td>BIN-003</td>
+                            <td>Community Park</td>
+                            <td>25%</td>
+                            <td>Low</td>
+                            <td>Not Required</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RESIDENT NOTIFICATIONS -->
+
+    <div
+        id="notificationInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToDashboard()"
+        >
+            ← Back to Resident Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Notifications
+            </h2>
+
+            <p>
+                Important waste collection updates.
+            </p>
+
+        </div>
+
+
+        <div class="notification-list">
+
+            <div class="notification unread">
+
+                <span class="notification-icon">
+                    🔔
+                </span>
+
+                <div>
+
+                    <h3>
+                        Collection Reminder
+                    </h3>
+
+                    <p>
+                        Waste collection is scheduled tomorrow at 8:00 AM.
+                    </p>
+
+                    <small>
+                        Today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="notification">
+
+                <span class="notification-icon">
+                    🗑️
+                </span>
+
+                <div>
+
+                    <h3>
+                        Bin Status Update
+                    </h3>
+
+                    <p>
+                        BIN-001 at Main Street is almost full.
+                    </p>
+
+                    <small>
+                        Yesterday
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RESIDENT PROFILE -->
+
+    <div
+        id="profileInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToDashboard()"
+        >
+            ← Back to Resident Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                My Profile
+            </h2>
+
+            <p>
+                Update your resident information.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <form id="profileForm">
+
+                <label>
+                    First Name
+                </label>
+
+                <input
+                    type="text"
+                    id="profileFirstName"
+                    required
+                >
+
+
+                <label>
+                    Last Name
+                </label>
+
+                <input
+                    type="text"
+                    id="profileLastName"
+                    required
+                >
+
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="profileEmail"
+                    required
+                >
+
+
+                <label>
+                    Contact Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="profilePhone"
+                    pattern="[0-9]{10,11}"
+                    placeholder="09XXXXXXXXX"
+                    required
+                >
+
+
+                <label>
+                    Address
+                </label>
+
+                <textarea
+                    id="profileAddress"
+                    required
+                ></textarea>
+
+
+                <label>
+                    Community Zone
+                </label>
+
+                <select
+                    id="profileZone"
+                    required
+                >
+
+                    <option value="">
+                        Select Zone
+                    </option>
+
+                    <option>
+                        Zone 1
+                    </option>
+
+                    <option>
+                        Zone 2
+                    </option>
+
+                    <option>
+                        Zone 3
+                    </option>
+
+                    <option>
+                        Zone 4
+                    </option>
+
+                    <option>
+                        Zone 5
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+                    Update Profile
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CREW AREA
+===================================================== -->
+
+<section
+    id="crewArea"
+    class="area"
+>
+
+
+    <!-- CREW DASHBOARD -->
+
+    <div id="crewDashboard">
+
+        <div class="dashboard-heading">
+
+            <div>
+
+                <h2>
+                    Collection Crew Dashboard
+                </h2>
+
+                <p>
+                    Welcome,
+
+                    <strong id="crewDisplay">
+                        Crew Member
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+            <button
+                class="logout"
+                id="logoutCrew"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <div
+                class="feature-card"
+                onclick="openCrewInterface('crewCollectionInterface')"
+            >
+
+                <div class="feature-icon">
+                    🚛
+                </div>
+
+                <h3>
+                    Collection Reports
+                </h3>
+
+                <p>
+                    Submit collection activities and waste reports.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openCrewInterface('crewSegregationInterface')"
+            >
+
+                <div class="feature-icon">
+                    ♻️
+                </div>
+
+                <h3>
+                    Segregation Monitoring
+                </h3>
+
+                <p>
+                    Record segregation compliance during collection.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openCrewInterface('crewDisposalInterface')"
+            >
+
+                <div class="feature-icon">
+                    🗑️
+                </div>
+
+                <h3>
+                    Waste Disposal
+                </h3>
+
+                <p>
+                    Record waste disposal and transportation.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openCrewInterface('crewRouteInterface')"
+            >
+
+                <div class="feature-icon">
+                    🗺️
+                </div>
+
+                <h3>
+                    Collection Route
+                </h3>
+
+                <p>
+                    View assigned collection routes.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openCrewInterface('crewFeedbackInterface')"
+            >
+
+                <div class="feature-icon">
+                    📢
+                </div>
+
+                <h3>
+                    Field Feedback
+                </h3>
+
+                <p>
+                    Send field observations to the administration.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CREW COLLECTION REPORT -->
+
+    <div
+        id="crewCollectionInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToCrewDashboard()"
+        >
+            ← Back to Crew Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Collection Reports
+            </h2>
+
+            <p>
+                Record a completed or ongoing waste collection activity.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Add Collection Report
+            </h3>
+
+
+            <form id="collectionReportForm">
+
+                <label for="collectionLocation">
+                    Collection Location
+                </label>
+
+                <input
+                    type="text"
+                    id="collectionLocation"
+                    placeholder="e.g. Barangay 1"
+                    required
+                >
+
+
+                <label for="wasteType">
+                    Waste Type
+                </label>
+
+                <select
+                    id="wasteType"
+                    required
+                >
+
+                    <option value="">
+                        Select waste type
+                    </option>
+
+                    <option>
+                        General Waste
+                    </option>
+
+                    <option>
+                        Organic
+                    </option>
+
+                    <option>
+                        Recyclable
+                    </option>
+
+                    <option>
+                        Residual
+                    </option>
+
+                    <option>
+                        Plastic
+                    </option>
+
+                </select>
+
+
+                <label for="collectionDate">
+                    Collection Date
+                </label>
+
+                <input
+                    type="date"
+                    id="collectionDate"
+                    required
+                >
+
+
+                <label for="wasteLevel">
+                    Waste Level
+                </label>
+
+                <select
+                    id="wasteLevel"
+                    required
+                >
+
+                    <option value="">
+                        Select waste level
+                    </option>
+
+                    <option>
+                        Low
+                    </option>
+
+                    <option>
+                        Medium
+                    </option>
+
+                    <option>
+                        Full
+                    </option>
+
+                </select>
+
+
+                <label for="collectionRemarks">
+                    Remarks
+                </label>
+
+                <textarea
+                    id="collectionRemarks"
+                    placeholder="Enter collection details"
+                    required
+                ></textarea>
+
+
+                <button type="submit">
+                    Submit Collection Report
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Collection Report Records
+            </h3>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Report ID
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Waste Type
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Waste Level
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="crewCollectionTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CREW SEGREGATION -->
+
+    <div
+        id="crewSegregationInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToCrewDashboard()"
+        >
+            ← Back to Crew Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Segregation Monitoring
+            </h2>
+
+            <p>
+                Record waste segregation compliance.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Segregation Compliance Check
+            </h3>
+
+
+            <form id="crewSegregationForm">
+
+                <label for="segBinId">
+                    Bin ID
+                </label>
+
+                <input
+                    type="text"
+                    id="segBinId"
+                    placeholder="e.g. BIN-001"
+                    required
+                >
+
+
+                <label for="segLocation">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="segLocation"
+                    placeholder="Enter location"
+                    required
+                >
+
+
+                <label for="segStatus">
+                    Segregation Status
+                </label>
+
+                <select
+                    id="segStatus"
+                    required
+                >
+
+                    <option value="">
+                        Select status
+                    </option>
+
+                    <option>
+                        Compliant
+                    </option>
+
+                    <option>
+                        Non-Compliant
+                    </option>
+
+                    <option>
+                        Needs Improvement
+                    </option>
+
+                </select>
+
+
+                <label for="segNotes">
+                    Remarks
+                </label>
+
+                <textarea
+                    id="segNotes"
+                    placeholder="Describe segregation condition"
+                    required
+                ></textarea>
+
+
+                <button type="submit">
+                    Save Segregation Check
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Segregation Records
+            </h3>
+
+            <div class="table-container">
+
+                <table id="crewSegregationTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Check ID
+                            </th>
+
+                            <th>
+                                Bin / Location
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Remarks
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CREW DISPOSAL -->
+
+    <div
+        id="crewDisposalInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToCrewDashboard()"
+        >
+            ← Back to Crew Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Waste Disposal
+            </h2>
+
+            <p>
+                Record waste transported to the disposal facility.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Add Disposal Record
+            </h3>
+
+
+            <form id="crewDisposalForm">
+
+                <label for="dispTruck">
+                    Truck Number
+                </label>
+
+                <input
+                    type="text"
+                    id="dispTruck"
+                    placeholder="e.g. TRUCK-001"
+                    required
+                >
+
+
+                <label for="dispCategory">
+                    Waste Category
+                </label>
+
+                <select
+                    id="dispCategory"
+                    required
+                >
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option>
+                        Organic
+                    </option>
+
+                    <option>
+                        Plastic
+                    </option>
+
+                    <option>
+                        Paper
+                    </option>
+
+                    <option>
+                        Metal
+                    </option>
+
+                    <option>
+                        Residual
+                    </option>
+
+                </select>
+
+
+                <label for="dispWeight">
+                    Weight (kg)
+                </label>
+
+                <input
+                    type="number"
+                    id="dispWeight"
+                    min="1"
+                    step="0.01"
+                    required
+                >
+
+
+                <label for="dispFacility">
+                    Disposal Facility
+                </label>
+
+                <input
+                    type="text"
+                    id="dispFacility"
+                    placeholder="Enter facility"
+                    required
+                >
+
+
+                <button type="submit">
+                    Save Disposal Record
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Disposal Records
+            </h3>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Truck
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Weight
+                            </th>
+
+                            <th>
+                                Facility
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="crewDisposalTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CREW ROUTE -->
+
+    <div
+        id="crewRouteInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToCrewDashboard()"
+        >
+            ← Back to Crew Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Collection Route
+            </h2>
+
+            <p>
+                View and update your assigned collection route.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Sequence
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Bin
+                            </th>
+
+                            <th>
+                                Fill Level
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Update
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="crewRouteTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CREW FEEDBACK -->
+
+    <div
+        id="crewFeedbackInterface"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToCrewDashboard()"
+        >
+            ← Back to Crew Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Field Feedback
+            </h2>
+
+            <p>
+                Submit observations and non-compliance concerns.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Submit Feedback
+            </h3>
+
+
+            <form id="crewFeedbackForm">
+
+                <label for="fbTopic">
+                    Feedback Topic
+                </label>
+
+                <select
+                    id="fbTopic"
+                    required
+                >
+
+                    <option value="">
+                        Select topic
+                    </option>
+
+                    <option>
+                        Non-compliance Alert
+                    </option>
+
+                    <option>
+                        Damaged Bin
+                    </option>
+
+                    <option>
+                        Road Access Problem
+                    </option>
+
+                    <option>
+                        Collection Delay
+                    </option>
+
+                    <option>
+                        Other
+                    </option>
+
+                </select>
+
+
+                <label for="fbTarget">
+                    Target Zone / Area
+                </label>
+
+                <input
+                    type="text"
+                    id="fbTarget"
+                    placeholder="e.g. Zone 1 - Main Street"
+                    required
+                >
+
+
+                <label for="fbMessage">
+                    Feedback Details
+                </label>
+
+                <textarea
+                    id="fbMessage"
+                    placeholder="Describe field conditions"
+                    required
+                ></textarea>
+
+
+                <button type="submit">
+                    Submit Feedback
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Submitted Crew Feedback
+            </h3>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Feedback ID
+                            </th>
+
+                            <th>
+                                Topic
+                            </th>
+
+                            <th>
+                                Zone / Location
+                            </th>
+
+                            <th>
+                                Details
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="crewFeedbackTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CITY FACILITATOR AREA
+===================================================== -->
+
+<section
+    id="cityFacilitatorArea"
+    class="area"
+>
+
+
+    <!-- CITY FACILITATOR MENU -->
+
+    <div id="facilitatorMenu">
+
+        <div class="dashboard-heading">
+
+            <div>
+
+                <h2>
+                    City Facilitator Dashboard
+                </h2>
+
+                <p>
+                    Welcome,
+
+                    <strong id="facilitatorDisplay">
+                        City Facilitator
+                    </strong>
+
+                </p>
+
+            </div>
+
+
+            <button
+                class="logout"
+                id="logoutFacilitator"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <div
+                class="feature-card"
+                onclick="showFacilitatorView('facilitatorDashboard')"
+            >
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Dashboard
+                </h3>
+
+                <p>
+                    View overall waste collection statistics.
+                </p>
+
+                <button type="button">
+                    Open Dashboard
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="showFacilitatorView('segregationMonitoring')"
+            >
+
+                <div class="feature-icon">
+                    ♻️
+                </div>
+
+                <h3>
+                    Segregation Monitoring
+                </h3>
+
+                <p>
+                    Monitor waste segregation compliance.
+                </p>
+
+                <button type="button">
+                    View Segregation
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="showFacilitatorView('collectionReports')"
+            >
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Collection Reports
+                </h3>
+
+                <p>
+                    View submitted waste collection reports.
+                </p>
+
+                <button type="button">
+                    View Reports
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="showFacilitatorView('scheduleMonitoring')"
+            >
+
+                <div class="feature-icon">
+                    📅
+                </div>
+
+                <h3>
+                    Collection Schedule
+                </h3>
+
+                <p>
+                    Monitor collection schedules.
+                </p>
+
+                <button type="button">
+                    View Schedule
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CITY FACILITATOR DASHBOARD -->
+
+    <div
+        id="facilitatorDashboard"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="showFacilitatorMenu()"
+        >
+            ← Back to Menu
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                City Facilitator Dashboard
+            </h2>
+
+            <p>
+                Overview of the Smart Waste Collection and Reporting System.
+            </p>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Collection Reports
+                </h3>
+
+                <strong id="totalCollectionReports">
+                    0
+                </strong>
+
+                <p>
+                    Reports submitted
+                </p>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Pending Reports
+                </h3>
+
+                <strong id="pendingReports">
+                    0
+                </strong>
+
+                <p>
+                    Awaiting action
+                </p>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Completed Reports
+                </h3>
+
+                <strong id="completedReports">
+                    0
+                </strong>
+
+                <p>
+                    Completed collections
+                </p>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Segregation Compliance
+                </h3>
+
+                <strong id="segregationCompliance">
+                    0%
+                </strong>
+
+                <p>
+                    Compliance rate
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Recent Collection Reports
+            </h3>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Report ID
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Waste Type
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Waste Level
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="facilitatorDashboardTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SEGREGATION MONITORING -->
+
+    <div
+        id="segregationMonitoring"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="showFacilitatorMenu()"
+        >
+            ← Back to Menu
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Segregation Monitoring
+            </h2>
+
+            <p>
+                Monitor waste segregation activities and compliance.
+            </p>
+
+        </div>
+
+
+        <!-- INTERACTIVE FORM -->
+
+        <div class="card">
+
+            <h3>
+                Add Segregation Monitoring Record
+            </h3>
+
+
+            <form id="segregationForm">
+
+                <label for="segregationLocation">
+                    Area / Location
+                </label>
+
+                <input
+                    type="text"
+                    id="segregationLocation"
+                    placeholder="e.g. Barangay 1"
+                    required
+                >
+
+
+                <label for="segregationBinId">
+                    Bin ID
+                </label>
+
+                <input
+                    type="text"
+                    id="segregationBinId"
+                    placeholder="e.g. BIN-001"
+                    required
+                >
+
+
+                <label for="biodegradable">
+                    Biodegradable Waste
+                </label>
+
+                <select
+                    id="biodegradable"
+                    required
+                >
+
+                    <option value="">
+                        Select condition
+                    </option>
+
+                    <option value="Proper">
+                        Properly Segregated
+                    </option>
+
+                    <option value="Mixed">
+                        Mixed
+                    </option>
+
+                </select>
+
+
+                <label for="recyclable">
+                    Recyclable Waste
+                </label>
+
+                <select
+                    id="recyclable"
+                    required
+                >
+
+                    <option value="">
+                        Select condition
+                    </option>
+
+                    <option value="Proper">
+                        Properly Segregated
+                    </option>
+
+                    <option value="Mixed">
+                        Mixed
+                    </option>
+
+                </select>
+
+
+                <label for="residual">
+                    Residual Waste
+                </label>
+
+                <select
+                    id="residual"
+                    required
+                >
+
+                    <option value="">
+                        Select condition
+                    </option>
+
+                    <option value="Proper">
+                        Properly Segregated
+                    </option>
+
+                    <option value="Mixed">
+                        Mixed
+                    </option>
+
+                </select>
+
+
+                <label for="segregationDate">
+                    Monitoring Date
+                </label>
+
+                <input
+                    type="date"
+                    id="segregationDate"
+                    required
+                >
+
+
+                <label for="segregationRemarks">
+                    Remarks
+                </label>
+
+                <textarea
+                    id="segregationRemarks"
+                    placeholder="Enter monitoring observations"
+                    required
+                ></textarea>
+
+
+                <button type="submit">
+                    Add Monitoring Record
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- SEGREGATION TABLE -->
+
+        <div class="card">
+
+            <h3>
+                Segregation Monitoring Records
+            </h3>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Monitoring ID
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Bin ID
+                            </th>
+
+                            <th>
+                                Biodegradable
+                            </th>
+
+                            <th>
+                                Recyclable
+                            </th>
+
+                            <th>
+                                Residual
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="facilitatorSegregationTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- COLLECTION REPORTS -->
+
+    <div
+        id="collectionReports"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="showFacilitatorMenu()"
+        >
+            ← Back to Menu
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Collection Reports
+            </h2>
+
+            <p>
+                View and monitor waste collection reports.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Report ID
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Waste Type
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Waste Level
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="facilitatorReportsTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- COLLECTION SCHEDULE -->
+
+    <div
+        id="scheduleMonitoring"
+        class="view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="showFacilitatorMenu()"
+        >
+            ← Back to Menu
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Collection Schedule
+            </h2>
+
+            <p>
+                Monitor collection schedules and assigned activities.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Schedule ID
+                            </th>
+
+                            <th>
+                                Area
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Time
+                            </th>
+
+                            <th>
+                                Assigned Crew
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>
+                                SC-001
+                            </td>
+
+                            <td>
+                                Barangay 1
+                            </td>
+
+                            <td>
+                                August 30, 2026
+                            </td>
+
+                            <td>
+                                8:00 AM
+                            </td>
+
+                            <td>
+                                Crew 1
+                            </td>
+
+                            <td>
+                                <span class="status low">
+                                    Completed
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                SC-002
+                            </td>
+
+                            <td>
+                                Barangay 2
+                            </td>
+
+                            <td>
+                                August 30, 2026
+                            </td>
+
+                            <td>
+                                10:00 AM
+                            </td>
+
+                            <td>
+                                Crew 2
+                            </td>
+
+                            <td>
+                                <span class="status pending">
+                                    Scheduled
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                SC-003
+                            </td>
+
+                            <td>
+                                Barangay 3
+                            </td>
+
+                            <td>
+                                August 31, 2026
+                            </td>
+
+                            <td>
+                                8:00 AM
+                            </td>
+
+                            <td>
+                                Crew 3
+                            </td>
+
+                            <td>
+                                <span class="status pending">
+                                    Scheduled
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN AREA
+===================================================== -->
+
+<section
+    id="adminArea"
+    class="area"
+>
+
+
+    <div id="adminDashboard">
+
+        <div class="dashboard-heading">
+
+            <div>
+
+                <h2>
+                    Admin / Officer Dashboard
+                </h2>
+
+                <p>
+                    System administration and monitoring.
+                </p>
+
+            </div>
+
+
+            <button
+                class="logout"
+                id="logoutAdmin"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <div class="grid">
+
+
+            <div
+                class="feature-card"
+                onclick="openAdminInterface('adminReportsInterface')"
+            >
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Waste Reports
+                </h3>
+
+                <p>
+                    Manage submitted reports.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openAdminInterface('crewManagementInterface')"
+            >
+
+                <div class="feature-icon">
+                    👷
+                </div>
+
+                <h3>
+                    Crew Management
+                </h3>
+
+                <p>
+                    Manage collection crew.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+
+
+            <div
+                class="feature-card"
+                onclick="openAdminInterface('analyticsInterface')"
+            >
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Analytics
+                </h3>
+
+                <p>
+                    View system statistics.
+                </p>
+
+                <button type="button">
+                    Open
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ADMIN REPORTS -->
+
+    <div
+        id="adminReportsInterface"
+        class="admin-view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToAdminDashboard()"
+        >
+            ← Back to Admin Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Waste Reports
+            </h2>
+
+            <p>
+                Review submitted reports.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Report ID
+                            </th>
+
+                            <th>
+                                User
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Priority
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="adminReportsTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CREW MANAGEMENT -->
+
+    <div
+        id="crewManagementInterface"
+        class="admin-view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToAdminDashboard()"
+        >
+            ← Back to Admin Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                Crew Management
+            </h2>
+
+            <p>
+                Add and monitor collection crew.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Add New Crew Member
+            </h3>
+
+
+            <form id="crewForm">
+
+                <label for="crewName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="crewName"
+                    required
+                >
+
+
+                <label for="crewArea">
+                    Assigned Area
+                </label>
+
+                <input
+                    type="text"
+                    id="crewArea"
+                    required
+                >
+
+
+                <label for="crewShift">
+                    Shift
+                </label>
+
+                <select
+                    id="crewShift"
+                    required
+                >
+
+                    <option value="">
+                        Select shift
+                    </option>
+
+                    <option>
+                        Morning
+                    </option>
+
+                    <option>
+                        Afternoon
+                    </option>
+
+                    <option>
+                        Evening
+                    </option>
+
+                </select>
+
+
+                <button type="submit">
+                    Add Crew Member
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Crew Records
+            </h3>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Crew ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Area
+                            </th>
+
+                            <th>
+                                Shift
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="crewTable">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ADMIN ANALYTICS -->
+
+    <div
+        id="analyticsInterface"
+        class="admin-view-panel"
+    >
+
+        <button
+            class="back-button"
+            onclick="returnToAdminDashboard()"
+        >
+            ← Back to Admin Dashboard
+        </button>
+
+
+        <div class="interface-header">
+
+            <h2>
+                System Analytics
+            </h2>
+
+            <p>
+                Overview of waste report statistics.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div
+                style="
+                    height: 350px;
+                    position: relative;
+                "
+            >
 
                 <canvas id="statsChart"></canvas>
 
             </div>
 
+        </div>
 
+    </div>
 
-            <button
-                type="button"
-                id="logoutAdmin"
-                class="btn-secondary"
-            >
-
-                Logout
-
-            </button>
-
-
-        </section>
-
-
-    </main>
+</section>
 
 
 
-    <footer>
+<footer>
 
-        <p>
-            © 2026 Smart Waste System | Designed by Aiya Ryl
-        </p>
+    <p>
+        © 2026 Smart Waste Collection and Reporting System
+    </p>
 
-    </footer>
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/chart.js"
-    ></script>
+</footer>
 
 
-    <script src="script.js"></script>
 
+<script src="script.js"></script>
 
 </body>
 
