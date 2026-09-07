@@ -58,7 +58,7 @@
             Login
         </h2>
 
-        <form id="loginForm">
+        <form id="loginForm" novalidate>
 
             <label for="loginUser">
                 Username
@@ -68,8 +68,10 @@
                 type="text"
                 id="loginUser"
                 placeholder="Enter username"
+                minlength="3" maxlength="50"
                 required
             >
+            <span class="validation-message" id="loginUser-error"></span>
 
 
             <label for="loginPassword">
@@ -80,9 +82,10 @@
                 type="password"
                 id="loginPassword"
                 placeholder="Enter password"
-                minlength="4"
+                minlength="4" maxlength="64"
                 required
             >
+            <span class="validation-message" id="loginPassword-error"></span>
 
 
             <label for="loginRole">
@@ -115,6 +118,7 @@
                 </option>
 
             </select>
+            <span class="validation-message" id="loginRole-error"></span>
 
 
             <button type="submit">
@@ -149,7 +153,6 @@
 <section
     id="registerSection"
     class="auth"
-    required
 >
 
     <div class="card">
@@ -159,7 +162,7 @@
         </h2>
 
 
-        <form id="registerForm">
+        <form id="registerForm" novalidate>
 
             <label for="regFirstName">
                 First Name
@@ -169,8 +172,11 @@
                 type="text"
                 id="regFirstName"
                 placeholder="Enter First Name"
+                minlength="2" maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
+                title="Only letters, spaces, hyphens, and apostrophes allowed (min 2 chars)."
                 required
             >
+            <span class="validation-message" id="regFirstName-error"></span>
 
 
             <label for="regMiddleName">
@@ -180,8 +186,11 @@
             <input
                 type="text"
                 id="regMiddleName"
-                placeholder="Enter Middle Name"
+                placeholder="Enter Middle Name (Optional)"
+                maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
+                title="Only letters, spaces, hyphens, and apostrophes allowed."
             >
+            <span class="validation-message" id="regMiddleName-error"></span>
 
 
             <label for="regLastName">
@@ -192,8 +201,11 @@
                 type="text"
                 id="regLastName"
                 placeholder="Enter Last Name"
+                minlength="2" maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
+                title="Only letters, spaces, hyphens, and apostrophes allowed (min 2 chars)."
                 required
             >
+            <span class="validation-message" id="regLastName-error"></span>
 
 
             <label for="regEmail">
@@ -203,9 +215,13 @@
             <input
                 type="email"
                 id="regEmail"
-                placeholder="example@email.com"
+                placeholder="example@gmail.com"
+                maxlength="100"
+                pattern="[A-Za-z0-9._%+-]+@gmail\.com"
+                title="Please enter a valid Gmail address ending in @gmail.com."
                 required
             >
+            <span class="validation-message" id="regEmail-error"></span>
 
 
             <label for="regUsername">
@@ -216,8 +232,10 @@
                 type="text"
                 id="regUsername"
                 placeholder="Create username"
+                minlength="3" maxlength="20" pattern="[A-Za-z0-9_]{3,20}" title="Use 3–20 letters, numbers, or underscores only."
                 required
             >
+            <span class="validation-message" id="regUsername-error"></span>
 
 
             <label for="regPassword">
@@ -227,99 +245,106 @@
             <input
                 type="password"
                 id="regPassword"
-                minlength="6"
-                placeholder="Minimum 6 characters"
+                minlength="8" maxlength="64" pattern="(?=.*[A-Za-z])(?=.*\d).{8,64}"
+                placeholder="Minimum 8 characters (letters and numbers)"
+                title="Password must be at least 8 characters long and include both letters and numbers."
                 required
             >
+            <span class="validation-message" id="regPassword-error"></span>
+
+
+            <label for="regContact">
+                Contact Number
+            </label>
+
+            <input
+                type="tel"
+                id="regContact"
+                pattern="09[0-9]{9}"
+                minlength="11" maxlength="11"
+                placeholder="09XXXXXXXXX"
+                title="Please enter an 11-digit mobile number starting with 09."
+                required
+            >
+            <span class="validation-message" id="regContact-error"></span>
 
 
             <label for="regCountry">
                 Country
             </label>
 
-            <input
-                type="text"
-                id="regCountry"
-                value="Philippines"
-                required
-            >
+            <select id="regCountry" required>
+                <option value="">Select Country</option>
+                <option value="Philippines">Philippines</option>
+            </select>
+            <span class="validation-message" id="regCountry-error"></span>
 
 
             <label for="regRegion">
                 Region
             </label>
 
-            <input
-                type="text"
-                id="regRegion"
-                placeholder="Enter Region"
-                required
-            >
+            <select id="regRegion" required disabled>
+                <option value="">Select Region</option>
+            </select>
+            <span class="validation-message" id="regRegion-error"></span>
 
 
             <label for="regCity">
                 City / Municipality
             </label>
 
-            <input
-                type="text"
-                id="regCity"
-                placeholder="Enter City / Municipality"
-                required
-            >
+            <select id="regCity" required disabled>
+                <option value="">Select City / Municipality</option>
+            </select>
+            <span class="validation-message" id="regCity-error"></span>
 
 
             <label for="regBarangay">
                 Barangay
             </label>
 
-            <input
-                type="text"
-                id="regBarangay"
-                placeholder="Enter Barangay"
-                required
-            >
+            <select id="regBarangay" required disabled>
+                <option value="">Select Barangay</option>
+            </select>
+            <span class="validation-message" id="regBarangay-error"></span>
 
 
             <label for="regPurokZone">
                 Purok / Zone
             </label>
 
-            <input
-                type="text"
-                id="regPurokZone"
-                placeholder="Enter Purok or Zone"
-                required
-            >
+            <select id="regPurokZone" required disabled>
+                <option value="">Select Purok / Zone</option>
+            </select>
+            <span class="validation-message" id="regPurokZone-error"></span>
 
 
             <label for="regBlock">
                 Block
             </label>
 
-            <input
-                type="text"
-                id="regBlock"
-                placeholder="Optional"
-            >
+            <select id="regBlock" disabled>
+                <option value="">Select Block (Optional)</option>
+            </select>
+            <span class="validation-message" id="regBlock-error"></span>
 
 
             <label for="regStreetPhaseLot">
                 Street / Phase / Lot
             </label>
 
-            <input
-                type="text"
-                id="regStreetPhaseLot"
-                placeholder="Optional"
-            >
+            <select id="regStreetPhaseLot" disabled>
+                <option value="">Select Street / Phase / Lot (Optional)</option>
+            </select>
+            <span class="validation-message" id="regStreetPhaseLot-error"></span>
 
-            <label for="loginRole">
+            <label for="regRole">
                 Register As
             </label>
 
             <select
-                id="loginRole"
+                id="regRole"
                 required
             >
 
@@ -344,6 +369,7 @@
                 </option>
 
             </select>
+            <span class="validation-message" id="regRole-error"></span>
 
 
 
@@ -391,12 +417,8 @@
 
             <div>
 
-                <h2>
-                    Resident Dashboard
-                </h2>
-
                 <p>
-                    Welcome,
+                    WELCOME!
 
                     <strong id="residentDisplay">
                         Resident
@@ -560,7 +582,7 @@
             </h3>
 
 
-            <form id="newReportForm">
+            <form id="newReportForm" novalidate>
 
                 <label for="repLocation">
                     Waste Location
@@ -569,9 +591,11 @@
                 <input
                     type="text"
                     id="repLocation"
-                    placeholder="Enter location"
+                    placeholder="Enter location (e.g., Main St. Corner Purok 3)"
+                    minlength="3" maxlength="100"
                     required
                 >
+                <span class="validation-message" id="repLocation-error"></span>
 
 
                 <label for="repType">
@@ -608,6 +632,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="repType-error"></span>
 
 
                 <label for="repPriority">
@@ -636,6 +661,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="repPriority-error"></span>
 
 
                 <label for="repDescription">
@@ -645,9 +671,11 @@
                 <textarea
                     id="repDescription"
                     rows="4"
-                    placeholder="Describe the waste problem"
+                    placeholder="Describe the waste problem (minimum 10 characters)"
+                    minlength="10" maxlength="500"
                     required
                 ></textarea>
+                <span class="validation-message" id="repDescription-error"></span>
 
 
                 <button type="submit">
@@ -1060,65 +1088,80 @@
 
         <div class="card">
 
-            <form id="profileForm">
+            <form id="profileForm" novalidate>
 
-                <label>
+                <label for="profileFirstName">
                     First Name
                 </label>
 
                 <input
                     type="text"
                     id="profileFirstName"
+                    minlength="2" maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
+                    title="Only letters, spaces, hyphens, and apostrophes allowed (min 2 chars)."
                     required
                 >
+                <span class="validation-message" id="profileFirstName-error"></span>
 
 
-                <label>
+                <label for="profileLastName">
                     Last Name
                 </label>
 
                 <input
                     type="text"
                     id="profileLastName"
+                    minlength="2" maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
+                    title="Only letters, spaces, hyphens, and apostrophes allowed (min 2 chars)."
                     required
                 >
+                <span class="validation-message" id="profileLastName-error"></span>
 
 
-                <label>
+                <label for="profileEmail">
                     Email Address
                 </label>
 
                 <input
                     type="email"
                     id="profileEmail"
+                    maxlength="100"
+                    pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+                    title="Please enter a valid email address (e.g. user@domain.com)."
                     required
                 >
+                <span class="validation-message" id="profileEmail-error"></span>
 
 
-                <label>
+                <label for="profilePhone">
                     Contact Number
                 </label>
 
                 <input
                     type="tel"
                     id="profilePhone"
-                    pattern="[0-9]{10,11}"
+                    pattern="09[0-9]{9}"
+                    minlength="11" maxlength="11"
                     placeholder="09XXXXXXXXX"
+                    title="Please enter an 11-digit mobile number starting with 09."
                     required
                 >
+                <span class="validation-message" id="profilePhone-error"></span>
 
 
-                <label>
+                <label for="profileAddress">
                     Address
                 </label>
 
                 <textarea
                     id="profileAddress"
+                    minlength="5" maxlength="200"
                     required
                 ></textarea>
+                <span class="validation-message" id="profileAddress-error"></span>
 
 
-                <label>
+                <label for="profileZone">
                     Community Zone
                 </label>
 
@@ -1152,6 +1195,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="profileZone-error"></span>
 
 
                 <button type="submit">
@@ -1186,12 +1230,8 @@
 
             <div>
 
-                <h2>
-                    Collection Crew Dashboard
-                </h2>
-
                 <p>
-                    Welcome,
+                   WELCOME CREW!
 
                     <strong id="crewDisplay">
                         Crew Member
@@ -1379,7 +1419,7 @@
             </h3>
 
 
-            <form id="collectionReportForm">
+            <form id="collectionReportForm" novalidate>
 
                 <label for="collectionLocation">
                     Collection Location
@@ -1389,8 +1429,10 @@
                     type="text"
                     id="collectionLocation"
                     placeholder="e.g. Barangay 1"
+                    minlength="3" maxlength="100"
                     required
                 >
+                <span class="validation-message" id="collectionLocation-error"></span>
 
 
                 <label for="wasteType">
@@ -1427,6 +1469,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="wasteType-error"></span>
 
 
                 <label for="collectionDate">
@@ -1438,6 +1481,7 @@
                     id="collectionDate"
                     required
                 >
+                <span class="validation-message" id="collectionDate-error"></span>
 
 
                 <label for="wasteLevel">
@@ -1466,6 +1510,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="wasteLevel-error"></span>
 
 
                 <label for="collectionRemarks">
@@ -1475,8 +1520,10 @@
                 <textarea
                     id="collectionRemarks"
                     placeholder="Enter collection details"
+                    minlength="5" maxlength="300"
                     required
                 ></textarea>
+                <span class="validation-message" id="collectionRemarks-error"></span>
 
 
                 <button type="submit">
@@ -1579,7 +1626,7 @@
             </h3>
 
 
-            <form id="crewSegregationForm">
+            <form id="crewSegregationForm" novalidate>
 
                 <label for="segBinId">
                     Bin ID
@@ -1589,8 +1636,11 @@
                     type="text"
                     id="segBinId"
                     placeholder="e.g. BIN-001"
+                    pattern="BIN-[0-9]{3}"
+                    title="Format must match BIN-XXX (e.g. BIN-001)"
                     required
                 >
+                <span class="validation-message" id="segBinId-error"></span>
 
 
                 <label for="segLocation">
@@ -1601,8 +1651,10 @@
                     type="text"
                     id="segLocation"
                     placeholder="Enter location"
+                    minlength="3" maxlength="100"
                     required
                 >
+                <span class="validation-message" id="segLocation-error"></span>
 
 
                 <label for="segStatus">
@@ -1631,6 +1683,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="segStatus-error"></span>
 
 
                 <label for="segNotes">
@@ -1640,8 +1693,10 @@
                 <textarea
                     id="segNotes"
                     placeholder="Describe segregation condition"
+                    minlength="5" maxlength="300"
                     required
                 ></textarea>
+                <span class="validation-message" id="segNotes-error"></span>
 
 
                 <button type="submit">
@@ -1740,7 +1795,7 @@
             </h3>
 
 
-            <form id="crewDisposalForm">
+            <form id="crewDisposalForm" novalidate>
 
                 <label for="dispTruck">
                     Truck Number
@@ -1750,8 +1805,11 @@
                     type="text"
                     id="dispTruck"
                     placeholder="e.g. TRUCK-001"
+                    pattern="TRUCK-[0-9]{3}"
+                    title="Format must match TRUCK-XXX (e.g. TRUCK-001)"
                     required
                 >
+                <span class="validation-message" id="dispTruck-error"></span>
 
 
                 <label for="dispCategory">
@@ -1788,6 +1846,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="dispCategory-error"></span>
 
 
                 <label for="dispWeight">
@@ -1798,9 +1857,12 @@
                     type="number"
                     id="dispWeight"
                     min="1"
+                    max="50000"
                     step="0.01"
+                    placeholder="e.g. 250.5"
                     required
                 >
+                <span class="validation-message" id="dispWeight-error"></span>
 
 
                 <label for="dispFacility">
@@ -1811,8 +1873,10 @@
                     type="text"
                     id="dispFacility"
                     placeholder="Enter facility"
+                    minlength="3" maxlength="100"
                     required
                 >
+                <span class="validation-message" id="dispFacility-error"></span>
 
 
                 <button type="submit">
@@ -1999,7 +2063,7 @@
             </h3>
 
 
-            <form id="crewFeedbackForm">
+            <form id="crewFeedbackForm" novalidate>
 
                 <label for="fbTopic">
                     Feedback Topic
@@ -2035,6 +2099,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="fbTopic-error"></span>
 
 
                 <label for="fbTarget">
@@ -2045,8 +2110,10 @@
                     type="text"
                     id="fbTarget"
                     placeholder="e.g. Zone 1 - Main Street"
+                    minlength="3" maxlength="100"
                     required
                 >
+                <span class="validation-message" id="fbTarget-error"></span>
 
 
                 <label for="fbMessage">
@@ -2055,9 +2122,11 @@
 
                 <textarea
                     id="fbMessage"
-                    placeholder="Describe field conditions"
+                    placeholder="Describe field conditions (minimum 10 characters)"
+                    minlength="10" maxlength="500"
                     required
                 ></textarea>
+                <span class="validation-message" id="fbMessage-error"></span>
 
 
                 <button type="submit">
@@ -2141,12 +2210,8 @@
 
             <div>
 
-                <h2>
-                    City Facilitator Dashboard
-                </h2>
-
                 <p>
-                    Welcome,
+                    WELCOME!
 
                     <strong id="facilitatorDisplay">
                         City Facilitator
@@ -2471,7 +2536,7 @@
             </h3>
 
 
-            <form id="segregationForm">
+            <form id="segregationForm" novalidate>
 
                 <label for="segregationLocation">
                     Area / Location
@@ -2481,8 +2546,10 @@
                     type="text"
                     id="segregationLocation"
                     placeholder="e.g. Barangay 1"
+                    minlength="3" maxlength="100"
                     required
                 >
+                <span class="validation-message" id="segregationLocation-error"></span>
 
 
                 <label for="segregationBinId">
@@ -2493,8 +2560,11 @@
                     type="text"
                     id="segregationBinId"
                     placeholder="e.g. BIN-001"
+                    pattern="BIN-[0-9]{3}"
+                    title="Format must match BIN-XXX (e.g. BIN-001)"
                     required
                 >
+                <span class="validation-message" id="segregationBinId-error"></span>
 
 
                 <label for="biodegradable">
@@ -2519,6 +2589,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="biodegradable-error"></span>
 
 
                 <label for="recyclable">
@@ -2543,6 +2614,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="recyclable-error"></span>
 
 
                 <label for="residual">
@@ -2567,6 +2639,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="residual-error"></span>
 
 
                 <label for="segregationDate">
@@ -2578,6 +2651,7 @@
                     id="segregationDate"
                     required
                 >
+                <span class="validation-message" id="segregationDate-error"></span>
 
 
                 <label for="segregationRemarks">
@@ -2587,8 +2661,10 @@
                 <textarea
                     id="segregationRemarks"
                     placeholder="Enter monitoring observations"
+                    minlength="5" maxlength="300"
                     required
                 ></textarea>
+                <span class="validation-message" id="segregationRemarks-error"></span>
 
 
                 <button type="submit">
@@ -2938,7 +3014,7 @@
             <div>
 
                 <h2>
-                    Admin / Officer Dashboard
+                    WELCOME!
                 </h2>
 
                 <p>
@@ -3159,7 +3235,7 @@
             </h3>
 
 
-            <form id="crewForm">
+            <form id="crewForm" novalidate>
 
                 <label for="crewName">
                     Full Name
@@ -3168,8 +3244,11 @@
                 <input
                     type="text"
                     id="crewName"
+                    minlength="2" maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
+                    title="Only letters, spaces, hyphens, and apostrophes allowed (min 2 chars)."
                     required
                 >
+                <span class="validation-message" id="crewName-error"></span>
 
 
                 <label for="crewArea">
@@ -3179,8 +3258,10 @@
                 <input
                     type="text"
                     id="crewArea"
+                    minlength="3" maxlength="100"
                     required
                 >
+                <span class="validation-message" id="crewArea-error"></span>
 
 
                 <label for="crewShift">
@@ -3209,6 +3290,7 @@
                     </option>
 
                 </select>
+                <span class="validation-message" id="crewShift-error"></span>
 
 
                 <button type="submit">

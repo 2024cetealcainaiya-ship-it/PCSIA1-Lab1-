@@ -1,7 +1,7 @@
 /* =========================================================
    SMART WASTE COLLECTION AND REPORTING SYSTEM
    SWCRS
-   FULL SCRIPT
+   FULL SCRIPT (TASK 6 VALIDATION INTEGRATED)
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -77,6 +77,338 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace(/'/g, "&#039;");
 
     }
+
+
+    /* =====================================================
+       FORM VALIDATION ENGINE (TASK 6)
+    ===================================================== */
+
+    function validateInput(input) {
+
+        if (!input || !input.id) {
+            return true;
+        }
+
+        const errorSpan =
+            document.getElementById(
+                input.id + "-error"
+            );
+
+        let errorMessage = "";
+
+        const value =
+            input.value
+                ? input.value.trim()
+                : "";
+
+
+        // 1. Required Check
+        if (
+            input.hasAttribute("required") &&
+            !value
+        ) {
+
+            errorMessage =
+                "This field is required.";
+
+        }
+
+        // 2. Formatting Checks
+        else if (value) {
+
+            if (
+                input.tagName === "SELECT" &&
+                input.hasAttribute("required") &&
+                !value
+            ) {
+
+                errorMessage =
+                    "Please select a valid option.";
+
+            }
+
+            else if (
+                input.type === "email" &&
+                input.validity.patternMismatch
+            ) {
+
+                errorMessage =
+                    input.title ||
+                    "Please enter a valid Email address.";
+
+            }
+
+            else if (
+                input.type === "email" &&
+                !input.checkValidity()
+            ) {
+
+                errorMessage =
+                    "Please enter a valid email address.";
+
+            }
+
+            else if (
+                input.type === "tel" &&
+                (
+                    input.validity.patternMismatch ||
+                    value.length !== 11
+                )
+            ) {
+
+                errorMessage =
+                    "Must be an 11-digit mobile number starting with 09 (e.g. 09123456789).";
+
+            }
+
+            else if (input.validity.tooShort) {
+
+                errorMessage =
+                    `Minimum length is ${input.minLength} characters.`;
+
+            }
+
+            else if (input.validity.tooLong) {
+
+                errorMessage =
+                    `Maximum length is ${input.maxLength} characters.`;
+
+            }
+
+            else if (
+                input.type === "number" &&
+                input.validity.rangeUnderflow
+            ) {
+
+                errorMessage =
+                    `Value must be at least ${input.min}.`;
+
+            }
+
+            else if (
+                input.type === "number" &&
+                input.validity.rangeOverflow
+            ) {
+
+                errorMessage =
+                    `Value cannot exceed ${input.max}.`;
+
+            }
+
+            else if (input.validity.patternMismatch) {
+
+                errorMessage =
+                    input.title ||
+                    "Invalid input format.";
+
+            }
+
+        }
+
+
+        // 3. UI Feedback update
+        if (errorMessage) {
+
+            input.classList.add(
+                "validation-invalid"
+            );
+
+            input.classList.remove(
+                "validation-valid"
+            );
+
+            if (errorSpan) {
+
+                errorSpan.textContent =
+                    errorMessage;
+
+                errorSpan.classList.add(
+                    "show"
+                );
+
+            }
+
+            return false;
+
+        }
+
+        else {
+
+            input.classList.remove(
+                "validation-invalid"
+            );
+
+
+            if (value) {
+
+                input.classList.add(
+                    "validation-valid"
+                );
+
+            } else {
+
+                input.classList.remove(
+                    "validation-valid"
+                );
+
+            }
+
+
+            if (errorSpan) {
+
+                errorSpan.textContent =
+                    "";
+
+                errorSpan.classList.remove(
+                    "show"
+                );
+
+            }
+
+            return true;
+
+        }
+
+    }
+
+
+
+    function validateForm(form) {
+
+        if (!form) {
+            return true;
+        }
+
+        const controls =
+            form.querySelectorAll(
+                "input, select, textarea"
+            );
+
+        let isValid = true;
+
+
+        controls.forEach(
+            function (input) {
+
+                const inputValid =
+                    validateInput(input);
+
+                if (!inputValid) {
+
+                    isValid = false;
+
+                }
+
+            }
+        );
+
+
+        return isValid;
+
+    }
+
+
+
+    function clearFormValidation(form) {
+
+        if (!form) {
+            return;
+
+        }
+
+        const controls =
+            form.querySelectorAll(
+                "input, select, textarea"
+            );
+
+
+        controls.forEach(
+            function (input) {
+
+                input.classList.remove(
+                    "validation-invalid",
+                    "validation-valid"
+                );
+
+                const errorSpan =
+                    document.getElementById(
+                        input.id + "-error"
+                    );
+
+                if (errorSpan) {
+
+                    errorSpan.textContent =
+                        "";
+
+                    errorSpan.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* Attach live listeners to all form controls */
+
+    document
+        .querySelectorAll("form")
+        .forEach(
+            function (form) {
+
+                const controls =
+                    form.querySelectorAll(
+                        "input, select, textarea"
+                    );
+
+
+                controls.forEach(
+                    function (input) {
+
+                        input.addEventListener(
+                            "input",
+                            function () {
+
+                                validateInput(
+                                    input
+                                );
+
+                            }
+                        );
+
+
+                        input.addEventListener(
+                            "blur",
+                            function () {
+
+                                validateInput(
+                                    input
+                                );
+
+                            }
+                        );
+
+
+                        input.addEventListener(
+                            "change",
+                            function () {
+
+                                validateInput(
+                                    input
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
 
 
 
@@ -390,6 +722,781 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
+       ADDRESS CASCADING OPTIONS
+    ===================================================== */
+
+    const addressData = {
+
+        Philippines: {
+            "National Capital Region (NCR)": {
+                "Quezon City": [
+                    "Barangay Bagong Pag-asa",
+                    "Barangay Commonwealth",
+                    "Barangay Dona Imelda",
+                    "Barangay Holy Spirit",
+                    "Barangay Kamuning"
+                ],
+                "Manila": [
+                    "Barangay 1",
+                    "Barangay 2",
+                    "Barangay 3",
+                    "Barangay 5",
+                    "Barangay 12"
+                ],
+                "Pasig City": [
+                    "San Antonio",
+                    "Bagong Ilog",
+                    "Kapitolyo",
+                    "Manggahan",
+                    "Pinagbuhatan"
+                ],
+                "Makati City": [
+                    "Barangay Bel-Air",
+                    "Barangay Poblacion",
+                    "Barangay San Antonio",
+                    "Barangay Urdaneta",
+                    "Barangay Guadalupe Nuevo"
+                ],
+                "Taguig City": [
+                    "Barangay Lower Bicutan",
+                    "Barangay Central Bicutan",
+                    "Barangay Fort Bonifacio",
+                    "Barangay Upper Bicutan",
+                    "Barangay Wawa"
+                ]
+            },
+            "Cordillera Administrative Region (CAR)": {
+                "Baguio City": [
+                    "Barangay Irisan",
+                    "Barangay Camp 7",
+                    "Barangay Pinsao",
+                    "Barangay San Luis",
+                    "Barangay Santo Tomas"
+                ],
+                "La Trinidad": [
+                    "Barangay Beckel",
+                    "Barangay Poblacion",
+                    "Barangay Tawang",
+                    "Barangay Pico",
+                    "Barangay Shilan"
+                ],
+                "Tabuk City": [
+                    "Bulanao",
+                    "Laya",
+                    "Lanna",
+                    "Balong",
+                    "Dilag"
+                ]
+            },
+            "Region I – Ilocos Region": {
+                "Laoag City": [
+                    "Barangay 1",
+                    "Barangay 2",
+                    "Barangay 3",
+                    "Barangay 5",
+                    "Barangay 10"
+                ],
+                "San Fernando City": [
+                    "Barangay A",
+                    "Barangay B",
+                    "Barangay C",
+                    "Barangay D",
+                    "Barangay E"
+                ],
+                "Vigan City": [
+                    "Barangay 1",
+                    "Barangay 2",
+                    "Barangay 3",
+                    "Barangay 5",
+                    "Barangay 6"
+                ]
+            },
+            "Region II – Cagayan Valley": {
+                "Tuguegarao City": [
+                    "Barangay Annafunan",
+                    "Barangay Balzain",
+                    "Barangay Carig",
+                    "Barangay Gosi",
+                    "Barangay Linao"
+                ],
+                "Ilagan City": [
+                    "Barangay Alibagu",
+                    "Barangay Cabannugan",
+                    "Barangay Sta. Barbara",
+                    "Barangay San Vicente",
+                    "Barangay Ragan Almacen"
+                ],
+                "Santiago City": [
+                    "Barangay Burgos",
+                    "Barangay Plaridel",
+                    "Barangay Rizal",
+                    "Barangay Centro",
+                    "Barangay Mabini"
+                ]
+            },
+            "Region III – Central Luzon": {
+                "Angeles City": [
+                    "Barangay Balibago",
+                    "Barangay Candaba",
+                    "Barangay Claro M. Recto",
+                    "Barangay Lourdes North",
+                    "Barangay Malabanias"
+                ],
+                "San Fernando City": [
+                    "Barangay 1",
+                    "Barangay 2",
+                    "Barangay 3",
+                    "Barangay 5",
+                    "Barangay 7"
+                ],
+                "Baliuag": [
+                    "Barangay 1",
+                    "Barangay 2",
+                    "Barangay 3",
+                    "Barangay 4",
+                    "Barangay 5"
+                ]
+            },
+            "Region IV-A – CALABARZON": {
+                "Calamba City": [
+                    "Barangay Bucal",
+                    "Barangay Canlubang",
+                    "Barangay Palingon",
+                    "Barangay Real",
+                    "Barangay Parian"
+                ],
+                "Batangas City": [
+                    "Barangay Alangilan",
+                    "Barangay Balete",
+                    "Barangay Pallocan",
+                    "Barangay San Agustin",
+                    "Barangay Wawa"
+                ],
+                "Lucena City": [
+                    "Barangay Cotta",
+                    "Barangay Gulang-Gulang",
+                    "Barangay Mayao",
+                    "Barangay Vendedor",
+                    "Barangay Isabang"
+                ]
+            },
+            "MIMAROPA Region – Southwestern Tagalog Region": {
+                "Puerto Princesa City": [
+                    "Barangay Bancao-Bancao",
+                    "Barangay San Pedro",
+                    "Barangay Tagburos",
+                    "Barangay Sicsican",
+                    "Barangay Sta. Lourdes"
+                ],
+                "Calapan City": [
+                    "Barangay Batingan",
+                    "Barangay Calero",
+                    "Barangay Nag-iba",
+                    "Barangay San Vicente",
+                    "Barangay Sta. Rita"
+                ],
+                "Romblon": [
+                    "Barangay Agpanawan",
+                    "Barangay Cobrador",
+                    "Barangay Lonos",
+                    "Barangay Odiongan",
+                    "Barangay San Fernando"
+                ]
+            },
+            "Region V – Bicol Region": {
+                "Legazpi City": [
+                    "Barangay 1",
+                    "Barangay 2",
+                    "Barangay 3",
+                    "Barangay 8",
+                    "Barangay 10"
+                ],
+                "Naga City": [
+                    "Barangay Balatas",
+                    "Barangay Dayangdang",
+                    "Barangay Peñafrancia",
+                    "Barangay Pacol",
+                    "Barangay Del Rosario"
+                ],
+                "Sorsogon City": [
+                    "Barangay Bitan-o",
+                    "Barangay Buhatan",
+                    "Barangay Poblacion",
+                    "Barangay Sirangan",
+                    "Barangay Tagas"
+                ]
+            },
+            "Region VI – Western Visayas": {
+                "Iloilo City": [
+                    "Barangay Molo",
+                    "Barangay Jaro",
+                    "Barangay La Paz",
+                    "Barangay Mandurriao",
+                    "Barangay Arevalo"
+                ],
+                "Bacolod City": [
+                    "Barangay Alijis",
+                    "Barangay Tangub",
+                    "Barangay Vista Alegre",
+                    "Barangay Mansilingan",
+                    "Barangay Granada"
+                ],
+                "Roxas City": [
+                    "Barangay Baybay",
+                    "Barangay Cagay",
+                    "Barangay Tanza",
+                    "Barangay Culasi",
+                    "Barangay Libas"
+                ]
+            },
+            "Negros Island Region (NIR)": {
+                "Bacolod City": [
+                    "Barangay Granada",
+                    "Barangay Mansilingan",
+                    "Barangay Villamonte",
+                    "Barangay Tangub",
+                    "Barangay Pahanocoy"
+                ],
+                "Bais City": [
+                    "Barangay Cabanbanan",
+                    "Barangay Manjuyod",
+                    "Barangay Tiling",
+                    "Barangay Tamisu",
+                    "Barangay Magsaysay"
+                ],
+                "Kabankalan City": [
+                    "Barangay Cabadiangan",
+                    "Barangay Camingawan",
+                    "Barangay Hilamonan",
+                    "Barangay Kawit",
+                    "Barangay Talubangi"
+                ]
+            },
+            "Region VII – Central Visayas": {
+                "Cebu City": [
+                    "Barangay Guadalupe",
+                    "Barangay Lahug",
+                    "Barangay Tisa",
+                    "Barangay Mambaling",
+                    "Barangay Talamban"
+                ],
+                "Bohol": [
+                    "Barangay Alafriz",
+                    "Barangay Bool",
+                    "Barangay Manga",
+                    "Barangay Dampas",
+                    "Barangay Cogon"
+                ],
+                "Dumaguete City": [
+                    "Barangay Daro",
+                    "Barangay Piapi",
+                    "Barangay Taclobo",
+                    "Barangay Valencia",
+                    "Barangay Camanjacan"
+                ]
+            },
+            "Region VIII – Eastern Visayas": {
+                "Tacloban City": [
+                    "Barangay 1",
+                    "Barangay 2",
+                    "Barangay 3",
+                    "Barangay 6",
+                    "Barangay 10"
+                ],
+                "Ormoc City": [
+                    "Barangay Cogon",
+                    "Barangay Macabug",
+                    "Barangay Valencia",
+                    "Barangay Naungan",
+                    "Barangay San Vicente"
+                ],
+                "Borongan City": [
+                    "Barangay Maypangdan",
+                    "Barangay Poblacion",
+                    "Barangay San Gabriel",
+                    "Barangay Sapa",
+                    "Barangay Tabok"
+                ]
+            },
+            "Region IX – Zamboanga Peninsula": {
+                "Zamboanga City": [
+                    "Barangay Baliwasan",
+                    "Barangay Curuan",
+                    "Barangay San Jose",
+                    "Barangay Tetuan",
+                    "Barangay Pasonanca"
+                ],
+                "Pagadian City": [
+                    "Barangay Dao",
+                    "Barangay Gatas",
+                    "Barangay Kahayagan",
+                    "Barangay San Francisco",
+                    "Barangay Balangasan"
+                ],
+                "Dipolog City": [
+                    "Barangay Central",
+                    "Barangay Turno",
+                    "Barangay Sicayab",
+                    "Barangay Mina",
+                    "Barangay Olingan"
+                ]
+            },
+            "Region X – Northern Mindanao": {
+                "Cagayan de Oro City": [
+                    "Barangay Camaman-an",
+                    "Barangay Gusa",
+                    "Barangay Lapasan",
+                    "Barangay Bulua",
+                    "Barangay Kauswagan"
+                ],
+                "Iligan City": [
+                    "Barangay Buru-un",
+                    "Barangay Palao",
+                    "Barangay Sta. Filomena",
+                    "Barangay Suarez",
+                    "Barangay Tubod"
+                ],
+                "Malaybalay City": [
+                    "Barangay Casisang",
+                    "Barangay San Jose",
+                    "Barangay St. Peter",
+                    "Barangay Violeta",
+                    "Barangay Busdi"
+                ]
+            },
+            "Region XI – Davao Region": {
+                "Davao City": [
+                    "Buhangin",
+                    "Bunawan",
+                    "Calinan",
+                    "Catalunan Grande",
+                    "J.P. Laurel",
+                    "Matina Aplaya",
+                    "Mintal",
+                    "Poblacion",
+                    "Sasa",
+                    "Toril",
+                    "Tugbok",
+                    "Maa",
+                    "Talomo",
+                    "Tamayong",
+                    "Panacan"
+                ],
+                "Tagum City": [
+                    "Barangay Mankilam",
+                    "Barangay Apokon",
+                    "Barangay Magugpo North",
+                    "Barangay La Filipina",
+                    "Barangay Visayan Village"
+                ],
+                "Digos City": [
+                    "Barangay Aplaya",
+                    "Barangay Goma",
+                    "Barangay San Miguel",
+                    "Barangay Rufo Hill",
+                    "Barangay Zone 1"
+                ],
+                "Panabo City": [
+                    "Barangay Cagangohan",
+                    "Barangay Gredu",
+                    "Barangay San Francisco",
+                    "Barangay Tamayong",
+                    "Barangay Little Baguio"
+                ]
+            },
+            "Region XII – SOCCSKSARGEN": {
+                "General Santos City": [
+                    "Barangay Apopong",
+                    "Barangay Baluan",
+                    "Barangay Batomelong",
+                    "Barangay Buayan",
+                    "Barangay Bula",
+                    "Barangay Calumpang",
+                    "Barangay City Heights",
+                    "Barangay Conel",
+                    "Barangay Dadiangas East",
+                    "Barangay Dadiangas North",
+                    "Barangay Dadiangas South",
+                    "Barangay Dadiangas West",
+                    "Barangay Fatima",
+                    "Barangay Katangawan",
+                    "Barangay Labangal",
+                    "Barangay Lagao",
+                    "Barangay Ligaya",
+                    "Barangay Mabuhay",
+                    "Barangay Olympog",
+                    "Barangay San Isidro",
+                    "Barangay San Jose",
+                    "Barangay Siguel",
+                    "Barangay Sinawal",
+                    "Barangay Tambler",
+                    "Barangay Tinagacan",
+                    "Barangay Upper Labay"
+                ],
+                "South Cotabato": [
+                    "Barangay Kalawag",
+                    "Barangay Koronadal",
+                    "Barangay Polomolok",
+                    "Barangay Surallah",
+                    "Barangay Tupi"
+                ],
+                "Sultan Kudarat": [
+                    "Barangay Isulan",
+                    "Barangay Tacurong",
+                    "Barangay Bagumbayan",
+                    "Barangay Lebak",
+                    "Barangay Kalamansig"
+                ],
+                "Cotabato": [
+                    "Barangay Rosary Heights",
+                    "Barangay Poblacion",
+                    "Barangay Tamontaka",
+                    "Barangay Sinsuat",
+                    "Barangay Kalanganan"
+                ],
+                "Sarangani": [
+                    "Barangay Alabel",
+                    "Barangay Kiamba",
+                    "Barangay Maasim",
+                    "Barangay Maitum",
+                    "Barangay Glan"
+                ],
+                "Koronadal City": [
+                    "Barangay Casing-Lorico",
+                    "Barangay Parang",
+                    "Barangay Zone 1",
+                    "Barangay Poblacion",
+                    "Barangay San Roque"
+                ],
+                "Kidapawan City": [
+                    "Barangay Amas",
+                    "Barangay Lanao",
+                    "Barangay Perez",
+                    "Barangay Poblacion",
+                    "Barangay Mula-tubig"
+                ]
+            },
+            "Region XIII – Caraga": {
+                "Butuan City": [
+                    "Barangay Ambago",
+                    "Barangay Bading",
+                    "Barangay Tiniwisan",
+                    "Barangay San Francisco",
+                    "Barangay Dagohoy"
+                ],
+                "Surigao City": [
+                    "Barangay Canlanipa",
+                    "Barangay Poctoy",
+                    "Barangay Taft",
+                    "Barangay San Juan",
+                    "Barangay Bonifacio"
+                ],
+                "Tandag City": [
+                    "Barangay Poblacion",
+                    "Barangay Bongdo",
+                    "Barangay Maticdum",
+                    "Barangay Pangi",
+                    "Barangay San Agustin"
+                ]
+            },
+            "Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)": {
+                "Cotabato City": [
+                    "Barangay Rosary Heights",
+                    "Barangay Poblacion",
+                    "Barangay Tamontaka",
+                    "Barangay Sinsuat",
+                    "Barangay Kalanganan"
+                ],
+                "Marawi City": [
+                    "Barangay Baclayon",
+                    "Barangay Basak Malutlut",
+                    "Barangay Datu Saber",
+                    "Barangay Sagonsongan",
+                    "Barangay Bangon"
+                ],
+                "Tawi-Tawi": [
+                    "Barangay Bongao",
+                    "Barangay Sapa-Sapa",
+                    "Barangay Simunul",
+                    "Barangay Panglima Sugala",
+                    "Barangay Sibutu"
+                ]
+            }
+        }
+
+    };
+
+    const defaultPurokOptions = [
+        "Purok 1",
+        "Purok 2",
+        "Purok 3",
+        "Purok 4",
+        "Purok 5",
+        "Purok 6",
+        "Purok 7",
+        "Purok 8",
+        "Purok 9",
+        "Purok 10",
+        "Purok 11",
+        "Purok 12",
+        "Purok 13",
+        "Purok 14",
+        "Purok 15",
+        "Purok 16",
+        "Purok 17",
+        "Purok 18",
+        "Purok 19",
+        "Purok 20",
+    ];
+
+    const defaultBlockOptions = [
+        "Block 1",
+        "Block 2",
+        "Block 3",
+        "Block 4",
+        "Block 5",
+        "Block 6",
+        "Block 7",
+        "Block 8",
+        "Block 9",
+        "Block 10",
+        "Block 11",
+        "Block 12",
+        "Block 13",
+        "Block 14",
+        "Block 15",
+        "Block 16",
+        "Block 17",
+        "Block 18",
+        "Block 19",
+        "Block 20",
+        "N/A"
+    ];
+
+    const defaultStreetOptions = [
+        "Phase 1",
+        "Phase 2",
+        "Phase 3",
+        "Phase 4",
+        "Phase 5",
+        "Phase 6",
+        "Phase 7",
+        "Phase 8",
+        "Phase 9",
+        "Phase 10",
+        "Street A",
+        "Street B",
+        "Street C",
+        "Street D",
+        "Street E",
+        "Street F",
+        "Street G",
+        "Street H",
+        "Street I",
+        "Street J",
+        "Lot 1",
+        "Lot 2",
+        "Lot 3",
+        "Lot 4",
+        "Lot 5",
+        "Lot 6",
+        "Lot 7",
+        "Lot 8",
+        "Lot 9",
+        "Lot 10",
+        "N/A"
+    ];
+
+    function populateSelect(selectElement, placeholderText, values) {
+
+        if (!selectElement) {
+            return;
+        }
+
+        selectElement.innerHTML = "";
+
+        const emptyOption = document.createElement("option");
+        emptyOption.value = "";
+        emptyOption.textContent = placeholderText;
+        selectElement.appendChild(emptyOption);
+
+        values.forEach(
+            function (value) {
+
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                selectElement.appendChild(option);
+
+            }
+        );
+
+        selectElement.disabled = values.length === 0;
+
+    }
+
+    function resetAddressCascade() {
+
+        const regRegion = document.getElementById("regRegion");
+        const regCity = document.getElementById("regCity");
+        const regBarangay = document.getElementById("regBarangay");
+        const regPurokZone = document.getElementById("regPurokZone");
+        const regBlock = document.getElementById("regBlock");
+        const regStreetPhaseLot = document.getElementById("regStreetPhaseLot");
+
+        populateSelect(regRegion, "Select Region", []);
+        populateSelect(regCity, "Select City / Municipality", []);
+        populateSelect(regBarangay, "Select Barangay", []);
+        populateSelect(regPurokZone, "Select Purok / Zone", []);
+        populateSelect(regBlock, "Select Block (Optional)", []);
+        populateSelect(regStreetPhaseLot, "Select Street / Phase / Lot (Optional)", []);
+
+    }
+
+    const regCountry = document.getElementById("regCountry");
+    const regRegion = document.getElementById("regRegion");
+    const regCity = document.getElementById("regCity");
+    const regBarangay = document.getElementById("regBarangay");
+    const regPurokZone = document.getElementById("regPurokZone");
+    const regBlock = document.getElementById("regBlock");
+    const regStreetPhaseLot = document.getElementById("regStreetPhaseLot");
+
+    if (regCountry) {
+
+        regCountry.addEventListener(
+            "change",
+            function () {
+
+                resetAddressCascade();
+
+                const country = regCountry.value;
+
+                if (!country || !addressData[country]) {
+                    return;
+                }
+
+                const regions = Object.keys(addressData[country]);
+
+                populateSelect(
+                    regRegion,
+                    "Select Region",
+                    regions
+                );
+
+                regRegion.disabled = false;
+
+            }
+        );
+
+    }
+
+    if (regRegion) {
+
+        regRegion.addEventListener(
+            "change",
+            function () {
+
+                const country = regCountry.value;
+                const region = regRegion.value;
+
+                populateSelect(regCity, "Select City / Municipality", []);
+                populateSelect(regBarangay, "Select Barangay", []);
+                populateSelect(regPurokZone, "Select Purok / Zone", []);
+                populateSelect(regBlock, "Select Block (Optional)", []);
+                populateSelect(regStreetPhaseLot, "Select Street / Phase / Lot (Optional)", []);
+
+                if (!country || !region || !addressData[country] || !addressData[country][region]) {
+                    return;
+                }
+
+                const cities = Object.keys(addressData[country][region]);
+
+                populateSelect(
+                    regCity,
+                    "Select City / Municipality",
+                    cities
+                );
+
+                regCity.disabled = false;
+
+            }
+        );
+
+    }
+
+    if (regCity) {
+
+        regCity.addEventListener(
+            "change",
+            function () {
+
+                const country = regCountry.value;
+                const region = regRegion.value;
+                const city = regCity.value;
+
+                populateSelect(regBarangay, "Select Barangay", []);
+                populateSelect(regPurokZone, "Select Purok / Zone", []);
+                populateSelect(regBlock, "Select Block (Optional)", []);
+                populateSelect(regStreetPhaseLot, "Select Street / Phase / Lot (Optional)", []);
+
+                if (!country || !region || !city || !addressData[country] || !addressData[country][region] || !addressData[country][region][city]) {
+                    return;
+                }
+
+                const barangays = addressData[country][region][city];
+
+                populateSelect(
+                    regBarangay,
+                    "Select Barangay",
+                    barangays
+                );
+
+                regBarangay.disabled = false;
+
+            }
+        );
+
+    }
+
+    if (regBarangay) {
+
+        regBarangay.addEventListener(
+            "change",
+            function () {
+
+                populateSelect(regPurokZone, "Select Purok / Zone", defaultPurokOptions);
+                populateSelect(regBlock, "Select Block (Optional)", defaultBlockOptions);
+                populateSelect(regStreetPhaseLot, "Select Street / Phase / Lot (Optional)", defaultStreetOptions);
+
+                regPurokZone.disabled = false;
+                regBlock.disabled = false;
+                regStreetPhaseLot.disabled = false;
+
+            }
+        );
+
+    }
+
+    if (regPurokZone) {
+
+        regPurokZone.addEventListener(
+            "change",
+            function () {
+
+                if (!regPurokZone.value) {
+                    return;
+                }
+
+                validateInput(regPurokZone);
+
+            }
+        );
+
+    }
+
+
+
+    /* =====================================================
        SECTION REFERENCES
     ===================================================== */
 
@@ -499,6 +1606,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
+                clearFormValidation(
+                    registerSection.querySelector("form")
+                );
+
                 switchSection(
                     registerSection
                 );
@@ -516,6 +1627,10 @@ document.addEventListener("DOMContentLoaded", function () {
             function (event) {
 
                 event.preventDefault();
+
+                clearFormValidation(
+                    loginSection.querySelector("form")
+                );
 
                 switchSection(
                     loginSection
@@ -547,6 +1662,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(loginForm)) {
+
+                    return;
+
+                }
+
+
                 const username =
                     document
                         .getElementById(
@@ -555,14 +1677,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         .value
                         .trim();
 
-
                 const password =
                     document
                         .getElementById(
                             "loginPassword"
                         )
                         .value;
-
 
                 const role =
                     document
@@ -571,21 +1691,62 @@ document.addEventListener("DOMContentLoaded", function () {
                         )
                         .value;
 
+                const registeredUsers =
+                    getData(
+                        "swcrs_accounts",
+                        []
+                    );
 
-                if (
-                    !username ||
-                    !password ||
-                    !role
-                ) {
+                const matchedUser =
+                    registeredUsers.find(
+                        function (user) {
+
+                            return user.username
+                                .toLowerCase() === username.toLowerCase();
+
+                        }
+                    );
+
+                if (!matchedUser) {
 
                     alert(
-                        "Please complete all login fields."
+                        "Please register first before logging in."
                     );
 
                     return;
 
                 }
 
+                if (matchedUser.password !== password) {
+
+                    alert(
+                        "Incorrect password. Please use the password from your registration."
+                    );
+
+                    return;
+
+                }
+
+                if (matchedUser.role !== role) {
+
+                    alert(
+                        "Selected role does not match your registered account. Please choose the correct role."
+                    );
+
+                    return;
+
+                }
+
+                saveData(
+                    "swcrs_session",
+                    {
+                        username: matchedUser.username,
+                        role: matchedUser.role
+                    }
+                );
+
+
+                clearFormValidation(loginForm);
 
 
                 /* ==============================
@@ -608,6 +1769,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             username;
 
                     }
+
+                    populateProfileForm(matchedUser);
 
 
                     renderResidentReports();
@@ -772,12 +1935,127 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(registerForm)) {
+
+                    return;
+
+                }
+
+                const username =
+                    document
+                        .getElementById(
+                            "regUsername"
+                        )
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById(
+                            "regPassword"
+                        )
+                        .value;
+
+                const contactNumber =
+                    document
+                        .getElementById(
+                            "regContact"
+                        )
+                        .value
+                        .trim();
+
+                const role =
+                    document
+                        .getElementById(
+                            "regRole"
+                        )
+                        .value;
+
+                const existingUsers =
+                    getData(
+                        "swcrs_accounts",
+                        []
+                    );
+
+                const usernameTaken =
+                    existingUsers.some(
+                        function (user) {
+
+                            return user.username
+                                .toLowerCase() === username.toLowerCase();
+
+                        }
+                    );
+
+                if (usernameTaken) {
+
+                    const regUsernameInput =
+                        document.getElementById(
+                            "regUsername"
+                        );
+
+                    regUsernameInput.classList.add(
+                        "validation-invalid"
+                    );
+
+                    const errorSpan =
+                        document.getElementById(
+                            "regUsername-error"
+                        );
+
+                    if (errorSpan) {
+
+                        errorSpan.textContent =
+                            "This username is already registered. Please choose another one.";
+
+                        errorSpan.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                    alert(
+                        "This username is already registered. Please choose another one."
+                    );
+
+                    return;
+
+                }
+
+                const newAccount = {
+                    username: username,
+                    password: password,
+                    contactNumber: contactNumber,
+                    role: role,
+                    firstName: document.getElementById("regFirstName").value.trim(),
+                    middleName: document.getElementById("regMiddleName").value.trim(),
+                    lastName: document.getElementById("regLastName").value.trim(),
+                    email: document.getElementById("regEmail").value.trim(),
+                    country: document.getElementById("regCountry").value,
+                    region: document.getElementById("regRegion").value,
+                    city: document.getElementById("regCity").value,
+                    barangay: document.getElementById("regBarangay").value,
+                    purokZone: document.getElementById("regPurokZone").value,
+                    block: document.getElementById("regBlock").value,
+                    streetPhaseLot: document.getElementById("regStreetPhaseLot").value,
+                    createdAt: new Date().toISOString()
+                };
+
+                existingUsers.push(newAccount);
+
+                saveData(
+                    "swcrs_accounts",
+                    existingUsers
+                );
+
                 alert(
-                    "Resident account created successfully!"
+                    "Resident account created successfully! Please login with your registered username and password."
                 );
 
 
                 registerForm.reset();
+
+                clearFormValidation(registerForm);
 
 
                 switchSection(
@@ -808,6 +2086,13 @@ document.addEventListener("DOMContentLoaded", function () {
             function (event) {
 
                 event.preventDefault();
+
+
+                if (!validateForm(newReportForm)) {
+
+                    return;
+
+                }
 
 
                 const reports =
@@ -881,6 +2166,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 this.reset();
+
+                clearFormValidation(newReportForm);
 
 
                 alert(
@@ -1186,6 +2473,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(collectionReportForm)) {
+
+                    return;
+
+                }
+
+
                 const collection =
                     getData(
                         "swcrs_collection"
@@ -1239,6 +2533,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 this.reset();
+
+                clearFormValidation(collectionReportForm);
 
 
                 alert(
@@ -1372,6 +2668,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(crewSegregationForm)) {
+
+                    return;
+
+                }
+
+
                 const records =
                     getData(
                         "swcrs_segregation"
@@ -1438,6 +2741,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 this.reset();
+
+                clearFormValidation(crewSegregationForm);
 
 
                 alert(
@@ -1567,6 +2872,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(crewDisposalForm)) {
+
+                    return;
+
+                }
+
+
                 const records =
                     getData(
                         "swcrs_disposal"
@@ -1621,6 +2933,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 this.reset();
+
+                clearFormValidation(crewDisposalForm);
 
 
                 alert(
@@ -1910,6 +3224,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(crewFeedbackForm)) {
+
+                    return;
+
+                }
+
+
                 const records =
                     getData(
                         "swcrs_feedback"
@@ -1962,6 +3283,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 this.reset();
+
+                clearFormValidation(crewFeedbackForm);
 
 
                 alert(
@@ -2523,6 +3846,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(segregationForm)) {
+
+                    return;
+
+                }
+
+
                 const biodegradable =
                     document
                         .getElementById(
@@ -2632,6 +3962,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 this.reset();
+
+                clearFormValidation(segregationForm);
 
 
                 alert(
@@ -2919,6 +4251,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(crewForm)) {
+
+                    return;
+
+                }
+
+
                 const crews =
                     getData(
                         "swcrs_crew"
@@ -2966,6 +4305,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 this.reset();
+
+                clearFormValidation(crewForm);
 
 
                 alert(
@@ -3230,6 +4571,42 @@ document.addEventListener("DOMContentLoaded", function () {
             "profileForm"
         );
 
+    function populateProfileForm(account) {
+
+        if (!profileForm || !account) {
+            return;
+        }
+
+        const profileValues = {
+            profileFirstName: account.firstName,
+            profileLastName: account.lastName,
+            profileEmail: account.email,
+            profilePhone: account.contactNumber,
+            profileAddress: [
+                account.country,
+                account.region,
+                account.city,
+                account.barangay,
+                account.purokZone,
+                account.block,
+                account.streetPhaseLot
+            ].filter(Boolean).join(", ")
+        };
+
+        Object.keys(profileValues).forEach(
+            function (id) {
+
+                const input = document.getElementById(id);
+
+                if (input) {
+                    input.value = profileValues[id] || "";
+                }
+
+            }
+        );
+
+    }
+
 
     if (profileForm) {
 
@@ -3240,9 +4617,44 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.preventDefault();
 
 
+                if (!validateForm(profileForm)) {
+
+                    return;
+
+                }
+
+                const session = getData("swcrs_session", null);
+                const accounts = getData("swcrs_accounts", []);
+                const accountIndex = accounts.findIndex(
+                    function (account) {
+                        return session && account.username.toLowerCase() === session.username.toLowerCase();
+                    }
+                );
+
+                if (accountIndex === -1) {
+                    alert("Please login again before updating your profile.");
+                    return;
+                }
+
+                accounts[accountIndex] = {
+                    ...accounts[accountIndex],
+                    firstName: document.getElementById("profileFirstName").value.trim(),
+                    lastName: document.getElementById("profileLastName").value.trim(),
+                    email: document.getElementById("profileEmail").value.trim(),
+                    contactNumber: document.getElementById("profilePhone").value.trim(),
+                    profileAddress: document.getElementById("profileAddress").value.trim(),
+                    profileZone: document.getElementById("profileZone").value
+                };
+
+                saveData("swcrs_accounts", accounts);
+
+
                 alert(
                     "Profile updated successfully!"
                 );
+
+
+                clearFormValidation(profileForm);
 
             }
         );
@@ -3257,9 +4669,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function logout() {
 
-        /*
-         * Hide all panels.
-         */
+        localStorage.removeItem("swcrs_session");
 
         document
             .querySelectorAll(
@@ -3275,10 +4685,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             );
 
-
-        /*
-         * Reset dashboard visibility.
-         */
 
         const dashboards = [
 
@@ -3313,10 +4719,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        /*
-         * Return to login.
-         */
-
         switchSection(
             loginSection
         );
@@ -3325,6 +4727,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (loginForm) {
 
             loginForm.reset();
+
+            clearFormValidation(loginForm);
 
         }
 
@@ -3390,9 +4794,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderCrewManagement();
 
+    const savedSession = getData("swcrs_session", null);
+    const savedAccount = savedSession
+        ? getData("swcrs_accounts", []).find(
+            function (account) {
+                return account.username.toLowerCase() === savedSession.username.toLowerCase() && account.role === savedSession.role;
+            }
+        )
+        : null;
 
-    switchSection(
-        loginSection
-    );
+    if (savedAccount) {
+        if (savedAccount.role === "resident") {
+            document.getElementById("residentDisplay").textContent = savedAccount.username;
+            populateProfileForm(savedAccount);
+            switchSection(residentArea);
+        } else if (savedAccount.role === "crew") {
+            document.getElementById("crewDisplay").textContent = savedAccount.username;
+            switchSection(crewArea);
+        } else if (savedAccount.role === "facilitator") {
+            document.getElementById("facilitatorDisplay").textContent = savedAccount.username;
+            showFacilitatorMenu();
+            switchSection(cityFacilitatorArea);
+        } else if (savedAccount.role === "admin") {
+            switchSection(adminArea);
+        }
+    } else {
+        localStorage.removeItem("swcrs_session");
+        switchSection(loginSection);
+    }
 
 });

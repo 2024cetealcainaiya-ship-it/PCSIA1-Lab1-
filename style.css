@@ -756,6 +756,55 @@ footer p {
 
 
 /* =====================================================
+   MESSAGES & FORM VALIDATION FEEDBACK (TASK 6)
+===================================================== */
+
+.message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.message.success {
+    color: #166534;
+}
+
+.message.error {
+    color: #991b1b;
+}
+
+.validation-message {
+    display: none;
+    margin: -0.45rem 0 0.75rem;
+    font-size: 0.82rem;
+    font-weight: bold;
+    line-height: 1.35;
+}
+
+.validation-message.show {
+    display: block;
+    color: #b91c1c;
+}
+
+.validation-invalid {
+    border: 2px solid #dc2626 !important;
+    background-color: #fef2f2 !important;
+}
+
+.validation-valid {
+    border: 2px solid #16a34a !important;
+    background-color: #f0fdf4 !important;
+}
+
+.validation-invalid:focus {
+    outline: 2px solid rgba(220, 38, 38, 0.25) !important;
+}
+
+.validation-valid:focus {
+    outline: 2px solid rgba(22, 163, 74, 0.25) !important;
+}
+
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -843,17 +892,4 @@ footer p {
         font-size: 0.9rem;
     }
 
-}
-
-.message {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.message.success {
-    color: #166534;
-}
-
-.message.error {
-    color: #991b1b;
 }
