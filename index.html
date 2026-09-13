@@ -42,11 +42,6 @@
 
 </header>
 
-
-<!-- =====================================================
-     LOGIN
-===================================================== -->
-
 <section
     id="loginSection"
     class="auth active"
@@ -146,10 +141,6 @@
 
 
 
-<!-- =====================================================
-     REGISTER
-===================================================== -->
-
 <section
     id="registerSection"
     class="auth"
@@ -158,7 +149,7 @@
     <div class="card">
 
         <h2>
-            Create Resident Account
+            Create Account
         </h2>
 
 
@@ -276,6 +267,26 @@
             <select id="regCountry" required>
                 <option value="">Select Country</option>
                 <option value="Philippines">Philippines</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Australia">Australia</option>
+                <option value="Japan">Japan</option>
+                <option value="South Korea">South Korea</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Malaysia">Malaysia</option>
+                <option value="Thailand">Thailand</option>
+                <option value="Indonesia">Indonesia</option>
+                <option value="China">China</option>
+                <option value="India">India</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+                <option value="Saudi Arabia">Saudi Arabia</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Italy">Italy</option>
+                <option value="Spain">Spain</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Mexico">Mexico</option>
             </select>
             <span class="validation-message" id="regCountry-error"></span>
 
@@ -301,11 +312,11 @@
 
 
             <label for="regBarangay">
-                Barangay
+                Name
             </label>
 
             <select id="regBarangay" required disabled>
-                <option value="">Select Barangay</option>
+                <option value="">Select Name</option>
             </select>
             <span class="validation-message" id="regBarangay-error"></span>
 
@@ -343,35 +354,14 @@
                 Register As
             </label>
 
-            <select
-                id="regRole"
-                required
-            >
-
-                <option value="">
-                    Select Role
-                </option>
-
-                <option value="resident">
-                    Resident
-                </option>
-
-                <option value="crew">
-                    Collection Crew
-                </option>
-
-                <option value="facilitator">
-                    City Facilitator
-                </option>
-
-                <option value="admin">
-                    Admin / Officer
-                </option>
-
+            <select id="regRole" required>
+                <option value="">Select Role</option>
+                <option value="resident">Resident</option>
+                <option value="crew">Collection Crew</option>
+                <option value="facilitator">City Facilitator</option>
+                <option value="admin">Admin / Officer</option>
             </select>
             <span class="validation-message" id="regRole-error"></span>
-
-
 
             <button type="submit">
                 Register
@@ -558,7 +548,7 @@
             class="back-button"
             onclick="returnToDashboard()"
         >
-            ← Back to Resident Dashboard
+            ← Back
         </button>
 
 
@@ -755,7 +745,7 @@
             class="back-button"
             onclick="returnToDashboard()"
         >
-            ← Back to Resident Dashboard
+            ← Back
         </button>
 
 
@@ -835,7 +825,7 @@
                 </div>
 
                 <h3>
-                    Barangay Hall
+                    Hall
                 </h3>
 
                 <div class="progress">
@@ -947,7 +937,7 @@
 
                         <tr>
                             <td>BIN-002</td>
-                            <td>Barangay Hall</td>
+                            <td>Hall</td>
                             <td>55%</td>
                             <td>Medium</td>
                             <td>Scheduled</td>
@@ -984,7 +974,7 @@
             class="back-button"
             onclick="returnToDashboard()"
         >
-            ← Back to Resident Dashboard
+            ← Back
         </button>
 
 
@@ -1069,7 +1059,7 @@
             class="back-button"
             onclick="returnToDashboard()"
         >
-            ← Back to Resident Dashboard
+            ← Back
         </button>
 
 
@@ -1395,7 +1385,7 @@
             class="back-button"
             onclick="returnToCrewDashboard()"
         >
-            ← Back to Crew Dashboard
+            ← Back
         </button>
 
 
@@ -1428,7 +1418,7 @@
                 <input
                     type="text"
                     id="collectionLocation"
-                    placeholder="e.g. Barangay 1"
+                    placeholder="e.g. 1"
                     minlength="3" maxlength="100"
                     required
                 >
@@ -1602,7 +1592,7 @@
             class="back-button"
             onclick="returnToCrewDashboard()"
         >
-            ← Back to Crew Dashboard
+            ← Back
         </button>
 
 
@@ -1771,7 +1761,7 @@
             class="back-button"
             onclick="returnToCrewDashboard()"
         >
-            ← Back to Crew Dashboard
+            ← Back
         </button>
 
 
@@ -1955,7 +1945,7 @@
             class="back-button"
             onclick="returnToCrewDashboard()"
         >
-            ← Back to Crew Dashboard
+            ← Back
         </button>
 
 
@@ -2039,7 +2029,7 @@
             class="back-button"
             onclick="returnToCrewDashboard()"
         >
-            ← Back to Crew Dashboard
+            ← Back
         </button>
 
 
@@ -2245,7 +2235,7 @@
                 </div>
 
                 <h3>
-                    Dashboard
+                    Overview
                 </h3>
 
                 <p>
@@ -2253,7 +2243,7 @@
                 </p>
 
                 <button type="button">
-                    Open Dashboard
+                    Open Overview
                 </button>
 
             </div>
@@ -2357,7 +2347,7 @@
         <div class="interface-header">
 
             <h2>
-                City Facilitator Dashboard
+                City Facilitator Overview
             </h2>
 
             <p>
@@ -2545,7 +2535,7 @@
                 <input
                     type="text"
                     id="segregationLocation"
-                    placeholder="e.g. Barangay 1"
+                    placeholder="e.g. 1"
                     minlength="3" maxlength="100"
                     required
                 >
@@ -2898,7 +2888,7 @@
                             </td>
 
                             <td>
-                                Barangay 1
+                                1
                             </td>
 
                             <td>
@@ -2929,7 +2919,7 @@
                             </td>
 
                             <td>
-                                Barangay 2
+                                2
                             </td>
 
                             <td>
@@ -2960,7 +2950,7 @@
                             </td>
 
                             <td>
-                                Barangay 3
+                                3
                             </td>
 
                             <td>
@@ -3127,7 +3117,7 @@
             class="back-button"
             onclick="returnToAdminDashboard()"
         >
-            ← Back to Admin Dashboard
+            ← Back
         </button>
 
 
@@ -3211,7 +3201,7 @@
             class="back-button"
             onclick="returnToAdminDashboard()"
         >
-            ← Back to Admin Dashboard
+            ← Back
         </button>
 
 
@@ -3251,17 +3241,17 @@
                 <span class="validation-message" id="crewName-error"></span>
 
 
-                <label for="crewArea">
+                <label for="crewAssignedArea">
                     Assigned Area
                 </label>
 
                 <input
                     type="text"
-                    id="crewArea"
+                    id="crewAssignedArea"
                     minlength="3" maxlength="100"
                     required
                 >
-                <span class="validation-message" id="crewArea-error"></span>
+                <span class="validation-message" id="crewAssignedArea-error"></span>
 
 
                 <label for="crewShift">
@@ -3365,7 +3355,7 @@
             class="back-button"
             onclick="returnToAdminDashboard()"
         >
-            ← Back to Admin Dashboard
+            ← Back
         </button>
 
 

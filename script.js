@@ -1,15 +1,5 @@
-/* =========================================================
-   SMART WASTE COLLECTION AND REPORTING SYSTEM
-   SWCRS
-   FULL SCRIPT (TASK 6 VALIDATION INTEGRATED)
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", function () {
 
-
-    /* =====================================================
-       LOCAL STORAGE
-    ===================================================== */
 
     function getData(key, defaultValue = []) {
 
@@ -48,10 +38,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    const staffAccounts = [
 
-    /* =====================================================
-       HTML ESCAPE
-    ===================================================== */
+        {
+            username: "crew1",
+            password: "Crew@1234",
+            role: "crew",
+            firstName: "Collection",
+            lastName: "Crew"
+        },
+
+        {
+            username: "facilitator1",
+            password: "Facilitator@1234",
+            role: "facilitator",
+            firstName: "City",
+            lastName: "Facilitator"
+        },
+
+        {
+            username: "admin1",
+            password: "Admin@1234",
+            role: "admin",
+            firstName: "System",
+            lastName: "Admin"
+        }
+
+    ];
+
+
+    const accounts = getData("swcrs_accounts", []);
+    let accountsChanged = false;
+
+    staffAccounts.forEach(function (staffAccount) {
+
+        const accountExists = accounts.some(function (account) {
+
+            return account.username.toLowerCase() === staffAccount.username.toLowerCase();
+
+        });
+
+        if (!accountExists) {
+
+            accounts.push(staffAccount);
+            accountsChanged = true;
+
+        }
+
+    });
+
+    if (accountsChanged) {
+
+        saveData("swcrs_accounts", accounts);
+
+    }
+
+
 
     function escapeHTML(value) {
 
@@ -66,6 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return String(value)
 
+            .replace(/^Barangay\s+/i, "")
+
             .replace(/&/g, "&amp;")
 
             .replace(/</g, "&lt;")
@@ -78,10 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    /* =====================================================
-       FORM VALIDATION ENGINE (TASK 6)
-    ===================================================== */
 
     function validateInput(input) {
 
@@ -1034,34 +1074,34 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Barangay Balangasan"
                 ],
                 "Dipolog City": [
-                    "Barangay Central",
-                    "Barangay Turno",
-                    "Barangay Sicayab",
-                    "Barangay Mina",
-                    "Barangay Olingan"
+                    " Central",
+                    " Turno",
+                    " Sicayab",
+                    " Mina",
+                    " Olingan"
                 ]
             },
             "Region X – Northern Mindanao": {
                 "Cagayan de Oro City": [
-                    "Barangay Camaman-an",
-                    "Barangay Gusa",
-                    "Barangay Lapasan",
-                    "Barangay Bulua",
-                    "Barangay Kauswagan"
+                    " Camaman-an",
+                    " Gusa",
+                    " Lapasan",
+                    " Bulua",
+                    " Kauswagan"
                 ],
                 "Iligan City": [
-                    "Barangay Buru-un",
-                    "Barangay Palao",
-                    "Barangay Sta. Filomena",
-                    "Barangay Suarez",
-                    "Barangay Tubod"
+                    " Buru-un",
+                    " Palao",
+                    " Sta. Filomena",
+                    " Suarez",
+                    " Tubod"
                 ],
                 "Malaybalay City": [
-                    "Barangay Casisang",
-                    "Barangay San Jose",
-                    "Barangay St. Peter",
-                    "Barangay Violeta",
-                    "Barangay Busdi"
+                    " Casisang",
+                    " San Jose",
+                    " St. Peter",
+                    " Violeta",
+                    " Busdi"
                 ]
             },
             "Region XI – Davao Region": {
@@ -1083,98 +1123,84 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Panacan"
                 ],
                 "Tagum City": [
-                    "Barangay Mankilam",
-                    "Barangay Apokon",
-                    "Barangay Magugpo North",
-                    "Barangay La Filipina",
-                    "Barangay Visayan Village"
+                    " Mankilam",
+                    " Apokon",
+                    " Magugpo North",
+                    " La Filipina",
+                    " Visayan Village"
                 ],
                 "Digos City": [
-                    "Barangay Aplaya",
-                    "Barangay Goma",
-                    "Barangay San Miguel",
-                    "Barangay Rufo Hill",
-                    "Barangay Zone 1"
+                    " Aplaya",
+                    " Goma",
+                    " San Miguel",
+                    " Rufo Hill",
+                    " Zone 1"
                 ],
                 "Panabo City": [
-                    "Barangay Cagangohan",
-                    "Barangay Gredu",
-                    "Barangay San Francisco",
-                    "Barangay Tamayong",
-                    "Barangay Little Baguio"
+                    " Cagangohan",
+                    " Gredu",
+                    "San Francisco",
+                    " Tamayong",
+                    " Little Baguio"
                 ]
             },
             "Region XII – SOCCSKSARGEN": {
                 "General Santos City": [
-                    "Barangay Apopong",
-                    "Barangay Baluan",
-                    "Barangay Batomelong",
-                    "Barangay Buayan",
-                    "Barangay Bula",
-                    "Barangay Calumpang",
-                    "Barangay City Heights",
-                    "Barangay Conel",
-                    "Barangay Dadiangas East",
-                    "Barangay Dadiangas North",
-                    "Barangay Dadiangas South",
-                    "Barangay Dadiangas West",
-                    "Barangay Fatima",
-                    "Barangay Katangawan",
-                    "Barangay Labangal",
-                    "Barangay Lagao",
-                    "Barangay Ligaya",
-                    "Barangay Mabuhay",
-                    "Barangay Olympog",
-                    "Barangay San Isidro",
-                    "Barangay San Jose",
-                    "Barangay Siguel",
-                    "Barangay Sinawal",
-                    "Barangay Tambler",
-                    "Barangay Tinagacan",
-                    "Barangay Upper Labay"
+                    " Apopong",
+                    " Baluan",
+                    " Batomelong",
+                    " Buayan",
+                    " Bula",
+                    " Calumpang",
+                    " City Heights",
+                    " Conel",
+                    " Dadiangas East",
+                    " Dadiangas North",
+                    " Dadiangas South",
+                    " Dadiangas West",
+                    " Fatima",
+                    " Katangawan",
+                    " Labangal",
+                    " Lagao",
+                    " Ligaya",
+                    " Mabuhay",
+                    " Olympog",
+                    " San Isidro",
+                    " San Jose",
+                    " Siguel",
+                    " Sinawal",
+                    " Tinagacan",
+                    " Upper Labay"
                 ],
                 "South Cotabato": [
-                    "Barangay Kalawag",
-                    "Barangay Koronadal",
-                    "Barangay Polomolok",
-                    "Barangay Surallah",
-                    "Barangay Tupi"
+                    " Kalawag",
+                    " Koronadal",
+                    " Polomolok",
+                    " Surallah",
+                    " Tupi"
                 ],
                 "Sultan Kudarat": [
-                    "Barangay Isulan",
-                    "Barangay Tacurong",
-                    "Barangay Bagumbayan",
-                    "Barangay Lebak",
-                    "Barangay Kalamansig"
+                    " Isulan",
+                    " Tacurong",
+                    " Bagumbayan",
+                    " Lebak",
+                    " Kalamansig"
                 ],
                 "Cotabato": [
-                    "Barangay Rosary Heights",
-                    "Barangay Poblacion",
-                    "Barangay Tamontaka",
-                    "Barangay Sinsuat",
-                    "Barangay Kalanganan"
+                    " Rosary Heights",
+                    " Poblacion",
+                    " Tamontaka",
+                    " Sinsuat",
+                    " Kalanganan"
                 ],
                 "Sarangani": [
-                    "Barangay Alabel",
-                    "Barangay Kiamba",
-                    "Barangay Maasim",
-                    "Barangay Maitum",
-                    "Barangay Glan"
+                    " Alabel",
+                    " Kiamba",
+                    " Maasim",
+                    " Maitum",
+                    " Glan"
                 ],
-                "Koronadal City": [
-                    "Barangay Casing-Lorico",
-                    "Barangay Parang",
-                    "Barangay Zone 1",
-                    "Barangay Poblacion",
-                    "Barangay San Roque"
-                ],
-                "Kidapawan City": [
-                    "Barangay Amas",
-                    "Barangay Lanao",
-                    "Barangay Perez",
-                    "Barangay Poblacion",
-                    "Barangay Mula-tubig"
-                ]
+                
             },
             "Region XIII – Caraga": {
                 "Butuan City": [
@@ -1325,7 +1351,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const option = document.createElement("option");
                 option.value = value;
-                option.textContent = value;
+                option.textContent = String(value).replace(/^Barangay\s+/i, "");
                 selectElement.appendChild(option);
 
             }
@@ -3826,11 +3852,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-    /* =====================================================
-       FACILITATOR SEGREGATION FORM
-    ===================================================== */
-
     const segregationForm =
         document.getElementById(
             "segregationForm"
@@ -3980,12 +4001,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-
-    /* =====================================================
-       ADMIN REPORTS
-    ===================================================== */
-
     function renderAdminReports() {
 
         const tbody =
@@ -4081,11 +4096,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-    /* =====================================================
-       UPDATE REPORT
-    ===================================================== */
-
     window.updateReport =
         function (id) {
 
@@ -4153,10 +4163,6 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
 
-
-    /* =====================================================
-       ADMIN CREW MANAGEMENT
-    ===================================================== */
 
     function renderCrewManagement() {
 
@@ -4232,9 +4238,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    /* =====================================================
-       ADD CREW FORM
-    ===================================================== */
 
     const crewForm =
         document.getElementById(
@@ -4280,7 +4283,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     area:
                         document
                             .getElementById(
-                                "crewArea"
+                                "crewAssignedArea"
                             )
                             .value
                             .trim(),
@@ -4323,9 +4326,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    /* =====================================================
-       ADMIN INTERFACE
-    ===================================================== */
 
     window.openAdminInterface =
         function (interfaceId) {
@@ -4421,10 +4421,6 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
 
-
-    /* =====================================================
-       CHART
-    ===================================================== */
 
     let chart = null;
 
@@ -4561,11 +4557,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-    /* =====================================================
-       PROFILE
-    ===================================================== */
-
     const profileForm =
         document.getElementById(
             "profileForm"
@@ -4660,12 +4651,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
     }
-
-
-
-    /* =====================================================
-       LOGOUT
-    ===================================================== */
 
     function logout() {
 
@@ -4770,11 +4755,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     );
 
-
-
-    /* =====================================================
-       INITIAL DISPLAY
-    ===================================================== */
 
     renderResidentReports();
 
