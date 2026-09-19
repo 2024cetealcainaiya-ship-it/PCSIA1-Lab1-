@@ -4798,4 +4798,414 @@ document.addEventListener("DOMContentLoaded", function () {
         switchSection(loginSection);
     }
 
+    const crudConfigurations = {
+        residentReportsBody: {
+            storage: "swcrs_reports",
+            render: renderResidentReports,
+            fields: [
+                ["location", "Location", "text", true],
+                ["type", "Waste Type", "text", true],
+                ["priority", "Priority", "text", true],
+                ["description", "Description", "textarea", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        adminReportsTable: {
+            storage: "swcrs_reports",
+            render: renderAdminReports,
+            fields: [
+                ["location", "Location", "text", true],
+                ["type", "Waste Type", "text", true],
+                ["priority", "Priority", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        crewCollectionTable: {
+            storage: "swcrs_collection",
+            render: renderCrewCollection,
+            fields: [
+                ["location", "Location", "text", true],
+                ["wasteType", "Waste Type", "text", true],
+                ["date", "Date", "date", true],
+                ["wasteLevel", "Waste Level", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        facilitatorReportsTable: {
+            storage: "swcrs_collection",
+            render: renderFacilitatorDashboard,
+            fields: [
+                ["location", "Location", "text", true],
+                ["wasteType", "Waste Type", "text", true],
+                ["date", "Date", "date", true],
+                ["wasteLevel", "Waste Level", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        facilitatorDashboardTable: {
+            storage: "swcrs_collection",
+            render: renderFacilitatorDashboard,
+            fields: [
+                ["location", "Location", "text", true],
+                ["wasteType", "Waste Type", "text", true],
+                ["date", "Date", "date", true],
+                ["wasteLevel", "Waste Level", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        crewSegregationTable: {
+            storage: "swcrs_segregation",
+            render: renderCrewSegregation,
+            fields: [
+                ["location", "Location", "text", true],
+                ["binId", "Bin ID", "text", true],
+                ["biodegradable", "Biodegradable", "text", true],
+                ["recyclable", "Recyclable", "text", true],
+                ["residual", "Residual", "text", true],
+                ["status", "Status", "text", true],
+                ["notes", "Notes", "textarea", false]
+            ]
+        },
+
+        facilitatorSegregationTable: {
+            storage: "swcrs_segregation",
+            render: renderFacilitatorSegregationTable,
+            fields: [
+                ["location", "Location", "text", true],
+                ["binId", "Bin ID", "text", true],
+                ["biodegradable", "Biodegradable", "text", true],
+                ["recyclable", "Recyclable", "text", true],
+                ["residual", "Residual", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        crewDisposalTable: {
+            storage: "swcrs_disposal",
+            render: renderCrewDisposal,
+            fields: [
+                ["truck", "Truck", "text", true],
+                ["category", "Category", "text", true],
+                ["weight", "Weight", "number", true],
+                ["facility", "Facility", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        crewRouteTable: {
+            storage: "swcrs_routes",
+            render: renderCrewRoutes,
+            fields: [
+                ["sequence", "Sequence", "number", true],
+                ["location", "Location", "text", true],
+                ["bin", "Bin", "text", true],
+                ["fill", "Fill Level", "text", true],
+                ["action", "Action", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        crewFeedbackTable: {
+            storage: "swcrs_feedback",
+            render: renderCrewFeedback,
+            fields: [
+                ["topic", "Topic", "text", true],
+                ["target", "Target", "text", true],
+                ["message", "Message", "textarea", true],
+                ["status", "Status", "text", true]
+            ]
+        },
+
+        crewTable: {
+            storage: "swcrs_crew",
+            render: renderCrewManagement,
+            fields: [
+                ["name", "Name", "text", true],
+                ["area", "Assigned Area", "text", true],
+                ["shift", "Shift", "text", true],
+                ["status", "Status", "text", true]
+            ]
+        }
+    };
+
+
+    function createCrudModal() {
+
+        let modal = document.getElementById("crudEditModal");
+
+        if (modal) {
+            return modal;
+        }
+
+        modal = document.createElement("div");
+        modal.id = "crudEditModal";
+
+        modal.style.cssText = `
+            display:none;
+            position:fixed;
+            inset:0;
+            z-index:9999;
+            background:rgba(0,0,0,.55);
+            align-items:center;
+            justify-content:center;
+        `;
+
+        modal.innerHTML = `
+            <div class="crud-edit-box">
+                <form id="crudEditForm">
+                    <h2>Edit Record</h2>
+
+                    <div id="crudEditFields"></div>
+
+                    <div class="crud-edit-buttons">
+                        <button type="submit" class="btn-action">
+                            Save Changes
+                        </button>
+
+                        <button type="button"
+                            id="crudCancelButton"
+                            class="btn-action">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        modal.querySelector("#crudCancelButton").addEventListener(
+            "click",
+            function () {
+                modal.style.display = "none";
+            }
+        );
+
+        return modal;
+    }
+
+
+    function openCrudEditor(storageKey, recordIndex, fields, renderFunction) {
+
+        const records = getData(storageKey, []);
+        const record = records[recordIndex];
+
+        if (!record) {
+            return;
+        }
+
+        const modal = createCrudModal();
+        const form = modal.querySelector("#crudEditForm");
+        const container = modal.querySelector("#crudEditFields");
+
+        container.innerHTML = "";
+
+        fields.forEach(function (field) {
+
+            const key = field[0];
+            const label = field[1];
+            const type = field[2];
+            const required = field[3];
+            const inputId = "crud_" + key;
+
+            const wrapper = document.createElement("div");
+            wrapper.style.marginBottom = "12px";
+
+            const labelElement = document.createElement("label");
+            labelElement.htmlFor = inputId;
+            labelElement.textContent = label;
+
+            let input;
+
+            if (type === "textarea") {
+                input = document.createElement("textarea");
+                input.rows = 3;
+            } else {
+                input = document.createElement("input");
+                input.type = type;
+            }
+
+            input.id = inputId;
+            input.value = record[key] ?? "";
+            input.required = required;
+            input.style.width = "100%";
+            input.style.boxSizing = "border-box";
+
+            const error = document.createElement("span");
+            error.id = inputId + "-error";
+            error.className = "validation-error";
+
+            wrapper.appendChild(labelElement);
+            wrapper.appendChild(input);
+            wrapper.appendChild(error);
+            container.appendChild(wrapper);
+
+            input.addEventListener("input", function () {
+                validateInput(input);
+            });
+
+            input.addEventListener("blur", function () {
+                validateInput(input);
+            });
+        });
+
+        modal.style.display = "flex";
+
+        form.onsubmit = function (event) {
+
+            event.preventDefault();
+
+            if (!validateForm(form)) {
+                return;
+            }
+
+            fields.forEach(function (field) {
+
+                const key = field[0];
+                const input = document.getElementById("crud_" + key);
+
+                record[key] = input.value.trim();
+
+                if (field[2] === "number") {
+                    record[key] = Number(record[key]);
+                }
+            });
+
+            saveData(storageKey, records);
+            modal.style.display = "none";
+
+            renderFunction();
+
+            renderResidentReports();
+            renderCrewCollection();
+            renderCrewSegregation();
+            renderFacilitatorDashboard();
+            renderAdminReports();
+            renderCrewManagement();
+        };
+    }
+
+
+    function deleteCrudRecord(storageKey, recordIndex, renderFunction) {
+
+        const records = getData(storageKey, []);
+
+        if (!records[recordIndex]) {
+            return;
+        }
+
+        if (!confirm("Are you sure you want to permanently delete this record?")) {
+            return;
+        }
+
+        records.splice(recordIndex, 1);
+        saveData(storageKey, records);
+
+        renderFunction();
+
+        renderResidentReports();
+        renderCrewCollection();
+        renderCrewSegregation();
+        renderFacilitatorDashboard();
+        renderAdminReports();
+        renderCrewManagement();
+    }
+
+
+    function addCrudButtons() {
+
+        Object.keys(crudConfigurations).forEach(function (tableId) {
+
+            const config = crudConfigurations[tableId];
+            const tbody = document.getElementById(tableId);
+
+            if (!tbody) {
+                return;
+            }
+
+            Array.from(tbody.rows).forEach(function (row, index) {
+
+                if (row.dataset.crudReady === "true") {
+                    return;
+                }
+
+                const cell = document.createElement("td");
+
+                cell.innerHTML = `
+                    <button type="button"
+                        class="btn-action crud-edit"
+                        data-table="${tableId}"
+                        data-index="${index}">
+                        Edit
+                    </button>
+
+                    <button type="button"
+                        class="btn-action crud-delete"
+                        data-table="${tableId}"
+                        data-index="${index}"
+                        style="margin-left:6px;background:#b42318;color:#fff;">
+                        Delete
+                    </button>
+                `;
+
+                row.appendChild(cell);
+                row.dataset.crudReady = "true";
+            });
+        });
+    }
+
+
+    document.addEventListener("click", function (event) {
+
+        const editButton = event.target.closest(".crud-edit");
+        const deleteButton = event.target.closest(".crud-delete");
+        const button = editButton || deleteButton;
+
+        if (!button) {
+            return;
+        }
+
+        const tableId = button.dataset.table;
+        const recordIndex = Number(button.dataset.index);
+        const config = crudConfigurations[tableId];
+
+        if (!config) {
+            return;
+        }
+
+        if (editButton) {
+            openCrudEditor(
+                config.storage,
+                recordIndex,
+                config.fields,
+                config.render
+            );
+        }
+
+        if (deleteButton) {
+            deleteCrudRecord(
+                config.storage,
+                recordIndex,
+                config.render
+            );
+        }
+    });
+
+
+    const crudObserver = new MutationObserver(function () {
+        addCrudButtons();
+    });
+
+    crudObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+    addCrudButtons();
+
 });
