@@ -83,39 +83,6 @@
             <span class="validation-message" id="loginPassword-error"></span>
 
 
-            <label for="loginRole">
-                Login As
-            </label>
-
-            <select
-                id="loginRole"
-                required
-            >
-
-                <option value="">
-                    Select Role
-                </option>
-
-                <option value="resident">
-                    Resident
-                </option>
-
-                <option value="crew">
-                    Collection Crew
-                </option>
-
-                <option value="facilitator">
-                    City Facilitator
-                </option>
-
-                <option value="admin">
-                    Admin / Officer
-                </option>
-
-            </select>
-            <span class="validation-message" id="loginRole-error"></span>
-
-
             <button type="submit">
                 Login
             </button>
@@ -163,8 +130,8 @@
                 type="text"
                 id="regFirstName"
                 placeholder="Enter First Name"
-                minlength="2" maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
-                title="Only letters, spaces, hyphens, and apostrophes allowed (min 2 chars)."
+                minlength="2" maxlength="50" pattern="^[A-Za-zÀ-ÿ]+(?:[ ][A-Za-zÀ-ÿ]+)*$"
+                title="Letters only. Numbers and special characters are not allowed."
                 required
             >
             <span class="validation-message" id="regFirstName-error"></span>
@@ -178,8 +145,8 @@
                 type="text"
                 id="regMiddleName"
                 placeholder="Enter Middle Name (Optional)"
-                maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
-                title="Only letters, spaces, hyphens, and apostrophes allowed."
+                maxlength="50" pattern="^(?:[A-Za-zÀ-ÿ]+(?:[ ][A-Za-zÀ-ÿ]+)*)?$"
+                title="Letters only. Numbers and special characters are not allowed."
             >
             <span class="validation-message" id="regMiddleName-error"></span>
 
@@ -192,8 +159,8 @@
                 type="text"
                 id="regLastName"
                 placeholder="Enter Last Name"
-                minlength="2" maxlength="50" pattern="[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,49}"
-                title="Only letters, spaces, hyphens, and apostrophes allowed (min 2 chars)."
+                minlength="2" maxlength="50" pattern="^[A-Za-zÀ-ÿ]+(?:[ ][A-Za-zÀ-ÿ]+)*$"
+                title="Letters only. Numbers and special characters are not allowed."
                 required
             >
             <span class="validation-message" id="regLastName-error"></span>

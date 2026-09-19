@@ -201,6 +201,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
             }
 
+            else if (
+                ["regFirstName", "regMiddleName", "regLastName"].includes(input.id) &&
+                /\d/.test(value)
+            ) {
+
+                errorMessage =
+                    "Name must contain letters only. Numbers are not allowed.";
+
+            }
+
             else if (input.validity.tooShort) {
 
                 errorMessage =
@@ -1710,13 +1720,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         )
                         .value;
 
-                const role =
-                    document
-                        .getElementById(
-                            "loginRole"
-                        )
-                        .value;
-
                 const registeredUsers =
                     getData(
                         "swcrs_accounts",
@@ -1753,15 +1756,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
-                if (matchedUser.role !== role) {
-
-                    alert(
-                        "Selected role does not match your registered account. Please choose the correct role."
-                    );
-
-                    return;
-
-                }
+                const role = matchedUser.role;
 
                 saveData(
                     "swcrs_session",
