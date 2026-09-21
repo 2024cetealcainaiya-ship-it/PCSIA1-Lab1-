@@ -1679,414 +1679,360 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-    /* =====================================================
-       LOGIN
-    ===================================================== */
+/* =====================================================
+   LOGIN
+===================================================== */
 
-    const loginForm =
-        document.getElementById(
-            "loginForm"
-        );
+const loginForm =
+    document.getElementById("loginForm");
 
+if (loginForm) {
 
-    if (loginForm) {
+    loginForm.addEventListener(
+        "submit",
+        async function (event) {
 
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
+            event.preventDefault();
 
-                event.preventDefault();
+            if (!validateForm(loginForm)) {
+                return;
+            }
 
+            const username =
+                document
+                    .getElementById("loginUser")
+                    .value
+                    .trim();
 
-                if (!validateForm(loginForm)) {
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    .value;
+
+            const data = new URLSearchParams();
+
+            data.append("username", username);
+            data.append("password", password);
+
+            try {
+
+                const response =
+                    await fetch("login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+                        },
+                        body: data.toString()
+                    });
+
+                const result =
+                    await response.text();
+
+                if (!response.ok) {
+
+                    if (result === "INVALID") {
+
+                        alert(
+                            "Invalid username or password."
+                        );
+
+                    } else {
+
+                        alert(result);
+                    }
 
                     return;
-
                 }
 
+                if (result.startsWith("SUCCESS|")) {
 
-                const username =
-                    document
-                        .getElementById(
-                            "loginUser"
-                        )
-                        .value
-                        .trim();
+                    const parts =
+                        result.split("|");
 
-                const password =
-                    document
-                        .getElementById(
-                            "loginPassword"
-                        )
-                        .value;
+                    const matchedUser = {
 
-                const registeredUsers =
-                    getData(
-                        "swcrs_accounts",
-                        []
-                    );
+                        username: parts[1],
+                        role: parts[2],
 
-                const matchedUser =
-                    registeredUsers.find(
-                        function (user) {
+                        firstName: parts[3],
+                        middleName: parts[4],
+                        lastName: parts[5],
 
-                            return user.username
-                                .toLowerCase() === username.toLowerCase();
+                        email: parts[6],
+                        contactNumber: parts[7],
 
+                        country: parts[8],
+                        region: parts[9],
+                        city: parts[10],
+                        barangay: parts[11],
+                        purokZone: parts[12],
+                        block: parts[13],
+                        streetPhaseLot: parts[14]
+                    };
+
+                    const role =
+                        matchedUser.role;
+
+                    saveData(
+                        "swcrs_session",
+                        {
+                            username:
+                                matchedUser.username,
+                            role:
+                                matchedUser.role
                         }
                     );
 
-                if (!matchedUser) {
-
-                    alert(
-                        "Please register first before logging in."
+                    clearFormValidation(
+                        loginForm
                     );
 
-                    return;
+                    /* ==============================
+                       RESIDENT
+                    ============================== */
 
-                }
+                    if (role === "resident") {
 
-                if (matchedUser.password !== password) {
+                        const display =
+                            document.getElementById(
+                                "residentDisplay"
+                            );
 
-                    alert(
-                        "Incorrect password. Please use the password from your registration."
-                    );
+                        if (display) {
 
-                    return;
+                            display.textContent =
+                                matchedUser.username;
+                        }
 
-                }
-
-                const role = matchedUser.role;
-
-                saveData(
-                    "swcrs_session",
-                    {
-                        username: matchedUser.username,
-                        role: matchedUser.role
-                    }
-                );
-
-
-                clearFormValidation(loginForm);
-
-
-                /* ==============================
-                   RESIDENT
-                ============================== */
-
-                if (
-                    role === "resident"
-                ) {
-
-                    const display =
-                        document.getElementById(
-                            "residentDisplay"
+                        populateProfileForm(
+                            matchedUser
                         );
 
+                        renderResidentReports();
 
-                    if (display) {
-
-                        display.textContent =
-                            username;
-
-                    }
-
-                    populateProfileForm(matchedUser);
-
-
-                    renderResidentReports();
-
-
-                    switchSection(
-                        residentArea
-                    );
-
-
-                    return;
-
-                }
-
-
-
-                /* ==============================
-                   CREW
-                ============================== */
-
-                if (
-                    role === "crew"
-                ) {
-
-                    const display =
-                        document.getElementById(
-                            "crewDisplay"
-                        );
-
-
-                    if (display) {
-
-                        display.textContent =
-                            username;
-
-                    }
-
-
-                    renderCrewCollection();
-
-                    renderCrewSegregation();
-
-                    renderCrewDisposal();
-
-                    renderCrewRoutes();
-
-                    renderCrewFeedback();
-
-
-                    switchSection(
-                        crewArea
-                    );
-
-
-                    return;
-
-                }
-
-
-
-                /* ==============================
-                   CITY FACILITATOR
-                ============================== */
-
-                if (
-                    role === "facilitator"
-                ) {
-
-                    if (
-                        !cityFacilitatorArea
-                    ) {
-
-                        alert(
-                            "City Facilitator area was not found."
+                        switchSection(
+                            residentArea
                         );
 
                         return;
-
                     }
 
+                    /* ==============================
+                       CREW
+                    ============================== */
 
-                    const display =
-                        document.getElementById(
-                            "facilitatorDisplay"
-                        );
+                    if (role === "crew") {
 
+                        const display =
+                            document.getElementById(
+                                "crewDisplay"
+                            );
 
-                    if (display) {
+                        if (display) {
 
-                        display.textContent =
-                            username;
-
-                    }
-
-
-                    renderFacilitatorDashboard();
-
-
-                    showFacilitatorMenu();
-
-
-                    switchSection(
-                        cityFacilitatorArea
-                    );
-
-
-                    return;
-
-                }
-
-
-
-                /* ==============================
-                   ADMIN
-                ============================== */
-
-                if (
-                    role === "admin"
-                ) {
-
-                    renderAdminReports();
-
-                    renderCrewManagement();
-
-                    switchSection(
-                        adminArea
-                    );
-
-
-                    return;
-
-                }
-
-
-                alert(
-                    "Invalid role."
-                );
-
-            }
-        );
-
-    }
-
-
-
-    /* =====================================================
-       REGISTER
-    ===================================================== */
-
-    const registerForm =
-        document.getElementById(
-            "registerForm"
-        );
-
-
-    if (registerForm) {
-
-        registerForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                if (!validateForm(registerForm)) {
-
-                    return;
-
-                }
-
-                const username =
-                    document
-                        .getElementById(
-                            "regUsername"
-                        )
-                        .value
-                        .trim();
-
-                const password =
-                    document
-                        .getElementById(
-                            "regPassword"
-                        )
-                        .value;
-
-                const contactNumber =
-                    document
-                        .getElementById(
-                            "regContact"
-                        )
-                        .value
-                        .trim();
-
-                const role =
-                    document
-                        .getElementById(
-                            "regRole"
-                        )
-                        .value;
-
-                const existingUsers =
-                    getData(
-                        "swcrs_accounts",
-                        []
-                    );
-
-                const usernameTaken =
-                    existingUsers.some(
-                        function (user) {
-
-                            return user.username
-                                .toLowerCase() === username.toLowerCase();
-
+                            display.textContent =
+                                matchedUser.username;
                         }
-                    );
 
-                if (usernameTaken) {
+                        renderCrewCollection();
+                        renderCrewSegregation();
+                        renderCrewDisposal();
+                        renderCrewRoutes();
+                        renderCrewFeedback();
 
-                    const regUsernameInput =
-                        document.getElementById(
-                            "regUsername"
+                        switchSection(
+                            crewArea
                         );
 
-                    regUsernameInput.classList.add(
-                        "validation-invalid"
-                    );
+                        return;
+                    }
 
-                    const errorSpan =
-                        document.getElementById(
-                            "regUsername-error"
+                    /* ==============================
+                       CITY FACILITATOR
+                    ============================== */
+
+                    if (
+                        role === "facilitator"
+                    ) {
+
+                        if (
+                            !cityFacilitatorArea
+                        ) {
+
+                            alert(
+                                "City Facilitator area was not found."
+                            );
+
+                            return;
+                        }
+
+                        const display =
+                            document.getElementById(
+                                "facilitatorDisplay"
+                            );
+
+                        if (display) {
+
+                            display.textContent =
+                                matchedUser.username;
+                        }
+
+                        renderFacilitatorDashboard();
+
+                        showFacilitatorMenu();
+
+                        switchSection(
+                            cityFacilitatorArea
                         );
 
-                    if (errorSpan) {
+                        return;
+                    }
 
-                        errorSpan.textContent =
-                            "This username is already registered. Please choose another one.";
+                    /* ==============================
+                       ADMIN
+                    ============================== */
 
-                        errorSpan.classList.add(
-                            "show"
+                    if (role === "admin") {
+
+                        renderAdminReports();
+
+                        renderCrewManagement();
+
+                        switchSection(
+                            adminArea
                         );
 
+                        return;
                     }
 
                     alert(
-                        "This username is already registered. Please choose another one."
+                        "Invalid role."
                     );
 
-                    return;
+                } else {
 
+                    alert(
+                        "Unexpected server response."
+                    );
                 }
 
-                const newAccount = {
-                    username: username,
-                    password: password,
-                    contactNumber: contactNumber,
-                    role: role,
-                    firstName: document.getElementById("regFirstName").value.trim(),
-                    middleName: document.getElementById("regMiddleName").value.trim(),
-                    lastName: document.getElementById("regLastName").value.trim(),
-                    email: document.getElementById("regEmail").value.trim(),
-                    country: document.getElementById("regCountry").value,
-                    region: document.getElementById("regRegion").value,
-                    city: document.getElementById("regCity").value,
-                    barangay: document.getElementById("regBarangay").value,
-                    purokZone: document.getElementById("regPurokZone").value,
-                    block: document.getElementById("regBlock").value,
-                    streetPhaseLot: document.getElementById("regStreetPhaseLot").value,
-                    createdAt: new Date().toISOString()
-                };
+            } catch (error) {
 
-                existingUsers.push(newAccount);
-
-                saveData(
-                    "swcrs_accounts",
-                    existingUsers
-                );
+                console.error(error);
 
                 alert(
-                    "Resident account created successfully! Please login with your registered username and password."
+                    "Could not connect to the server."
                 );
+            }
+        }
+    );
+}
 
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+const registerForm = document.getElementById("registerForm");
+
+if (registerForm) {
+
+    registerForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        if (!validateForm(registerForm)) {
+            return;
+        }
+
+        const data = new URLSearchParams();
+
+        data.append("firstName",
+            document.getElementById("regFirstName").value.trim());
+
+        data.append("middleName",
+            document.getElementById("regMiddleName").value.trim());
+
+        data.append("lastName",
+            document.getElementById("regLastName").value.trim());
+
+        data.append("email",
+            document.getElementById("regEmail").value.trim());
+
+        data.append("username",
+            document.getElementById("regUsername").value.trim());
+
+        data.append("password",
+            document.getElementById("regPassword").value);
+
+        data.append("contactNumber",
+            document.getElementById("regContact").value.trim());
+
+        data.append("country",
+            document.getElementById("regCountry").value);
+
+        data.append("region",
+            document.getElementById("regRegion").value);
+
+        data.append("city",
+            document.getElementById("regCity").value);
+
+        data.append("barangay",
+            document.getElementById("regBarangay").value);
+
+        data.append("purokZone",
+            document.getElementById("regPurokZone").value);
+
+        data.append("block",
+            document.getElementById("regBlock").value);
+
+        data.append("streetPhaseLot",
+            document.getElementById("regStreetPhaseLot").value);
+
+        data.append("role",
+            document.getElementById("regRole").value);
+
+        try {
+
+            const response = await fetch("register", {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded"
+                },
+                body: data.toString()
+            });
+
+            const result = await response.text();
+
+            if (response.ok) {
+
+                alert(result);
 
                 registerForm.reset();
-
                 clearFormValidation(registerForm);
 
+                switchSection(loginSection);
 
-                switchSection(
-                    loginSection
-                );
+            } else {
+
+                alert(result);
 
             }
-        );
 
-    }
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Could not connect to the server."
+            );
+        }
+
+    });
+}
 
 
 
